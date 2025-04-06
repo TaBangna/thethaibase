@@ -3,7 +3,7 @@ header {
     background-image: url('your-background.jpg');
     background-size: cover;
     background-position: center;
-    color: white;
+    color: #333333;
     padding: 100px 20px;
     text-align: center;
   }
@@ -23,6 +23,7 @@ header {
     z-index: 1;
   }
 
+
   body {
     font-family: 'Helvetica Neue', sans-serif;
     margin: 0;
@@ -30,7 +31,10 @@ header {
     background-color: #f9f9f9;
     color: #333;
   }
-
+ 
+  h1 {
+    color: darkorange;
+  }
   
   header h1 {
     font-size: 3rem;
