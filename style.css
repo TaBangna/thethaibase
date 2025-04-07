@@ -88,6 +88,7 @@
   }
 
   .cards {
+    color: #ffa;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -95,13 +96,31 @@
     margin-top: 20px;
   }
 
-  .card {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+   .card {
+    background-color: #003580;  /* booking-style deep blue */
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
   }
+  
+  .card a {
+    color: #ffcc00;  /* bright contrast for Explore link */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .card a:hover {
+    text-decoration: underline;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+
+
 
   footer {
     background-color: #001f3f; /* deep navy blue */
