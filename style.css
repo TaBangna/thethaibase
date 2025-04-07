@@ -13,6 +13,14 @@
     display: block;
   }
 
+  
+  .navbar a.nav-link {
+    font-weight: bold;
+    color: #003580;
+    text-decoration: none;
+  }
+
+
   header {
     position: relative;
     background-image: url('your-background.jpg');
