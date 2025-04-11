@@ -1,35 +1,25 @@
-AUTHOR = 'TaBangna'
-SITENAME = 'The Thai Base'
-SITEURL = ""
+# pelicanconf.py
+AUTHOR = 'The Thai Base'
+SITENAME = 'TheThaiBase.com'
+SITEURL = "http://localhost:8000"  # Adjust as necessary
 
-PATH = "content"
-
+PATH = 'content'
+PAGE_PATHS = ['pages']
+ARTICLE_PATHS = ['articles']
+STATIC_PATHS = ['images']
+# Set the SITELOGO variable to point to your logo image.
+# Ensure the path is relative to your output directory.
+SITELOGO = '/images/Logo2.png'
 TIMEZONE = 'Asia/Bangkok'
-
 DEFAULT_LANG = 'en'
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
-AUTHOR_FEED_RSS = None
+THEME = 'pelican-themes/Flex'
 
-# Blogroll
-LINKS = (
-    ("Pelican", "https://getpelican.com/"),
-    ("Python.org", "https://www.python.org/"),
-    ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-    ("You can modify those links in your config file", "#"),
-)
-
-# Social widget
-SOCIAL = (
-    ("You can add links in your config file", "#"),
-    ("Another social link", "#"),
-)
-
-DEFAULT_PAGINATION = False
-
-# Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
+# Enable HTML inside markdown
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
