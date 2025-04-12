@@ -19,6 +19,22 @@
   margin: 0 auto 20px;
 }
 
+#site-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: #f9f9f9;
+}
+
+#site-logo-link {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+#site-logo-img {
+  height: 60px;
+}
+
 .cards {
   display: flex;
   flex-wrap: wrap;
