@@ -1,4 +1,31 @@
 /* --- TheThaiBase Homepage Styles --- */
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  color: #2d2d2d;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+p {
+  margin-bottom: 1.2em;
+  font-size: 1rem;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .homepage {
   padding: 60px 20px;
   max-width: 1100px;
