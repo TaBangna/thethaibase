@@ -76,7 +76,7 @@ body {
 .navbar a:hover {
   color: #007f73;
 }
-
+/*
 .search-bar {
   margin: 40px auto;
   max-width: 600px;
@@ -108,7 +108,7 @@ body {
 .search-bar button:hover {
   background: #008a58;
 }
-
+*/
 /* --- Responsive Adjustments for Mobile --- */
 @media (max-width: 768px) {
   #site-logo-img {
@@ -128,7 +128,7 @@ body {
     padding-top: 8px;
     padding-bottom: 8px;
   }
-  
+
   body {
     font-size: 15px;
   }
