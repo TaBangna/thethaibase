@@ -123,6 +123,12 @@ body {
     font-size: 1.2rem !important;
     padding: 12px !important;
   }
+
+  .navbar {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  
   body {
     font-size: 15px;
   }
