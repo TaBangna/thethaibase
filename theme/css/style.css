@@ -76,12 +76,12 @@ a:hover {
   }
 
   .navbar a {
-    font-size: 1.1rem; /* match or slightly larger than content */
+    font-size: 1.2rem; /* match or slightly larger than content */
     padding: 10px;
   }
 
   .navbar ul {
-    gap: 1rem; /* reduce spacing if needed */
+    gap: 1.2rem; /* reduce spacing if needed */
   }
 
 }
