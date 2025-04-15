@@ -164,6 +164,7 @@ body {
 
   .navbar ul.active {
     display: flex !important;
+    font-size: 1.8rem
     z-index: 10;
   }
 
