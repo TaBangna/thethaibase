@@ -122,11 +122,12 @@ body {
     color: #000;
   }
   .navbar ul {
-    display: none;
+    display: none !important;
     flex-direction: column;
     background-color: #fff;
     padding: 1rem;
     border-top: 1px solid #ddd;
+    
   }
 
   .navbar ul.active {
