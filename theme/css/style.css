@@ -164,13 +164,12 @@ body {
 
   .navbar ul.active {
     display: flex !important;
-    font-size: 3.0rem
     z-index: 10;
   }
 
-  /*.navbar ul li a {
-    font-size: 1.2rem;
-  }*/
+  .navbar ul li a {
+    font-size: 3.2rem;
+  }
 
 }
 
