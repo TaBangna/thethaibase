@@ -14,7 +14,11 @@
         <a href="./" id="site-logo-link">
         <img id="site-logo-img" src="./images/Logo2.png" alt="The Thai Base Logo">
         </a>
-        <nav class="navbar"><nav>
+        <div class="menu-toggle" id="menu-toggle">
+          ☰
+        </div>  
+
+        <nav class="navbar" id="navbar">
           <ul>
             <li><a href="./">Home</a></li>
             <li><a href="./pages/about.html">About</a></li>
@@ -150,6 +154,18 @@ Agoda and Booking.com are two of the biggest players—but which one gives bette
     <p>© 2025 <strong>TheThaiBase.com</strong> — All rights reserved.</p>
   </footer>
   </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const toggle = document.getElementById('menu-toggle');
+      const navbar = document.querySelector('.navbar ul');
+  
+      toggle.addEventListener('click', function () {
+        navbar.classList.toggle('active');
+      });
+    });
+  </script>
+
 </body>
 </html>
 
