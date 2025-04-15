@@ -134,8 +134,12 @@ body {
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
+    
   }
-
+  .menu-toggle i {
+    font-size: 1.8rem;
+    color: #000;
+  }
   .navbar ul {
     display: none;
     flex-direction: column;
