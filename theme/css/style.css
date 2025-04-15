@@ -119,9 +119,9 @@ body {
     font-size: 1.2rem !important; /* match or slightly larger than content */
     padding: 10px 12px !important;
   }
-
-  .navbar ul {
-    gap: 1.2rem; /* reduce spacing if needed */
+  .navbar ul li a {
+    font-size: 1.2rem !important;
+    padding: 12px !important;
   }
 
 }
