@@ -110,28 +110,9 @@ body {
 }
 */
 /* --- Responsive Adjustments for Mobile --- */
-@media screen and (max-width: 768px) {
-  #site-logo-img {
-    height: 1.0rem !important; /* slightly larger logo */
-  }
-/* Hamburger Icon (hidden on desktop) */
-.menu-toggle {
-  display: none;
-  font-size: 2rem;
-  cursor: pointer;
-  padding: 12px;
-}
 
-/* Mobile Nav Hidden by Default */
-.navbar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 2rem;
-}
 
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .menu-toggle {
     display: block;
     
