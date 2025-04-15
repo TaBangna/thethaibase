@@ -128,7 +128,7 @@ body {
   .menu-toggle {
     display: block;
     position: absolute;
-    right: 20px;
+    right: 30px;
     font-size: 3.2rem;
     top: 50%;
     transform: translateY(-50%);
@@ -163,12 +163,12 @@ body {
   }
 
   .navbar ul.active {
-    display: flex;
+    display: flex !important;
   }
 
-  .navbar ul li a {
+  /*.navbar ul li a {
     font-size: 1.2rem;
-  }
+  }*/
 
 }
 
