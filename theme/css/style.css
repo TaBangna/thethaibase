@@ -65,10 +65,26 @@ a:hover {
 
 /* Logo styling */
 #site-logo-img {
-  height: 40px;
-  z-index: 10;
-}
+  font-size: 40px;
+  max-height: 8vh;
+ }
 
+/* --- Responsive Adjustments for Mobile --- */
+@media (max-width: 768px) {
+  #site-logo-img {
+    height: 1.0rem; /* slightly larger logo */
+  }
+
+  .navbar a {
+    font-size: 1.1rem; /* match or slightly larger than content */
+    padding: 10px;
+  }
+
+  .navbar ul {
+    gap: 1rem; /* reduce spacing if needed */
+  }
+
+}
 /* Nav styling */
 .navbar {
   margin-left: auto;
