@@ -76,6 +76,12 @@ body {
 .navbar a:hover {
   color: #007f73;
 }
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
 /*
 .search-bar {
   margin: 40px auto;
@@ -124,9 +130,14 @@ body {
   .navbar ul {
     display: none !important;
     flex-direction: column;
+    gap: 1rem;
     background-color: #fff;
+    position: absolute;
+    top: 60px;
+    right: 20px;
     padding: 1rem;
-    border-top: 1px solid #ddd;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     
   }
 
