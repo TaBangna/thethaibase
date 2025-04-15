@@ -129,12 +129,12 @@ body {
     display: block;
     position: absolute;
     right: 30px;
-    font-size: 3.2rem;
+    font-size: 3.5rem !important;
     top: 50%;
     transform: translateY(-50%);
   }
   .menu-toggle i {
-    font-size: 3.2rem;
+    font-size: 3.5rem !important;
     color: #000;
   }
 
