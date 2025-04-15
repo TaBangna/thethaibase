@@ -1,37 +1,19 @@
-Title: Home
+Title: Welcome to TheThaiBase.com
+Date: 2025-04-15
+Slug: index
 Save_as: index.html
-Template: home
-Status: published
+jinja2content: true
+Summary: Your Launchpad for Life in Thailand
 
-# Your Launchpad for Life in Thailand
+Welcome to **TheThaiBase.com** — your go-to guide for digital nomads, retirees, and expats living in Thailand 🇹🇭.
 
-Visas, housing, healthcare, and lifestyle tips — everything you need to live, work, or retire in Thailand, all in one place.
+We help you compare visa options, housing, healthcare, and more. Whether you're looking for monthly hotel deals, co-working spaces, or tips to retire comfortably, we've got you covered.
 
-[Explore the Base](#) • [Start with a Guide](#)
+➡️ **Start exploring:**
 
----
+- [Agoda vs Booking.com – Which is Better?](agoda-vs-booking-thailand.html)
+- [Best Hotels in Bangkok for Digital Nomads](bangkok-hotels-nomads.html)
+- [How to Book Hotels in Thailand]({filename}booking-tips-thailand.md)
 
-## Who Are You Building Your Base As?
 
-<div class="card-row">
-<div class="cards">
-  <div class="card">
-    <h3>Nomad Base</h3>
-    <p>SIMs, visas, coworking, tools</p>
-    <a href="#">Explore</a>
-  </div>
-  <div class="card">
-    <h3>Retiree Base</h3>
-    <p>Healthcare, long-stay visas, cost of living</p>
-    <a href="#">Explore</a>
-  </div>
-  <div class="card">
-    <h3>Expat Base</h3>
-    <p>Family life, schooling, housing</p>
-    <a href="#">Explore</a>
-  </div>
-</div>
-</div>
-## Read the Blog
-
-[See all articles](archives.html)
+> *We compare, curate, and simplify everything you need to live your best life in Thailand.*
