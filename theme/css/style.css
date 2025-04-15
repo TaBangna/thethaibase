@@ -110,7 +110,7 @@ body {
 }
 */
 /* --- Responsive Adjustments for Mobile --- */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   #site-logo-img {
     height: 1.0rem !important; /* slightly larger logo */
   }
