@@ -83,6 +83,11 @@ body {
   cursor: pointer;
   margin-left: auto;
 }
+
+.community-link {
+  font-weight: 600;
+  color: #E63946;
+}
 /*
 .search-bar {
   margin: 40px auto;
