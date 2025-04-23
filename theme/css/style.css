@@ -130,7 +130,6 @@ h1, h2, h3, h4, h5, h6 {
 */
 /* --- Responsive Adjustments for Mobile --- */
 
-
 @media (max-width: 850px) {
   .site-container {
     max-width: 100%;
@@ -195,9 +194,11 @@ h1, h2, h3, h4, h5, h6 {
 /* grid container */
 .article-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  /* let columns collapse down responsively: */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
+
 }
 
 /* individual card */
