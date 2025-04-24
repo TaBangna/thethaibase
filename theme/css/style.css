@@ -95,6 +95,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: #E63946;
 }
+
+.large-text {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
 /*
 .search-bar {
   margin: 40px auto;
@@ -139,14 +144,20 @@ h1, h2, h3, h4, h5, h6 {
   .menu-toggle {
     display: block;
     position: absolute;
-    right: 30px;
-    font-size: 3.5rem !important;
     top: 50%;
+    right: 20px;
     transform: translateY(-50%);
+    /* Shrink the button itself */
+    font-size: 2rem !important;    /* was 3.5rem */
+    width: 2.5rem;                 /* tighten hit area */
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
   }
   .menu-toggle i {
-    font-size: 3.5rem !important;
-    color: #000;
+     /* Shrink the icon inside */
+     font-size: 2rem !important;    /* was 3.5rem */
+     color: #000;
   }
 
   
