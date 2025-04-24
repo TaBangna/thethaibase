@@ -251,6 +251,23 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
+.card-image {
+  /* 16:9 aspect ratio box */
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Crop & fill container */
+  object-position: center center;
+  display: block;
+}
+
 /* pagination */
 .pagination {
   display: flex;
