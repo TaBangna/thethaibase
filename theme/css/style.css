@@ -283,6 +283,44 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 400px;            /* adjust this to taste */
+  overflow: hidden;
+}
+
+.hero-banner .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-banner .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  padding: 0 1rem;          /* small side padding on mobile */
+  max-width: 90%;           /* so text doesn’t overrun on narrow screens */
+}
+
+.hero-banner .hero-content h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.hero-banner .hero-content p {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
 .site-footer {
   background-color: #003580;
   color: #eee;
