@@ -40,29 +40,28 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Layout for header row */
 .navbar-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between !important; /* Logo on left, nav on right */
   max-width: 1100px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 0;
 
 }
 
 /* Logo styling */
-#site-logo-img {
-  font-size: 40px;
-  max-height: 8vh;
- }
-
+ #site-logo-img { grid-column: 1; justify-self: start; max-height: 8vh;}
+ #community-logo-img { grid-column: 3; justify-self: end; max-height: 8vh;}
 
 /* Nav styling */
 .navbar {
-  font-family: 'Ubuntu', sans-serif;
-  margin-left: auto;
-  position: static;
+  grid-column: 2;
+  justify-self: center;
+  position: relative;       /* back in normal flow */
   transform: none;
-  z-index: 5; /* z-index can remain if needed for stacking */
+  font-family: 'Ubuntu', sans-serif;
+  z-index: 5;
+  margin: 0;
 }
 
 .navbar ul {
@@ -70,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   gap: 1.8rem;
   margin: 0;
-  padding: 0;
+  padding: 0; 
 }
 
 .navbar a {
@@ -84,11 +83,9 @@ h1, h2, h3, h4, h5, h6 {
   color: #007f73;
 }
 
+ /* hamburger only on mobile */
 .menu-toggle {
   display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  margin-left: auto;
 }
 
 .community-link {
@@ -140,26 +137,38 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 100%;
     padding: 0; /* Adjust padding as needed */
   }
-  
+  /* Logo styling */
+ #site-logo-img { grid-column: 1; justify-self: start; max-height: 8vh;}
+ #community-logo-img { grid-column: 3; justify-self: end; max-height: 8vh;}
+ 
   .menu-toggle {
     display: block;
-    position: absolute;
+    grid-column: 2;         /* still in center column */
+    /*position: absolute;
     top: 50%;
-    right: 20px;
+    right: 0px;               adjust this value to sit just left of your right logo 
     transform: translateY(-50%);
-    /* Shrink the button itself */
-    font-size: 2rem !important;    /* was 3.5rem */
-    width: 2.5rem;                 /* tighten hit area */
-    height: 2.5rem;
-    line-height: 2.5rem;
-    text-align: center;
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin: 0;
+    z-index: 10;*/
   }
   .menu-toggle i {
-     /* Shrink the icon inside */
-     font-size: 2rem !important;    /* was 3.5rem */
-     color: #000;
+    /*display: block;
+    grid-column: 2;          still in center column */
+    position: absolute;
+    top: 50%;
+    right: 70px;               /* adjust this value to sit just left of your right logo */
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin: 0;
+    z-index: 10;
   }
-
+  /* force nav to only be as wide as the toggle */
+  .navbar {
+    width: auto;
+  }
   
 .navbar-container {
   display: flex;
