@@ -162,16 +162,16 @@ h1, h2, h3, h4, h5, h6 {
     grid-column: 2;          still in center column */
     position: absolute;
     top: 50%;
-    right: 90px;               /* adjust this value to sit just left of your right logo */
+    right: 100px;               /* adjust this value to sit just left of your right logo */
     transform: translateY(-50%);
     font-size: 1.8rem;
     cursor: pointer;
     margin: 0;
     z-index: 10;
   }
-  /* force nav to only be as wide as the toggle */
+  /* force nav to only be as wide as the toggle ..width: auto;*/
   .navbar {
-    width: auto;
+    display: block;
   }
   
 .navbar-container {
