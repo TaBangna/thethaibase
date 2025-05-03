@@ -134,13 +134,17 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 850px) {
   .site-container {
-    max-width: 100%;
-    padding: 0; /* Adjust padding as needed */
+    /*max-width: 100%;
+    padding: 0;  Adjust padding as needed */
+
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
   /* Logo styling */
  #site-logo-img { grid-column: 1; justify-self: start; max-height: 8vh;}
  #community-logo-img { grid-column: 3; justify-self: end; max-height: 8vh;}
- 
+
   .menu-toggle {
     display: block;
     grid-column: 2;         /* still in center column */
