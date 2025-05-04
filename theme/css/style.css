@@ -132,7 +132,7 @@ h1, h2, h3, h4, h5, h6 {
 */
 /* --- Responsive Adjustments for Mobile --- */
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   /* 1) Let header items wrap onto multiple lines */
   .navbar-container {
     display: flex;
