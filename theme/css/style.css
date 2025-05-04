@@ -199,13 +199,13 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 25;
   }
 
-  /* 5) Right logo stays in the last slot */
+  /* 5) Right logo stays in the last slot 
   #community-logo-img {
     order: 3;
     flex: 0 0 auto;
     justify-self: end;
     max-height: 8vh;
-  }
+  }*/
 }
 
 .main-heading {
