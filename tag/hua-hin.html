@@ -42,8 +42,6 @@
         <img id="community-logo-img" src="../images/TheThaiBaseCommunity_PrimaryLogo_resized.png" alt="The Thai Base Community">
         </a>-->
       </div>
-      <input type="text" id="search-box" placeholder="Search articles..." />
-      <ul id="search-results"></ul>
 
     <h2>Articles tagged with hua hin</h2>
 
@@ -59,7 +57,7 @@
             </footer>
         </article>
         <article>
-            <header> <h2><a href="../standard-hua-hin-nomad.html" rel="bookmark" title="Permalink to Why The Standard Hua Hin Is the Best Hotel for Digital Nomads">Why The Standard Hua Hin Is the Best Hotel for Digital Nomads</a></h2> </header>
+            <header> <h2><a href="../standard-hua-hin-nomad.html" rel="bookmark" title="Permalink to The Standard Hua Hin, one of the Best Hotels for Digital Nomads">The Standard Hua Hin, one of the Best Hotels for Digital Nomads</a></h2> </header>
             <section><p>Blending beachfront location, creative design, fast Wi-Fi, and lifestyle perks, The Standard Hua Hin stands out as the ultimate long-stay choice for digital nomads in Thailand.</p></section>
             <footer>
                 <p>Published: <time datetime="2025-05-11T00:00:00+07:00"> 2025-05-11 </time></p>
@@ -79,7 +77,7 @@
             </footer>
         </article>
         <article>
-            <header> <h2><a href="../vann-hua-hin-nomad.html" rel="bookmark" title="Permalink to Why Vann Hua Hin Resort Is a Hidden Gem for Digital Nomads">Why Vann Hua Hin Resort Is a Hidden Gem for Digital Nomads</a></h2> </header>
+            <header> <h2><a href="../vann-hua-hin-nomad.html" rel="bookmark" title="Permalink to Vann Hua Hin Resort, a Hidden Gem for Digital Nomads">Vann Hua Hin Resort, a Hidden Gem for Digital Nomads</a></h2> </header>
             <section><p>Quiet, modern, and designed for focus — Vann Hua Hin Resort offers digital nomads a peaceful retreat with fast Wi-Fi and inspiring surroundings.</p></section>
             <footer>
                 <p>Published: <time datetime="2025-05-10T00:00:00+07:00"> 2025-05-10 </time></p>
@@ -171,31 +169,7 @@
   </script>
   <script src="https://www.anrdoezrs.net/am/101432442/include/allCj/impressions/page/am.js"></script>
 
-  <script src="https://unpkg.com/lunr/lunr.js"></script>
-  <script>
-    fetch('/search.json')
-      .then(response => response.json())
-      .then(data => {
-        const idx = lunr(function () {
-          this.ref('url');
-          this.field('title');
-          this.field('summary');
-          this.field('content');
   
-          data.forEach(doc => this.add(doc));
-        });
-  
-        document.getElementById('search-box').addEventListener('input', function () {
-          const results = idx.search(this.value);
-          const container = document.getElementById('search-results');
-          container.innerHTML = results.map(r => {
-            const item = data.find(d => d.url === r.ref);
-            return `<li><a href="${item.url}">${item.title}</a></li>`;
-          }).join('');
-        });
-      });
-  </script>
-
 </body>
 </html>
 

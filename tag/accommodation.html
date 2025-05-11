@@ -42,8 +42,6 @@
         <img id="community-logo-img" src="../images/TheThaiBaseCommunity_PrimaryLogo_resized.png" alt="The Thai Base Community">
         </a>-->
       </div>
-      <input type="text" id="search-box" placeholder="Search articles..." />
-      <ul id="search-results"></ul>
 
     <h2>Articles tagged with accommodation</h2>
 
@@ -81,31 +79,7 @@
   </script>
   <script src="https://www.anrdoezrs.net/am/101432442/include/allCj/impressions/page/am.js"></script>
 
-  <script src="https://unpkg.com/lunr/lunr.js"></script>
-  <script>
-    fetch('/search.json')
-      .then(response => response.json())
-      .then(data => {
-        const idx = lunr(function () {
-          this.ref('url');
-          this.field('title');
-          this.field('summary');
-          this.field('content');
   
-          data.forEach(doc => this.add(doc));
-        });
-  
-        document.getElementById('search-box').addEventListener('input', function () {
-          const results = idx.search(this.value);
-          const container = document.getElementById('search-results');
-          container.innerHTML = results.map(r => {
-            const item = data.find(d => d.url === r.ref);
-            return `<li><a href="${item.url}">${item.title}</a></li>`;
-          }).join('');
-        });
-      });
-  </script>
-
 </body>
 </html>
 
