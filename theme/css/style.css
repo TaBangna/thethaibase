@@ -345,6 +345,16 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.4;
 }
 
+.explore-list,
+.explore-list a {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.25rem;    /* bump size up */
+  font-weight: 700;      /* make it bold */
+}
+.explore-list li {
+  margin-bottom: 1.1rem;  /* adjust this value to whatever spacing you like */
+}
+
 .site-footer {
   background-color: #003580;
   color: #eee;
