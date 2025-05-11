@@ -47,6 +47,10 @@
     <h1 class="page-title">Guides</h1>
   </div>
 
+  <!-- Filter Tool --> 
+  <div class="filter-container">
+    <input type="text" id="article-filter" placeholder="Filter articles..." />
+  </div>
 
   <div class="article-cards">
       <article class="card">
@@ -86,6 +90,20 @@
   </script>
   <script src="https://www.anrdoezrs.net/am/101432442/include/allCj/impressions/page/am.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('article-filter');
+      console.log('Filter script loaded', input);
+      input.addEventListener('input', function() {
+        const q = input.value.trim().toLowerCase();
+        document.querySelectorAll('.article-cards article.card').forEach(function(card) {
+          const titleText = card.querySelector('.card-title').textContent.toLowerCase();
+          const excerptText = card.querySelector('.card-excerpt').textContent.toLowerCase();
+          card.style.display = (titleText.includes(q) || excerptText.includes(q)) ? '' : 'none';
+        });
+      });
+    });
+  </script>
   
 </body>
 </html>
