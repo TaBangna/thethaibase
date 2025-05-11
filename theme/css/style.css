@@ -210,7 +210,7 @@ h1, h2, h3, h4, h5, h6 {
   .explore-list,
   .explore-list a {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 1.25rem;    /* bump size up */
+    font-size: 1.1rem;    /* bump size up */
     font-weight: 700;      /* make it bold */
   }
   .explore-list li {
