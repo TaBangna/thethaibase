@@ -395,6 +395,22 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.1rem;  /* adjust this value to whatever spacing you like */
 }
 
+.footer-links {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  margin: 0 10px;
+  color: #555;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
 .site-footer {
   background-color: #003580;
   color: #eee;
@@ -410,4 +426,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-footer a:hover {
   text-decoration: underline;
+}
+
+/* footer disclosure styling */
+.footer-disclosure {
+  font-size: 0.85em;
+  color: #888;
+  margin: 0.5rem 0 0;
+}
+
+.footer-disclosure a {
+  color: #888;
+  text-decoration: underline; /* or none, as you prefer */
 }
