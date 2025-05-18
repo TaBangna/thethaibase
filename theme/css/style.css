@@ -1,4 +1,61 @@
 /* --- TheThaiBase Homepage Styles --- */
+/* Always show the hamburger toggle */
+.menu-toggle {
+  display: block;
+  cursor: pointer;
+  font-size: 1.8rem;
+  margin-left: auto; /* push to the right */
+  z-index: 1000;
+}
+
+/* Hide the nav by default */
+.navbar {
+  display: none;
+  position: absolute;    /* instead of static/relative */
+  top: 100%;             /* sit just below the header bar */
+  right: 0;              /* anchor to the right edge */
+  left: auto;            /* unset any left:0 */ 
+  width: auto;           /* shrink‐to‐fit list width, or set a max-width */
+  background: #fff;
+  border: 1.5px solid #ddd;
+  font-family: 'Ubuntu', sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: none;         /* hidden until toggled */
+  z-index: 500;          /* above page content */
+}
+
+/* When toggled, show the nav */
+.navbar.open {
+  display: block;
+}
+
+/* 4) Make sure the list inside still lays out as before */
+.navbar ul {
+  list-style: none;
+  background: #fff;
+  border: 1.5px solid #ddd;
+  margin: 0;
+  padding: 1rem 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-direction: column;   /* vertical by default */
+  align-items: flex-end;    /* right align the items */
+  /*justify-content: center;*/
+}
+
+/* Ensure the <ul> is hidden until open 
+.navbar ul {
+  display: none;
+}*/
+
+/* And show the list when the parent has .open */
+.navbar.open ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  /* fallback to column on small screens via your existing mobile media query */
+}
+
 .site-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -41,6 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Layout for header row */
 .navbar-container {
   display: grid;
+  position: relative;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   max-width: 1100px;
@@ -53,16 +111,16 @@ h1, h2, h3, h4, h5, h6 {
  #site-logo-img { grid-column: 1; justify-self: start; max-height: 8vh;}
  #community-logo-img { grid-column: 3; justify-self: end; max-height: 8vh;}
 
-/* Nav styling */
+/* Nav styling 
 .navbar {
   grid-column: 2;
   justify-self: center;
-  position: relative;       /* back in normal flow */
+  position: relative;       
   transform: none;
   font-family: 'Ubuntu', sans-serif;
   z-index: 5;
   margin: 0;
-}
+}*/
 
 .navbar ul {
   list-style: none;
@@ -83,11 +141,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #007f73;
 }
 
- /* hamburger only on mobile */
-.menu-toggle {
-  display: none;
-}
-
 .community-link {
   font-weight: 600;
   color: #E63946;
@@ -97,41 +150,17 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.25rem;
   line-height: 1.6;
 }
-/*
-.search-bar {
-  margin: 40px auto;
-  max-width: 600px;
-  display: flex;
-  border-radius: 30px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  overflow: hidden;
-  border: 1px solid #ddd;
+
+/* Keep links horizontal on desktop when open */
+@media (min-width: 851px) {
+  .navbar.open ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* center vertically in the row */
+  }
 }
 
-.search-bar input {
-  flex: 1;
-  padding: 15px 20px;
-  border: none;
-  font-size: 16px;
-  outline: none;
-}
-
-.search-bar button {
-  background: #00aa6c;
-  color: white;
-  border: none;
-  padding: 0 24px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.search-bar button:hover {
-  background: #008a58;
-}
-*/
 /* --- Responsive Adjustments for Mobile --- */
-
 @media (max-width: 850px) {
   /* 1) Let header items wrap onto multiple lines */
   .navbar-container {
@@ -171,7 +200,7 @@ h1, h2, h3, h4, h5, h6 {
     list-style: none;
     flex-direction: column;
     background: #fff;
-    border: 1px solid #ddd;
+    border: 1.5px solid #ddd;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 0.5rem 1rem;
     position: absolute;
