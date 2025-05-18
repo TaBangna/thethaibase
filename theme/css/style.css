@@ -95,6 +95,12 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto 20px;
 }
 
+.trip-search-box iframe {
+  width: 100%;
+  /*max-width: 1200px;
+  height: 400px;*/
+}
+
 /* Layout for header row */
 .navbar-container {
   display: grid;
