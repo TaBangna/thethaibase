@@ -55,20 +55,39 @@
         </a>-->
       </div>
 
-    <h2>Articles tagged with hotels.com</h2>
+  <div class="page-header">
+    <h1 class="page-title" style="text-align:center;">work</h1>
+  </div>
+
+  <!-- Filter Tool --> 
+  <div class="filter-container" style="text-align:center; margin: 2rem 0;">
+    <input type="text" id="article-filter" placeholder="Filter articles..." 
+           style="width: 60%; max-width: 400px; font-size: 1.2rem; padding: 0.75rem;" />
+  </div>
 
 
-        <article>
-            <header> <h2><a href="../where-to-stay-in-thailand-expats-retirees-nomads.html" rel="bookmark" title="Permalink to Where to Stay in Thailand">Where to Stay in Thailand</a></h2> </header>
-            <section><p>Thailand offers an incredible range of accommodation options tailored specifically for expats, retirees, and nomads. Explore popular locations, accommodation types, and essential booking tips in this comprehensive guide.</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-05-11T00:00:00+07:00"> 2025-05-11 </time></p>
-                <address>By
-                        <a href="../author/ace.html">Ace</a>
-                </address>
-            </footer>
-        </article>
+  <div class="article-cards">
+      <article class="card">
+          <div class="card-image">
+              <a href="../wework-thailand.html">
+                <img src="../images/wework.jpg" alt="Work from WeWork: Best Coworking Spaces in Thailand for Expats & Nomads">
+              </a>
+          </div>
 
+        <div class="card-body">
+          <h2 class="card-title">
+            <a href="../wework-thailand.html">Work from WeWork: Best Coworking Spaces in Thailand for Expats & Nomads</a>
+          </h2>
+          <!--<time datetime="2025-05-12T00:00:00+07:00" class="card-date">
+            May 12, 2025
+          </time> -->
+          <p class="card-excerpt">
+            <p>Discover the best WeWork coworking locations across Thailand and why they're ideal for remote workers, digital nomads, and business travelers.</p>
+          </p>
+          <a href="../wework-thailand.html" class="read-more">Read more →</a>
+        </div>
+      </article>
+  </div>
 
 
   <footer class="site-footer">
@@ -91,6 +110,20 @@
   </script>
   <script src="https://www.anrdoezrs.net/am/101432442/include/allCj/impressions/page/am.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const input = document.getElementById('article-filter');
+      console.log('Filter script loaded', input);
+      input.addEventListener('input', function() {
+        const q = input.value.trim().toLowerCase();
+        document.querySelectorAll('.article-cards article.card').forEach(function(card) {
+          const titleText = card.querySelector('.card-title').textContent.toLowerCase();
+          const excerptText = card.querySelector('.card-excerpt').textContent.toLowerCase();
+          card.style.display = (titleText.includes(q) || excerptText.includes(q)) ? '' : 'none';
+        });
+      });
+    });
+  </script>
   
 </body>
 </html>
