@@ -301,7 +301,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .card-title {
   font-size: 1.25rem;
-  margin: 0 0 .5rem;
+  margin: 0 0 0rem;
 }
 .card-date {
   font-size: .875rem;
@@ -310,7 +310,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .card-excerpt {
   flex: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 2px;
   color: #444;
 }
 .read-more {
