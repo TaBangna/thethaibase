@@ -64,7 +64,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   color: #2d2d2d;
   background-color: #fff;
 }
@@ -72,9 +72,8 @@ body {
 /* optionally also set headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Ubuntu', sans-serif;
-  font-weight: 500; /* or 700 for bolder titles */
+  font-weight: 700; /* or 700 for bolder titles */
 }
-
 
 .homepage {
   padding: 60px 20px;
