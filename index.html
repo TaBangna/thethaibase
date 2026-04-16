@@ -11,7 +11,8 @@
 <body>
   <div class="navbar">
         <img src="assets/logo-new.svg" alt="The Thai Base" style="height: 44px; width: auto;"/>
-    <nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        <nav>
       <a href="#who-we-serve" class="nav-link">Who We Serve</a>
       <a href="#what-we-offer" class="nav-link">What We Offer</a>
       <a href="#guides" class="nav-link">Guides</a>
@@ -65,6 +66,12 @@
     <p><a href="expat.html">Expat Life</a> | <a href="retiree.html">Retirement</a> | <a href="nomad.html">Visas and Permits</a> | <a href="#">Contact</a></p>
     <p class="disclosure">The Thai Base participates in select affiliate programmes. Recommendations are editorially independent.</p>
   </footer>
+
+<script>
+const btn=document.getElementById('hamburger');
+const nav=document.querySelector('.navbar nav');
+btn.addEventListener('click',function(){btn.classList.toggle('open');nav.classList.toggle('open');});
+</script>
 </body>
 </html><!DOCTYPE html>
 <html lang="en">
