@@ -40,7 +40,9 @@ def contact_links(cls="btn btn-primary"):
         num = "".join(ch for ch in c["whatsapp"] if ch.isdigit())
         links.append(f'<a class="{cls}" href="https://wa.me/{num}">Message on WhatsApp</a>')
     if c.get("line"):
-        links.append(f'<a class="{cls}" href="https://line.me/ti/p/~{e(c["line"])}">Add us on LINE</a>')
+        lid = c["line"].strip()
+        url = f"https://line.me/R/ti/p/{lid}" if lid.startswith("@") else f"https://line.me/ti/p/~{lid}"
+        links.append(f'<a class="{cls}" href="{e(url)}">Add us on LINE</a>')
     if c.get("email"):
         links.append(f'<a class="{cls}" href="mailto:{e(c["email"])}">Email us</a>')
     if not links:
