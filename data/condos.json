@@ -1,0 +1,117 @@
+[
+  {
+    "slug": "the-coast-bangkok",
+    "name": "The Coast Bangkok",
+    "featured": true,
+    "station": "Bang Na",
+    "walk": "About 100 m to BTS Bang Na",
+    "completed": 2011,
+    "towers": "2 towers, up to 39 floors",
+    "units": "About 820 units",
+    "unit_types": "1, 2 and 3 bedrooms, including duplex layouts (roughly 30–150 sq m)",
+    "summary": "A two-tower condo right next to BTS Bang Na and the BITEC exhibition centre, with a small shopping mall at its base.",
+    "facilities": [
+      "Indoor and outdoor saltwater pools",
+      "Gym and library",
+      "Rooftop and sky gardens",
+      "Children's playground",
+      "Shops and restaurants on site",
+      "Key-card access, CCTV, 24-hour security",
+      "Parking"
+    ],
+    "nearby": [
+      "BITEC exhibition centre — next door",
+      "Central Bangna and Mega Bangna for shopping",
+      "Berkeley International School — about 1 km",
+      "Sikarin and Thainakarin hospitals"
+    ],
+    "good_for": "Commuters who want the BTS at the door, and families who want a pool and play area in the building.",
+    "sources": [
+      ["CondoDee — The Coast Bangkok Bangna", "https://condodee.com/p/658"]
+    ]
+  },
+  {
+    "slug": "ideo-o2",
+    "name": "Ideo O2",
+    "station": "Bang Na",
+    "walk": "About 900 m to BTS Bang Na, with a building shuttle",
+    "completed": 2017,
+    "towers": "3 buildings, 34 floors",
+    "units": "About 1,569 units",
+    "unit_types": "Studios, 1 and 2 bedrooms",
+    "summary": "A large Ananda Development project on the Bang Na side of the BTS, with resort-style shared facilities.",
+    "developer": "Ananda Development",
+    "facilities": [
+      "Pool, gym, sauna and running track",
+      "Co-working and meeting rooms",
+      "Kids zone and gardens",
+      "Shuttle bus to the BTS",
+      "Key-card access, CCTV, 24-hour security",
+      "Parking"
+    ],
+    "nearby": [
+      "BTS Bang Na by shuttle",
+      "Central Bangna and Mega Bangna for shopping",
+      "Bangna–Trad Road toward the international school belt"
+    ],
+    "good_for": "Singles and couples who want lots of shared space and newer facilities at a lower rent than the BTS-front buildings.",
+    "sources": [
+      ["FazWaz — Ideo O2 listing", "https://www.fazwaz.com/property-rent/2-bedroom-condo-for-rent-at-ideo-o2-in-bang-na-bangkok-u5692009"]
+    ]
+  },
+  {
+    "slug": "ideo-mobi-sukhumvit-eastgate",
+    "name": "Ideo Mobi Sukhumvit Eastgate",
+    "station": "Bang Na",
+    "walk": "Close to BTS Bang Na",
+    "completed": 2016,
+    "towers": "30 floors",
+    "units": "",
+    "unit_types": "Mostly studios and 1 bedrooms",
+    "summary": "A compact Ananda Development tower near BTS Bang Na, built mainly for single professionals.",
+    "developer": "Ananda Development",
+    "facilities": [
+      "Pool and gym",
+      "Garden and library",
+      "24-hour security",
+      "Parking"
+    ],
+    "nearby": [
+      "BTS Bang Na",
+      "BITEC exhibition centre",
+      "Central Bangna for shopping"
+    ],
+    "good_for": "Single professionals who want a small, easy-to-manage unit near the BTS.",
+    "sources": [
+      ["Thailand-Property — Ideo Mobi Sukhumvit Eastgate", "https://www.thailand-property.com/condo/3323/ideo-mobi-sukhumvit-eastgate"]
+    ]
+  },
+  {
+    "slug": "whizdom-101",
+    "name": "Whizdom 101",
+    "station": "Punnawithi",
+    "walk": "About 300–500 m to BTS Punnawithi",
+    "completed": 2020,
+    "towers": "3 buildings",
+    "units": "About 554 units",
+    "unit_types": "1, 2 and 3 bedrooms",
+    "summary": "An MQDC project near 101 The Third Place and True Digital Park at BTS Punnawithi, two stops from Bang Na.",
+    "developer": "MQDC (Magnolia Quality Development)",
+    "facilities": [
+      "Pool, gym, sauna and jogging track",
+      "Indoor kids zone",
+      "Restaurant on site",
+      "Key-card access, CCTV, 24-hour security",
+      "Parking"
+    ],
+    "nearby": [
+      "101 The Third Place for shops and dining",
+      "True Digital Park offices",
+      "Central Bangna, a short drive east"
+    ],
+    "good_for": "Tech and office workers at True Digital Park, and families who want a newer building with an indoor play area.",
+    "sources": [
+      ["FazWaz — Whizdom 101", "https://www.fazwaz.com/projects/thailand/bangkok/phra-khanong/bang-chak/whizdom-101"]
+    ]
+  }
+]

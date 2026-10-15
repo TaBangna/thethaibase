@@ -1,0 +1,143 @@
+/* The Thai Base — Bang Na condo rentals
+   Navy kept from the original brand; BTS Sukhumvit-line green is the accent. */
+
+:root {
+  --navy: #1A2535;
+  --navy-2: #24324A;
+  --ink: #18212B;
+  --muted: #5B6670;
+  --paper: #F3F5F2;
+  --card: #FFFFFF;
+  --line: #D9DED8;
+  --bts: #5E9E32;
+  --bts-soft: #E3EFD9;
+  --gold: #B8943F;
+  --focus: #2F6FD6;
+  --display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  --body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --max: 1120px;
+  --text: 68ch;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+img, svg { max-width: 100%; display: block; }
+a { color: var(--navy); text-underline-offset: 3px; }
+a:hover { color: var(--bts); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--display); color: var(--navy); line-height: 1.1; margin: 0 0 .5em; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 700; letter-spacing: -.02em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 600; letter-spacing: -.01em; }
+h3 { font-size: 1.2rem; font-weight: 600; }
+p { margin: 0 0 1em; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .wrap { padding: 0 32px; } }
+.prose { max-width: var(--text); }
+.muted { color: var(--muted); }
+.small { font-size: .9rem; }
+
+/* Header */
+.site-head { background: var(--navy); color: #fff; }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
+.brand img { height: 36px; width: auto; }
+.site-nav { display: flex; gap: 4px 20px; flex-wrap: wrap; }
+.site-nav a { color: #DCE3EA; text-decoration: none; font-size: .95rem; padding: 4px 0; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: #fff; box-shadow: inset 0 -2px 0 var(--bts); }
+
+/* Hero */
+.hero { background: var(--navy); color: #fff; padding: 40px 0 0; }
+.hero h1 { color: #fff; max-width: 16ch; }
+.hero p { color: #C9D2DB; max-width: 52ch; font-size: 1.1rem; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0 32px; }
+
+.btn { display: inline-block; padding: 12px 20px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 1rem; border: 2px solid transparent; }
+.btn-primary { background: var(--bts); color: #fff; }
+.btn-primary:hover { background: #4E8728; color: #fff; }
+.btn-ghost { border-color: #5A6A80; color: #fff; }
+.btn-ghost:hover { border-color: #fff; color: #fff; }
+.btn-dark { background: var(--navy); color: #fff; }
+.btn-dark:hover { background: var(--navy-2); color: #fff; }
+
+/* BTS line strip — the signature element */
+.line-strip { background: var(--navy-2); padding: 28px 0 24px; border-top: 1px solid #33425A; }
+.line-strip h2 { color: #fff; font-size: 1rem; font-family: var(--body); font-weight: 600; margin-bottom: 4px; }
+.line-strip .hint { color: #A9B6C3; font-size: .9rem; margin-bottom: 16px; }
+.line-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.line-svg { min-width: 680px; width: 100%; height: auto; }
+.line-svg .track { stroke: var(--bts); stroke-width: 8; stroke-linecap: round; }
+.line-svg .station circle { fill: #fff; stroke: var(--bts); stroke-width: 4; }
+.line-svg .station text { fill: #fff; font: 600 15px var(--body); }
+.line-svg .station .dir { fill: #A9B6C3; font-weight: 400; font-size: 12px; }
+.line-svg a .pin { fill: var(--gold); }
+.line-svg a text { fill: #fff; font: 500 14px var(--body); text-decoration: underline; text-decoration-color: rgba(255,255,255,.35); }
+.line-svg a:hover text, .line-svg a:focus text { fill: var(--bts-soft); }
+.line-svg a .stem { stroke: #5A6A80; stroke-width: 1.5; stroke-dasharray: 3 3; }
+
+/* Sections */
+.section { padding: 56px 0; }
+.section + .section { border-top: 1px solid var(--line); }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.section-head p { margin: 0; }
+
+/* Condo rows */
+.condo-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--navy); }
+.condo-row { display: grid; grid-template-columns: 1fr; gap: 6px 24px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+@media (min-width: 760px) {
+  .condo-row { grid-template-columns: minmax(220px, 1.2fr) 1fr 1.4fr auto; align-items: start; }
+}
+.condo-row h3 { margin: 0; font-size: 1.25rem; }
+.condo-row h3 a { text-decoration: none; }
+.condo-row h3 a:hover { text-decoration: underline; }
+.station-tag { display: inline-flex; align-items: center; gap: 6px; font-size: .92rem; color: var(--ink); }
+.station-tag::before { content: ""; width: 10px; height: 10px; border-radius: 50%; border: 3px solid var(--bts); background: #fff; flex: none; }
+.condo-row .year { color: var(--muted); font-size: .92rem; }
+.badge { display: inline-block; background: var(--bts-soft); color: #2F5A14; font-size: .8rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
+
+/* Two-column feature blocks */
+.split { display: grid; gap: 32px; }
+@media (min-width: 860px) { .split { grid-template-columns: 1fr 1fr; gap: 56px; } }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 24px; }
+.panel-dark { background: var(--navy); color: #DCE3EA; border-color: var(--navy); }
+.panel-dark h2, .panel-dark h3 { color: #fff; }
+.panel-dark a:not(.btn) { color: #fff; }
+
+ol.steps { padding-left: 1.3em; margin: 0 0 1em; }
+ol.steps li { margin-bottom: .6em; padding-left: .2em; }
+ul.ticks { list-style: none; padding: 0; margin: 0 0 1em; }
+ul.ticks li { padding-left: 22px; position: relative; margin-bottom: .45em; }
+ul.ticks li::before { content: ""; position: absolute; left: 2px; top: .55em; width: 9px; height: 9px; border-radius: 50%; background: var(--bts); }
+
+/* Condo detail */
+.crumbs { font-size: .9rem; color: var(--muted); padding: 20px 0 0; }
+.crumbs a { color: var(--muted); }
+.detail-head { padding: 16px 0 32px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border-top: 2px solid var(--navy); margin: 24px 0; }
+.facts div { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-size: .85rem; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-weight: 600; }
+.notice { border-left: 4px solid var(--gold); background: #FBF7EC; padding: 14px 18px; border-radius: 0 6px 6px 0; margin: 24px 0; }
+
+/* Contact */
+.contact-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+
+/* Footer */
+.site-foot { background: var(--navy); color: #A9B6C3; padding: 40px 0; font-size: .92rem; margin-top: 0; }
+.site-foot a { color: #DCE3EA; }
+.foot-grid { display: grid; gap: 24px; }
+@media (min-width: 720px) { .foot-grid { grid-template-columns: 2fr 1fr 1fr; } }
+.site-foot ul { list-style: none; padding: 0; margin: 0; }
+.site-foot li { margin-bottom: 6px; }
+.site-foot h3 { color: #fff; font-size: 1rem; font-family: var(--body); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
