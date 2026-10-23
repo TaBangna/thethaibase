@@ -33,64 +33,37 @@ STATIONS = [("Punnawithi", 160), ("Udom Suk", 340), ("Bang Na", 520), ("Bearing"
 e = html.escape
 
 
-def contact_links(cls="btn btn-primary"):
+LABELS = {
+    "en": {"wa": "Message on WhatsApp", "line": "Add us on LINE", "email": "Email us",
+           "none": "Contact details are being set up."},
+    "th": {"wa": "ทักทาง WhatsApp", "line": "เพิ่มเพื่อนใน LINE", "email": "ส่งอีเมล",
+           "none": "กำลังจัดเตรียมช่องทางติดต่อ"},
+}
+
+
+def contact_links(cls="btn btn-primary", lang="en"):
+    L = LABELS[lang]
     c = SITE["contact"]
     links = []
     if c.get("whatsapp"):
         num = "".join(ch for ch in c["whatsapp"] if ch.isdigit())
-        links.append(f'<a class="{cls}" href="https://wa.me/{num}">Message on WhatsApp</a>')
+        links.append(f'<a class="{cls}" href="https://wa.me/{num}">{L["wa"]}</a>')
     if c.get("line"):
         lid = c["line"].strip()
         url = f"https://line.me/R/ti/p/{lid}" if lid.startswith("@") else f"https://line.me/ti/p/~{lid}"
-        links.append(f'<a class="{cls}" href="{e(url)}">Add us on LINE</a>')
+        links.append(f'<a class="{cls}" href="{e(url)}">{L["line"]}</a>')
     if c.get("email"):
-        links.append(f'<a class="{cls}" href="mailto:{e(c["email"])}">Email us</a>')
+        links.append(f'<a class="{cls}" href="mailto:{e(c["email"])}">{L["email"]}</a>')
     if not links:
-        return '<p class="muted">Contact details are being set up.</p>'
+        return f'<p class="muted">{L["none"]}</p>'
     return '<div class="contact-links">' + "".join(links) + "</div>"
 
 
-def layout(path, title, desc, body):
-    current = ' aria-current="page"'
-    nav = "".join(
-        f'<a href="{href}"{current if href == path else ""}>{label}</a>'
-        for href, label in NAV
-    )
-    full_title = f"{title} | {SITE['brand']}" if path != "/" else f"{SITE['brand']} — {SITE['tagline']}"
-    canonical = SITE["base_url"] + path
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(full_title)}</title>
-<meta name="description" content="{e(desc)}">
-<link rel="canonical" href="{canonical}">
-<meta property="og:title" content="{e(full_title)}">
-<meta property="og:description" content="{e(desc)}">
-<meta property="og:url" content="{canonical}">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css">
-</head>
-<body>
-<header class="site-head">
-  <div class="wrap">
-    <a class="brand" href="/">The Thai Base</a>
-    <nav class="site-nav" aria-label="Main">{nav}</nav>
-  </div>
-</header>
-<main>
-{body}
-</main>
-<footer class="site-foot">
-  <div class="wrap foot-grid">
+EN_FOOT = """
     <div>
       <h3>The Thai Base</h3>
       <p>Condo rentals in Bang Na for foreign professionals and families. Building facts come from public listings and are checked before each viewing.</p>
-      {contact_links("btn btn-ghost")}
+      {contact}
     </div>
     <div>
       <h3>Renters</h3>
@@ -107,7 +80,75 @@ def layout(path, title, desc, body):
         <li><a href="/list-your-condo.html">List your condo</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
+    </div>"""
+
+
+FOOT_TH = """
+    <div>
+      <h3>The Thai Base</h3>
+      <p>บริการปล่อยเช่าคอนโดในบางนาให้พนักงานและครอบครัวชาวต่างชาติ</p>
+      {contact}
     </div>
+    <div>
+      <h3>สำหรับเจ้าของห้อง</h3>
+      <ul>
+        <li><a href="/th/list-your-condo.html">ลงประกาศคอนโด</a></li>
+        <li><a href="/list-your-condo.html">English version</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>For renters</h3>
+      <ul>
+        <li><a href="/condos/">Condos in Bang Na</a></li>
+        <li><a href="/renting-guide.html">Renting guide</a></li>
+      </ul>
+    </div>"""
+
+
+def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None):
+    current = ' aria-current="page"'
+    nav_path = nav_path or path
+    alt = "".join(f'\n<link rel="alternate" hreflang="{hl}" href="{SITE["base_url"]}{href}">'
+                  for hl, href in (alternates or []))
+    thai_font = ('\n<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">'
+                 if lang == "th" else "")
+    nav = "".join(
+        f'<a href="{href}"{current if href == nav_path else ""}>{label}</a>'
+        for href, label in NAV
+    )
+    full_title = f"{title} | {SITE['brand']}" if path != "/" else f"{SITE['brand']} — {SITE['tagline']}"
+    canonical = SITE["base_url"] + path
+    foot = (FOOT_TH.format(contact=contact_links("btn btn-ghost", "th")) if lang == "th"
+            else EN_FOOT.format(contact=contact_links("btn btn-ghost")))
+    return f"""<!DOCTYPE html>
+<html lang="{lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{e(full_title)}</title>
+<meta name="description" content="{e(desc)}">
+<link rel="canonical" href="{canonical}">{alt}
+<meta property="og:title" content="{e(full_title)}">
+<meta property="og:description" content="{e(desc)}">
+<meta property="og:url" content="{canonical}">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">{thai_font}
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/">The Thai Base</a>
+    <nav class="site-nav" aria-label="Main">{nav}</nav>
+  </div>
+</header>
+<main>
+{body}
+</main>
+<footer class="site-foot">
+  <div class="wrap foot-grid">{foot}
   </div>
   <div class="wrap"><p class="small">© {date.today().year} The Thai Base</p></div>
 </footer>
@@ -291,9 +332,12 @@ def page_condo(c):
     return layout(f"/condos/{c['slug']}.html", f"{c['name']} — condo for rent near BTS {c['station']}", desc, body)
 
 
-def page_fragment(name, path, title, desc):
-    frag = (SRC / name).read_text(encoding="utf-8").replace("{{CONTACT}}", contact_links())
-    return layout(path, title, desc, frag)
+OWNER_ALTERNATES = [("en", "/list-your-condo.html"), ("th", "/th/list-your-condo.html")]
+
+
+def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None):
+    frag = (SRC / name).read_text(encoding="utf-8").replace("{{CONTACT}}", contact_links(lang=lang))
+    return layout(path, title, desc, frag, lang, nav_path, alternates)
 
 
 def write(rel, content):
@@ -317,11 +361,18 @@ def main():
          "Deposits, leases, TM30 reporting, utilities and what to check before you sign a condo lease in Thailand."),
         ("list-your-condo.html", "/list-your-condo.html", "List your Bang Na condo for foreign tenants",
          "Rent your Bang Na condo to foreign professionals and families. We handle marketing, viewings and the lease in English."),
+        ("th/list-your-condo.html", "/th/list-your-condo.html", "ปล่อยเช่าคอนโดบางนาให้ผู้เช่าชาวต่างชาติ",
+         "ปล่อยเช่าคอนโดในบางนาให้พนักงานและครอบครัวชาวต่างชาติ เราดูแลการตลาด การพาชมห้อง และสัญญาเช่าภาษาอังกฤษให้"),
         ("contact.html", "/contact.html", "Contact",
          "Contact The Thai Base about condo rentals in Bang Na."),
         ("404.html", "/404.html", "Page not found", "Page not found."),
     ]:
-        pages.append((name, path, page_fragment(name, path, title, desc)))
+        kw = {}
+        if name.endswith("list-your-condo.html"):
+            kw["alternates"] = OWNER_ALTERNATES
+            if name.startswith("th/"):
+                kw.update(lang="th", nav_path="/list-your-condo.html")
+        pages.append((name, path, page_fragment(name, path, title, desc, **kw)))
 
     for rel, _, content in pages:
         write(rel, content)
