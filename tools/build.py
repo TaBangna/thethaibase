@@ -10,6 +10,7 @@ Generated pages are written to the repo root so GitHub Pages serves them.
 """
 import html
 import json
+from urllib.parse import quote
 from datetime import date
 from pathlib import Path
 
@@ -26,6 +27,13 @@ NAV = [
     ("/list-your-condo.html", "For owners"),
     ("/contact.html", "Contact"),
 ]
+
+_units_file = ROOT / "data/units.json"
+UNITS = json.loads(_units_file.read_text(encoding="utf-8")) if _units_file.exists() else []
+CONDO_BY_SLUG = {c["slug"]: c for c in CONDOS}
+LIVE_UNITS = [u for u in UNITS if not u.get("draft")]
+if LIVE_UNITS:
+    NAV.insert(1, ("/rent/", "For rent"))
 
 # Stations on the BTS Sukhumvit line, west to east, with x positions in the strip.
 STATIONS = [("Punnawithi", 160), ("Udom Suk", 340), ("Bang Na", 520), ("Bearing", 690)]
@@ -105,11 +113,13 @@ FOOT_TH = """
     </div>"""
 
 
-def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None):
+def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, noindex=False):
     current = ' aria-current="page"'
     nav_path = nav_path or path
     alt = "".join(f'\n<link rel="alternate" hreflang="{hl}" href="{SITE["base_url"]}{href}">'
                   for hl, href in (alternates or []))
+    if noindex:
+        alt += '\n<meta name="robots" content="noindex">'
     thai_font = ('\n<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">'
                  if lang == "th" else "")
     nav = "".join(
@@ -292,6 +302,8 @@ def page_condo(c):
     fac = "".join(f"<li>{e(x)}</li>" for x in c["facilities"])
     near = "".join(f"<li>{e(x)}</li>" for x in c["nearby"])
     src = "".join(f'<li><a href="{e(u)}" rel="nofollow">{e(t)}</a></li>' for t, u in c["sources"])
+    here = [u for u in LIVE_UNITS if u["condo"] == c["slug"]]
+    units_section = (f'<section class="section"><h2>Units for rent here</h2>{unit_cards(here)}</section>' if here else "")
     avail = ("<p><strong>Units here are coming to the site soon.</strong> Message us now to hear about them first.</p>"
              if c.get("featured") else
              "<p>Ask us which units in this building are available now.</p>")
@@ -325,6 +337,7 @@ def page_condo(c):
       <ul class="small">{src}</ul>
     </div>
   </div>
+  {units_section}
 </div>
 <div class="section"></div>
 """
@@ -333,6 +346,144 @@ def page_condo(c):
 
 
 OWNER_ALTERNATES = [("en", "/list-your-condo.html"), ("th", "/th/list-your-condo.html")]
+
+
+def baht(n):
+    return f"฿{n:,.0f}"
+
+
+def line_ask_url(text):
+    lid = SITE["contact"].get("line", "").strip()
+    if not lid.startswith("@"):
+        return None
+    return f"https://line.me/R/oaMessage/{lid}/?{quote(text)}"
+
+
+def unit_title(u):
+    beds = "Studio" if u["bedrooms"] == 0 else f'{u["bedrooms"]}-bedroom'
+    return f'{beds}, {u["size_sqm"]:g} sq m'
+
+
+def unit_cards(units):
+    if not units:
+        return ""
+    cards = []
+    for u in units:
+        c = CONDO_BY_SLUG[u["condo"]]
+        rented = u.get("status") == "rented"
+        badge = '<span class="badge badge-muted">Rented</span>' if rented else ""
+        cards.append(f"""<li class="unit-card">
+  <a href="/rent/{u['slug']}.html">
+    <img src="{e(u['photos'][0])}" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-body">
+      <div class="unit-price">{baht(u['rent_thb'])}<span> / month</span>{badge}</div>
+      <h3>{e(unit_title(u))}</h3>
+      <p class="muted small">{e(c['name'])} · Floor {u['floor']} · BTS {e(c['station'])}</p>
+    </div>
+  </a>
+</li>""")
+    return '<ul class="unit-grid">' + "".join(cards) + "</ul>"
+
+
+def page_unit(u):
+    c = CONDO_BY_SLUG[u["condo"]]
+    title = unit_title(u)
+    photos = u["photos"]
+    gallery = (f'<a class="g-lead" href="{e(photos[0])}"><img src="{e(photos[0])}" alt="Photo 1 of {len(photos)}" width="1200" height="800"></a>'
+               + "".join(f'<a href="{e(ph)}"><img src="{e(ph)}" alt="Photo {i} of {len(photos)}" loading="lazy" width="600" height="400"></a>'
+                         for i, ph in enumerate(photos[1:5], 2)))
+    more = (f'<p class="small muted">{len(photos) - 5} more photo{"s" if len(photos) - 5 > 1 else ""} — <a href="{e(photos[5])}">view</a> or ask us on LINE.</p>'
+            if len(photos) > 5 else "")
+    spec = [("Rent", f"{baht(u['rent_thb'])} / month"),
+            ("Bedrooms", "Studio" if u["bedrooms"] == 0 else str(u["bedrooms"])),
+            ("Bathrooms", str(u["bathrooms"])),
+            ("Size", f"{u['size_sqm']:g} sq m"),
+            ("Floor", str(u["floor"]) + (f", Tower {u['tower']}" if u.get("tower") else "")),
+            ("Facing", u.get("facing", "")),
+            ("Furnishing", u.get("furnished", "")),
+            ("Available from", u.get("available_from", ""))]
+    spec_html = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in spec if v)
+    terms = [f"Deposit: {u['deposit_months']} months' rent" if u.get("deposit_months") else "",
+             f"Paid in advance: {u['advance_months']} month's rent" if u.get("advance_months") else "",
+             f"Minimum lease: {u['min_lease_months']} months" if u.get("min_lease_months") else "",
+             {True: "Pets allowed", False: "No pets"}.get(u.get("pets"), "")]
+    terms_html = "".join(f"<li>{e(t)}</li>" for t in terms if t)
+
+    def tick_list(items):
+        return '<ul class="ticks">' + "".join(f"<li>{e(x)}</li>" for x in items) + "</ul>" if items else ""
+
+    furn = (f"<h2>Furniture and appliances</h2><div class=\"two-col\">{tick_list(u.get('furniture', []))}{tick_list(u.get('appliances', []))}</div>"
+            if u.get("furniture") or u.get("appliances") else "")
+    inc = tick_list(u.get("included", []))
+    exc = tick_list(u.get("not_included", []))
+    bills = (f"<h3>Included in the rent</h3>{inc}" if inc else "") + (f"<h3>Paid separately</h3>{exc}" if exc else "")
+    desc_th = (f'<p lang="th">{e(u["description_th"])}</p>' if u.get("description_th") else "")
+    ask = line_ask_url(f"Hi, I'm interested in unit {u['id']} at {c['name']} ({title}, {baht(u['rent_thb'])}/month). Is it still available?")
+    ask_btn = (f'<a class="btn btn-primary" href="{e(ask)}">Ask about this unit on LINE</a>' if ask else contact_links())
+    rented = u.get("status") == "rented"
+    status = ('<div class="notice"><strong>This unit has been rented.</strong> Ask us about similar units in the building.</div>'
+              if rented else "")
+    sample = ('<div class="notice"><strong>Sample listing.</strong> This page previews the layout; it is not a real unit.</div>'
+              if u.get("draft") else "")
+    body = f"""
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/condos/">Condos</a> / <a href="/condos/{c['slug']}.html">{e(c['name'])}</a> / {e(u['id'])}</nav>
+  {sample}
+  <div class="gallery">{gallery}</div>
+  {more}
+  <div class="unit-layout">
+    <div>
+      <div class="detail-head" style="padding-bottom:0">
+        <p class="muted" style="margin:0"><a href="/condos/{c['slug']}.html">{e(c['name'])}</a> · <span class="station-tag">BTS {e(c['station'])}</span> · {e(c['walk'])}</p>
+        <h1>{e(title)}</h1>
+      </div>
+      {status}
+      <dl class="facts">{spec_html}</dl>
+      <div class="prose">
+        <h2>About this unit</h2>
+        <p>{e(u['description_en'])}</p>
+        {desc_th}
+        {furn}
+        {bills}
+        <h2>The building</h2>
+        <p>{e(c['summary'])} <a href="/condos/{c['slug']}.html">Facilities and nearby places</a></p>
+      </div>
+    </div>
+    <aside>
+      <div class="panel price-panel">
+        <div class="unit-price">{baht(u['rent_thb'])}<span> / month</span></div>
+        <ul class="plain small">{terms_html}</ul>
+        {ask_btn}
+        <p class="small muted" style="margin:12px 0 0">Unit ref {e(u['id'])}. We confirm availability before every viewing.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+<div class="section"></div>
+"""
+    desc = (f"{title} for rent at {c['name']}, Bang Na — {baht(u['rent_thb'])} a month, floor {u['floor']}, "
+            f"{u.get('furnished', '').lower()}. Near BTS {c['station']}.")
+    return layout(f"/rent/{u['slug']}.html", f"{title} for rent at {c['name']}", desc, body,
+                  nav_path="/rent/", noindex=bool(u.get("draft")))
+
+
+def page_rent_index():
+    if LIVE_UNITS:
+        inner = unit_cards(LIVE_UNITS)
+    else:
+        inner = ('<p class="muted">New units are being added. Tell us your budget and move-in date and we\'ll send you what\'s available.</p>'
+                 + contact_links())
+    body = f"""
+<div class="wrap">
+  <div class="detail-head">
+    <h1>Condos for rent in Bang Na</h1>
+    <p class="prose muted">Units we have checked in person, near the BTS from Punnawithi to Bearing.</p>
+  </div>
+  {inner}
+</div>
+<div class="section"></div>
+"""
+    return layout("/rent/", "Condo units for rent in Bang Na", "Condo units for rent in Bang Na near the BTS, with photos, rent and what's included.", body)
 
 
 def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None):
@@ -354,6 +505,9 @@ def main():
     ]
     for c in CONDOS:
         pages.append((f"condos/{c['slug']}.html", f"/condos/{c['slug']}.html", page_condo(c)))
+    pages.append(("rent/index.html", "/rent/", page_rent_index()))
+    for u in UNITS:
+        pages.append((f"rent/{u['slug']}.html", f"/rent/{u['slug']}.html", page_unit(u)))
     for name, path, title, desc in [
         ("bang-na.html", "/bang-na.html", "Living in Bang Na: a guide for expats",
          "What it's like to live in Bang Na, Bangkok: BTS stations, international schools, shopping, hospitals and getting to the airport."),
@@ -377,7 +531,8 @@ def main():
     for rel, _, content in pages:
         write(rel, content)
 
-    urls = [p for _, p, _ in pages if p != "/404.html"]
+    drafts = {f"/rent/{u['slug']}.html" for u in UNITS if u.get("draft")}
+    urls = [p for _, p, _ in pages if p != "/404.html" and p not in drafts]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sitemap += [f"  <url><loc>{SITE['base_url']}{u}</loc></url>" for u in urls]
