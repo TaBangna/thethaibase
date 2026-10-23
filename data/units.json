@@ -25,7 +25,14 @@
       "Fridge",
       "Washing machine"
     ],
-    "photos": [],
+    "photos": [
+      "https://bszmfgsyqzewjulhzdkr.supabase.co/storage/v1/object/public/listing-photos/da2f9e53-8377-4099-b38c-5ecd20576428/1780409587427_ctxix4smr6.jpg",
+      "https://bszmfgsyqzewjulhzdkr.supabase.co/storage/v1/object/public/listing-photos/da2f9e53-8377-4099-b38c-5ecd20576428/1780409588394_uax2nshblxl.jpg",
+      "https://bszmfgsyqzewjulhzdkr.supabase.co/storage/v1/object/public/listing-photos/da2f9e53-8377-4099-b38c-5ecd20576428/1780409588798_u0ruftaj9sm.jpg",
+      "https://bszmfgsyqzewjulhzdkr.supabase.co/storage/v1/object/public/listing-photos/da2f9e53-8377-4099-b38c-5ecd20576428/1780409589313_50xubskant7.jpg",
+      "https://bszmfgsyqzewjulhzdkr.supabase.co/storage/v1/object/public/listing-photos/da2f9e53-8377-4099-b38c-5ecd20576428/1780409589594_4kr7riw1bqe.jpg",
+      "https://bszmfgsyqzewjulhzdkr.supabase.co/storage/v1/object/public/listing-photos/da2f9e53-8377-4099-b38c-5ecd20576428/1780409589927_kfn976eoh3r.jpg"
+    ],
     "description_en": "A one-bedroom unit on the 16th floor of Tower A, facing west, rented directly by the owner. The Coast is about 100 m from BTS Bang Na. Partly furnished with a bed, wardrobe, two air conditioners, fridge and washing machine. Ask us on LINE to arrange a viewing.",
     "description_th": "ห้อง 1 ห้องนอน ชั้น 16 ตึก A หันทิศตะวันตก ปล่อยเช่าโดยเจ้าของโดยตรง โครงการ The Coast อยู่ห่าง BTS บางนาประมาณ 100 เมตร ตกแต่งบางส่วน มีเตียง ตู้เสื้อผ้า แอร์ 2 ตัว ตู้เย็น และเครื่องซักผ้า นัดชมห้องทาง LINE ได้เลย",
     "listed": "2026-10-23"
