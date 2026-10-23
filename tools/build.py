@@ -333,8 +333,6 @@ def page_condo(c):
         {contact_links()}
       </div>
       <div class="notice small">Building details come from public listings and may change. We confirm everything at the viewing.</div>
-      <p class="small muted">Sources</p>
-      <ul class="small">{src}</ul>
     </div>
   </div>
   {units_section}
