@@ -1,18 +1,21 @@
 [
   {
     "slug": "the-coast-bangkok",
+    "zone": "bang-na",
     "name": "The Coast Bangkok",
     "featured": true,
     "station": "Bang Na",
     "walk": "About 300 m to BTS Bang Na",
-    "completed": 2011,
-    "towers": "2 towers, up to 39 floors",
-    "units": "About 820 units",
-    "unit_types": "1, 2 and 3 bedrooms, including duplex layouts (roughly 30–150 sq m)",
-    "summary": "A two-tower condo a short walk from BTS Bang Na, next to the BITEC exhibition centre, with a small shopping mall at its base.",
+    "walk_th": "ห่าง BTS บางนาประมาณ 300 เมตร",
+    "completed": 2012,
+    "towers": "2 towers, 35 and 39 floors",
+    "units": "775 units",
+    "unit_types": "1, 2 and 3 bedrooms, including duplex layouts (roughly 30–130 sq m)",
+    "summary": "A two-tower condo a short walk from BTS Bang Na, next to the BITEC exhibition centre, with the area's largest units and a small shopping mall at its base.",
+    "summary_th": "คอนโด 2 ตึก เดินไป BTS บางนาได้ ติดไบเทค มีห้องขนาดใหญ่ที่สุดในย่าน ตั้งแต่ 1 ถึง 3 ห้องนอน และมีร้านค้าด้านล่าง",
     "facilities": [
       "Indoor and outdoor saltwater pools",
-      "Gym and library",
+      "Gym, sauna and library",
       "Rooftop and sky gardens",
       "Children's playground",
       "Shops and restaurants on site",
@@ -25,65 +28,134 @@
       "Berkeley International School — about 1 km",
       "Sikarin and Thainakarin hospitals"
     ],
-    "good_for": "Commuters who want the BTS within walking distance, and families who want a pool and play area in the building.",
+    "good_for": "Families and couples who want a 2 or 3-bedroom unit within walking distance of the BTS, with a pool and play area in the building.",
+    "good_for_th": "ครอบครัวและคู่รักที่ต้องการห้อง 2–3 ห้องนอน เดินถึง BTS มีสระว่ายน้ำและสนามเด็กเล่น",
+    "rents": [
+      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 20000, "low": 13000, "high": 28000},
+      {"type": "2 bedrooms", "type_th": "2 ห้องนอน", "typical": 28000, "low": 20000, "high": 40000},
+      {"type": "3 bedrooms", "type_th": "3 ห้องนอน", "typical": 60000, "low": 55000, "high": 80000}
+    ],
     "sources": [
+      ["PropertyHub — The Coast Condominium", "https://propertyhub.in.th/en/condo-for-rent/project-the-coast-condominium"],
       ["CondoDee — The Coast Bangkok Bangna", "https://condodee.com/p/658"]
     ]
   },
   {
     "slug": "ideo-o2",
+    "zone": "bang-na",
     "name": "Ideo O2",
     "station": "Bang Na",
-    "walk": "About 900 m to BTS Bang Na, with a building shuttle",
-    "completed": 2017,
-    "towers": "3 buildings, 34 floors",
-    "units": "About 1,569 units",
-    "unit_types": "Studios, 1 and 2 bedrooms",
-    "summary": "A large Ananda Development project on the Bang Na side of the BTS, with resort-style shared facilities.",
+    "walk": "About 750 m to BTS Bang Na, with a building shuttle",
+    "walk_th": "ห่าง BTS บางนาประมาณ 750 เมตร มีรถรับส่ง",
+    "completed": 2018,
+    "towers": "3 buildings, 33–34 floors",
+    "units": "1,559 units",
+    "unit_types": "Studios, 1 and 2 bedrooms (roughly 26–53 sq m)",
+    "summary": "The biggest of the four: an Ananda Development project with almost 10 rai of shared space, gardens, a futsal pitch and a running track.",
+    "summary_th": "โครงการใหญ่ที่สุดในสี่โครงการ ของอนันดา ส่วนกลางเกือบ 10 ไร่ มีสวน สนามฟุตซอล และลู่วิ่ง",
     "developer": "Ananda Development",
     "facilities": [
       "Pool, gym, sauna and running track",
+      "Futsal pitch and large gardens",
       "Co-working and meeting rooms",
-      "Kids zone and gardens",
+      "Kids zone",
       "Shuttle bus to the BTS",
       "Key-card access, CCTV, 24-hour security",
       "Parking"
     ],
     "nearby": [
       "BTS Bang Na by shuttle",
-      "Central Bangna and Mega Bangna for shopping",
-      "Bangna–Trad Road toward the international school belt"
+      "Bangkok Mall, BITEC and Central Bangna",
+      "Bang Na Expressway"
     ],
-    "good_for": "Singles and couples who want lots of shared space and newer facilities at a lower rent than the BTS-front buildings.",
+    "good_for": "Singles and couples who want plenty of shared space and newer facilities at a lower rent than the BTS-front buildings.",
+    "good_for_th": "คนโสดและคู่รักที่ชอบส่วนกลางกว้าง สิ่งอำนวยความสะดวกใหม่ ในค่าเช่าที่ถูกกว่าคอนโดติด BTS",
+    "rents": [
+      {"type": "Studio", "type_th": "สตูดิโอ", "typical": 12000, "low": 11000, "high": 14000},
+      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 14500, "low": 11000, "high": 16000},
+      {"type": "2 bedrooms", "type_th": "2 ห้องนอน", "typical": 24000, "low": 19500, "high": 28000}
+    ],
     "sources": [
-      ["FazWaz — Ideo O2 listing", "https://www.fazwaz.com/property-rent/2-bedroom-condo-for-rent-at-ideo-o2-in-bang-na-bangkok-u5692009"]
+      ["PropertyHub — Ideo O2", "https://propertyhub.in.th/en/condo-for-rent/project-ideo-o2"]
     ]
   },
   {
     "slug": "ideo-mobi-sukhumvit-eastgate",
+    "zone": "bang-na",
     "name": "Ideo Mobi Sukhumvit Eastgate",
     "station": "Bang Na",
-    "walk": "Close to BTS Bang Na",
+    "walk": "Short walk to BTS Bang Na",
+    "walk_th": "เดินไป BTS บางนาได้",
     "completed": 2016,
-    "towers": "30 floors",
-    "units": "",
-    "unit_types": "Mostly studios and 1 bedrooms",
-    "summary": "A compact Ananda Development tower near BTS Bang Na, built mainly for single professionals.",
+    "towers": "1 tower, 30 floors",
+    "units": "844 units",
+    "unit_types": "Studios (about 22 sq m) and 1 bedrooms (about 30 sq m)",
+    "summary": "A compact Ananda Development tower on Sukhumvit Road near BTS Bang Na, built for single professionals, with the lowest rents of the four.",
+    "summary_th": "คอนโดตึกเดียวของอนันดา ริมถนนสุขุมวิท ใกล้ BTS บางนา เหมาะกับคนทำงานที่อยู่คนเดียว ค่าเช่าถูกที่สุดในสี่โครงการ",
     "developer": "Ananda Development",
     "facilities": [
-      "Pool and gym",
-      "Garden and library",
-      "24-hour security",
+      "50 m saltwater pool and gym",
+      "Sky gardens on the 24th and 30th floors",
+      "Rooftop library and sky lounge",
+      "Supermarket at the front of the building",
+      "Key-card access, CCTV, 24-hour security",
       "Parking"
     ],
     "nearby": [
       "BTS Bang Na",
-      "BITEC exhibition centre",
-      "Central Bangna for shopping"
+      "Manarom Hospital — about 200 m",
+      "St. Andrews International School (Sukhumvit 107)",
+      "BITEC and Bangkok Mall"
     ],
-    "good_for": "Single professionals who want a small, easy-to-manage unit near the BTS.",
+    "good_for": "Single professionals who want a small, easy-to-manage unit near the BTS at the lowest rent in the area.",
+    "good_for_th": "คนทำงานที่อยู่คนเดียว ต้องการห้องเล็กดูแลง่าย ใกล้ BTS ในค่าเช่าที่ประหยัดที่สุด",
+    "rents": [
+      {"type": "Studio", "type_th": "สตูดิโอ", "typical": 10000, "low": 9000, "high": 11000},
+      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 13000, "low": 10000, "high": 15000}
+    ],
     "sources": [
+      ["PropertyHub — Ideo Mobi Sukhumvit Eastgate", "https://propertyhub.in.th/en/condo-for-rent/project-ideo-mobi-sukhumvit-eastgate"],
       ["Thailand-Property — Ideo Mobi Sukhumvit Eastgate", "https://www.thailand-property.com/condo/3323/ideo-mobi-sukhumvit-eastgate"]
+    ]
+  },
+  {
+    "slug": "ideo-mobi-sukhumvit-eastpoint",
+    "zone": "bang-na",
+    "name": "Ideo Mobi Sukhumvit Eastpoint",
+    "station": "Bang Na",
+    "walk": "About 250 m to BTS Bang Na; BTS Bearing also within walking distance",
+    "walk_th": "ห่าง BTS บางนาประมาณ 250 เมตร เดินไป BTS แบริ่งได้",
+    "completed": 2020,
+    "towers": "2 towers, 32 floors",
+    "units": "1,162 units",
+    "unit_types": "Studios, 1 bedrooms, 1-bedroom duplexes and 2 bedrooms (roughly 26–56 sq m)",
+    "summary": "The newest of the four: an Ananda Development project on Sukhumvit Road next to Ideo Mobi Eastgate, with a pool deck, garden walkways and a top-floor gym.",
+    "summary_th": "โครงการใหม่ที่สุดในสี่โครงการ ของอนันดา ริมถนนสุขุมวิท ติดกับ Ideo Mobi Eastgate มีสระว่ายน้ำ สวน และฟิตเนสชั้นบนสุด",
+    "developer": "Ananda Development",
+    "facilities": [
+      "Pool with jacuzzi and garden deck",
+      "Gym on the 32nd floor",
+      "Rooftop gardens",
+      "Library",
+      "Key-card access, CCTV, 24-hour security",
+      "Parking"
+    ],
+    "nearby": [
+      "BTS Bang Na and BTS Bearing",
+      "Manarom Hospital — about 200 m",
+      "BITEC — about 600 m",
+      "St. Andrews International School (Sukhumvit 107)"
+    ],
+    "good_for": "Professionals and couples who want a newer building on the BTS, with layouts from studio to 2 bedrooms.",
+    "good_for_th": "คนทำงานและคู่รักที่อยากได้ตึกใหม่ ใกล้ BTS มีตั้งแต่สตูดิโอถึง 2 ห้องนอน",
+    "rents": [
+      {"type": "Studio", "type_th": "สตูดิโอ", "typical": 14000, "low": 13000, "high": 15000},
+      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 17000, "low": 13000, "high": 20000},
+      {"type": "1-bedroom duplex", "type_th": "1 ห้องนอน ดูเพล็กซ์", "typical": 25000, "low": 25000, "high": 27000},
+      {"type": "2 bedrooms", "type_th": "2 ห้องนอน", "typical": 30000, "low": 28000, "high": 35000}
+    ],
+    "sources": [
+      ["PropertyHub — Ideo Mobi Sukhumvit Eastpoint", "https://propertyhub.in.th/en/condo-for-rent/project-ideo-mobi-sukhumvit-eastpoint"]
     ]
   }
 ]
