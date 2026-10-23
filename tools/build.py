@@ -287,7 +287,7 @@ def page_condos_index():
 </div>
 <div class="section"></div>
 """
-    return layout("/condos/", "Condos for rent in Bang Na", "Condos for rent in Bang Na near BTS Bang Na and Punnawithi: The Coast Bangkok, Ideo O2, Ideo Mobi Sukhumvit Eastgate, Whizdom 101.", body)
+    return layout("/condos/", "Condos for rent in Bang Na", "Condos for rent in Bang Na near BTS Bang Na and Punnawithi: The Coast Bangkok, Ideo O2, Ideo Mobi Sukhumvit Eastgate.", body)
 
 
 def page_condo(c):
