@@ -26,6 +26,7 @@ NAV = [
     ("/renting-guide.html", "Renting guide"),
     ("/list-your-condo.html", "For owners"),
     ("/contact.html", "Contact"),
+    ("/th/", "ภาษาไทย"),
 ]
 
 _units_file = ROOT / "data/units.json"
@@ -36,7 +37,13 @@ if LIVE_UNITS:
     NAV.insert(1, ("/rent/", "For rent"))
 
 # Stations on the BTS Sukhumvit line, west to east, with x positions in the strip.
-STATIONS = [("Punnawithi", 160), ("Udom Suk", 340), ("Bang Na", 520), ("Bearing", 690)]
+STATIONS = [("Udom Suk", 140), ("Bang Na", 400), ("Bearing", 660)]
+
+# Condos are grouped by zone so new areas can be added later; the site currently markets one.
+ZONE_NAME = SITE.get("zone", "BTS Bang Na")
+CONDO_NAMES = ", ".join(c["name"] for c in CONDOS[:-1]) + f" and {CONDOS[-1]['name']}" if len(CONDOS) > 1 else CONDOS[0]["name"]
+RENTS_AS_OF = SITE.get("rents_as_of", "")
+RENTS_AS_OF_TH = SITE.get("rents_as_of_th", RENTS_AS_OF)
 
 e = html.escape
 
@@ -70,13 +77,14 @@ def contact_links(cls="btn btn-primary", lang="en"):
 EN_FOOT = """
     <div>
       <h3>The Thai Base</h3>
-      <p>Condo rentals in Bang Na for foreign professionals and families. Building facts come from public listings and are checked before each viewing.</p>
+      <p>Condos for rent at BTS Bang Na: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate and Ideo Mobi Eastpoint. We help Thai and foreign renters, in Thai or English.</p>
       {contact}
     </div>
     <div>
       <h3>Renters</h3>
       <ul>
-        <li><a href="/condos/">Condos in Bang Na</a></li>
+        <li><a href="/condos/">Our four condos</a></li>
+        <li><a href="/th/">ภาษาไทย</a></li>
         <li><a href="/bang-na.html">Living in Bang Na</a></li>
         <li><a href="/renting-guide.html">Renting guide</a></li>
         <li><a href="/blog/thailand-visas.html">Visa types</a></li>
@@ -94,21 +102,21 @@ EN_FOOT = """
 FOOT_TH = """
     <div>
       <h3>The Thai Base</h3>
-      <p>บริการปล่อยเช่าคอนโดในบางนาให้พนักงานและครอบครัวชาวต่างชาติ</p>
+      <p>คอนโดให้เช่าย่าน BTS บางนา: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate และ Ideo Mobi Eastpoint ดูแลทั้งผู้เช่าคนไทยและชาวต่างชาติ</p>
       {contact}
+    </div>
+    <div>
+      <h3>สำหรับผู้เช่า</h3>
+      <ul>
+        <li><a href="/th/">คอนโดทั้ง 4 โครงการ</a></li>
+        <li><a href="/rent/">ห้องว่างให้เช่า</a></li>
+      </ul>
     </div>
     <div>
       <h3>สำหรับเจ้าของห้อง</h3>
       <ul>
-        <li><a href="/th/list-your-condo.html">ลงประกาศคอนโด</a></li>
-        <li><a href="/list-your-condo.html">English version</a></li>
-      </ul>
-    </div>
-    <div>
-      <h3>For renters</h3>
-      <ul>
-        <li><a href="/condos/">Condos in Bang Na</a></li>
-        <li><a href="/renting-guide.html">Renting guide</a></li>
+        <li><a href="/th/list-your-condo.html">ฝากเช่าคอนโด</a></li>
+        <li><a href="/">English</a></li>
       </ul>
     </div>"""
 
@@ -167,7 +175,7 @@ def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, n
 """
 
 
-def line_strip():
+def line_strip(lang="en"):
     xs = dict(STATIONS)
     parts = ['<line class="track" x1="20" y1="70" x2="780" y2="70"/>']
     for name, x in STATIONS:
@@ -175,8 +183,9 @@ def line_strip():
             f'<g class="station"><circle cx="{x}" cy="70" r="11"/>'
             f'<text x="{x}" y="45" text-anchor="middle">{e(name)}</text></g>'
         )
-    parts.append('<g class="station"><text class="dir" x="20" y="105">← Siam, Asok</text>'
-                 '<text class="dir" x="780" y="105" text-anchor="end">Samut Prakan →</text></g>')
+    left, right = ("← Asok, Siam", "Samut Prakan →") if lang == "en" else ("← อโศก สยาม", "สมุทรปราการ →")
+    parts.append(f'<g class="station"><text class="dir" x="20" y="105">{left}</text>'
+                 f'<text class="dir" x="780" y="105" text-anchor="end">{right}</text></g>')
     counts = {}
     for c in CONDOS:
         x = xs.get(c["station"])
@@ -192,47 +201,126 @@ def line_strip():
             f'<text x="{x + 14}" y="{y + 5}">{e(c["name"])}</text></a>'
         )
     height = 140 + max(counts.values(), default=1) * 30
+    label = ("BTS Sukhumvit line from Udom Suk to Bearing, with our four condos at BTS Bang Na" if lang == "en"
+             else "รถไฟฟ้า BTS สายสุขุมวิท จากอุดมสุขถึงแบริ่ง และคอนโด 4 โครงการใกล้ BTS บางนา")
     return (f'<div class="line-scroll"><svg class="line-svg" viewBox="0 0 800 {height}" role="img" '
-            f'aria-label="BTS Sukhumvit line from Punnawithi to Bearing with condos by station">'
-            + "".join(parts) + "</svg></div>")
+            f'aria-label="{e(label)}">' + "".join(parts) + "</svg></div>")
 
 
-def condo_rows(items):
+def units_here(c):
+    return [u for u in LIVE_UNITS if u["condo"] == c["slug"] and u.get("status") != "rented"]
+
+
+def rent_from(c):
+    return min(r["typical"] for r in c["rents"]) if c.get("rents") else None
+
+
+def condo_rows(items, lang="en"):
     rows = []
     for c in items:
-        badge = '<span class="badge">Units coming soon</span>' if c.get("featured") else ""
+        n = len(units_here(c))
+        if n:
+            badge = (f'<span class="badge">{n} unit{"s" if n > 1 else ""} for rent</span>' if lang == "en"
+                     else f'<span class="badge">ว่าง {n} ห้อง</span>')
+        else:
+            badge = ""
+        frm = rent_from(c)
+        price = ""
+        if frm:
+            price = (f'<div class="row-rent">from {baht(frm)}<span>/month</span></div>' if lang == "en"
+                     else f'<div class="row-rent">เริ่ม {baht(frm)}<span>/เดือน</span></div>')
+        summary = c["summary"] if lang == "en" else c.get("summary_th", c["summary"])
+        walk = c["walk"] if lang == "en" else c.get("walk_th", c["walk"])
+        built = f"Built {c['completed']}" if lang == "en" else f"สร้างเสร็จ {c['completed']}"
         rows.append(f"""<li class="condo-row">
   <h3><a href="/condos/{c['slug']}.html">{e(c['name'])}</a>{badge}</h3>
-  <div><span class="station-tag">BTS {e(c['station'])}</span><div class="year">{e(c['walk'])}</div></div>
-  <p class="muted" style="margin:0">{e(c['summary'])}</p>
-  <div class="year">Built {c['completed']}</div>
+  <div><span class="station-tag">BTS {e(c['station'])}</span><div class="year">{e(walk)}</div></div>
+  <p class="muted" style="margin:0">{e(summary)}</p>
+  <div class="year">{price}{built} · {e(c['units'].replace(' units', ''))} {'units' if lang == 'en' else 'ห้อง'}</div>
 </li>""")
     return '<ul class="condo-list">' + "".join(rows) + "</ul>"
 
 
+def rent_note(lang="en"):
+    if lang == "en":
+        return (f"Typical asking rents for 12-month leases, from public listings in {RENTS_AS_OF}. "
+                "Furnishing, floor and view move the price; ask us for units available now.")
+    return (f"ค่าเช่าที่ตั้งประกาศโดยทั่วไป สำหรับสัญญา 12 เดือน จากประกาศเช่าสาธารณะ ณ {RENTS_AS_OF_TH} "
+            "ค่าเช่าจริงขึ้นกับการตกแต่ง ชั้น และวิว สอบถามห้องว่างตอนนี้ได้เลย")
+
+
+def rent_compare(lang="en"):
+    """One table comparing typical rents across all condos, by unit type."""
+    order = ["Studio", "1 bedroom", "1-bedroom duplex", "2 bedrooms", "3 bedrooms"]
+    th = {"Studio": "สตูดิโอ", "1 bedroom": "1 ห้องนอน", "1-bedroom duplex": "1 นอน ดูเพล็กซ์",
+          "2 bedrooms": "2 ห้องนอน", "3 bedrooms": "3 ห้องนอน"}
+    types = [t for t in order if any(r["type"] == t for c in CONDOS for r in c.get("rents", []))]
+    head = "".join(f'<th scope="col">{e(t if lang == "en" else th[t])}</th>' for t in types)
+    body = []
+    for c in CONDOS:
+        by = {r["type"]: r for r in c.get("rents", [])}
+        cells = "".join(f'<td>{baht(by[t]["typical"])}</td>' if t in by else '<td class="na">—</td>' for t in types)
+        body.append(f'<tr><th scope="row"><a href="/condos/{c["slug"]}.html">{e(c["name"])}</a></th>{cells}</tr>')
+    first = "Condo" if lang == "en" else "โครงการ"
+    return (f'<div class="table-scroll"><table class="rent-table"><thead><tr><th scope="col">{first}</th>{head}</tr></thead>'
+            f'<tbody>{"".join(body)}</tbody></table></div><p class="small muted">{e(rent_note(lang))}</p>')
+
+
+def rent_table(c, lang="en"):
+    if not c.get("rents"):
+        return ""
+    hd = ("Unit type", "Typical", "Usual range") if lang == "en" else ("ประเภทห้อง", "ค่าเช่าทั่วไป", "ช่วงราคา")
+    rows = "".join(
+        f'<tr><th scope="row">{e(r["type"] if lang == "en" else r["type_th"])}</th><td>{baht(r["typical"])}</td>'
+        f'<td>{baht(r["low"])} – {baht(r["high"])}</td></tr>' for r in c["rents"])
+    return (f'<div class="table-scroll"><table class="rent-table"><thead><tr><th scope="col">{hd[0]}</th>'
+            f'<th scope="col">{hd[1]}</th><th scope="col">{hd[2]}</th></tr></thead><tbody>{rows}</tbody></table></div>'
+            f'<p class="small muted">{e(rent_note(lang))}</p>')
+
+
+HOME_ALTERNATES = [("en", "/"), ("th", "/th/")]
+
+
 def page_home():
+    units_block = ""
+    if LIVE_UNITS:
+        units_block = f"""
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>Units for rent now</h2><a href="/rent/">All units</a></div>
+    {unit_cards(LIVE_UNITS[:6])}
+  </div>
+</section>"""
     body = f"""
 <section class="hero">
   <div class="wrap">
-    <h1>Rent a condo in Bang Na, close to the BTS and the school belt</h1>
-    <p>We help foreign professionals and families find a condo in Bang Na: real buildings, honest details and an English-speaking contact from first viewing to signed lease.</p>
+    <p class="lang-switch hero-lang"><a href="/th/" hreflang="th" lang="th">ดูหน้านี้เป็นภาษาไทย</a></p>
+    <h1>Four condos at BTS Bang Na. One contact for all of them.</h1>
+    <p>We know The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate and Ideo Mobi Eastpoint unit by unit. Tell us your budget and move-in date and we'll send what's free in all four buildings, then show you round in Thai or English.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="/condos/">See condos</a>
+      <a class="btn btn-primary" href="/condos/">Compare the four condos</a>
       <a class="btn btn-ghost" href="/contact.html">Tell us what you need</a>
     </div>
   </div>
   <div class="line-strip">
     <div class="wrap">
-      <h2>Condos by BTS station</h2>
-      <p class="hint">Bang Na sits on the same BTS Sukhumvit line as Asok and Siam. Choose a building to see its details.</p>
+      <h2>All four are around BTS Bang Na</h2>
+      <p class="hint">On the BTS Sukhumvit line, about 20–25 minutes to Asok without changing trains. Choose a building to see its details.</p>
       {line_strip()}
     </div>
+  </div>
+</section>
+{units_block}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>Which condo fits your budget</h2><a href="/condos/">Building details</a></div>
+    {rent_compare()}
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><h2>Condos we cover</h2><a href="/condos/">All condos</a></div>
+    <div class="section-head"><h2>The four condos</h2></div>
     {condo_rows(CONDOS)}
   </div>
 </section>
@@ -240,17 +328,21 @@ def page_home():
 <section class="section">
   <div class="wrap split">
     <div class="prose">
-      <h2>Why Bang Na</h2>
-      <p>Bang Na gives you more space for your rent than central Sukhumvit while staying on the same BTS line. Many of Bangkok's international schools sit along Bangna–Trad Road and Sukhumvit 105–107, and Suvarnabhumi Airport is a short drive east.</p>
-      <p><a href="/bang-na.html">Read the area guide</a></p>
+      <h2>Why rent through us</h2>
+      <ul class="ticks">
+        <li><strong>One search, four buildings.</strong> Instead of messaging a different agent for each listing, you get one shortlist across every building at BTS Bang Na.</li>
+        <li><strong>We only work here.</strong> We know which towers face the morning sun, which floors hear the expressway and what each building's juristic office allows.</li>
+        <li><strong>No fee for renters.</strong> The owner pays our fee.</li>
+        <li><strong>Thai or English.</strong> Viewings, the lease and move-in, in the language you prefer.</li>
+      </ul>
     </div>
     <div class="panel">
       <h3>How renting with us works</h3>
       <ol class="steps">
-        <li>Tell us your budget, move-in date, and where you work or your children study.</li>
-        <li>We send a shortlist of available units with photos.</li>
+        <li>Tell us your budget, bedrooms, move-in date and where you work or study.</li>
+        <li>We send a shortlist of available units across the four buildings, with photos.</li>
         <li>We arrange viewings, in person or by video call.</li>
-        <li>We check the lease in English with you before you sign.</li>
+        <li>We go through the lease with you before you sign and record the unit's condition at move-in.</li>
       </ol>
       <a href="/renting-guide.html">What to expect when renting in Thailand</a>
     </div>
@@ -260,34 +352,127 @@ def page_home():
 <section class="section">
   <div class="wrap split">
     <div class="panel panel-dark">
-      <h2>Own a condo in Bang Na?</h2>
-      <p>We market your unit to foreign tenants and handle viewings and the lease in English.</p>
-      <a class="btn btn-primary" href="/list-your-condo.html">List your condo</a>
+      <h2>Own a unit in one of these buildings?</h2>
+      <p>Listing is free. You pay one month's rent only when we find your tenant on a one-year lease.</p>
+      <a class="btn btn-primary" href="/th/list-your-condo.html">ฝากเช่ากับเรา</a>
+      <a class="btn btn-ghost" href="/list-your-condo.html">List your condo</a>
     </div>
     <div>
       <h2>Talk to us</h2>
-      <p>Send your budget, bedrooms and move-in date. We reply in English or Thai.</p>
+      <p>Send your budget, bedrooms and move-in date. We reply in Thai or English.</p>
       {contact_links()}
     </div>
   </div>
 </section>
 """
-    return layout("/", "", "Condo rentals in Bang Na, Bangkok for expats: buildings near BTS Bang Na, Udom Suk and Punnawithi, the international school belt, and English-speaking support.", body)
+    return layout("/", "", f"Condos for rent at BTS Bang Na: {CONDO_NAMES}. Compare typical rents, see available units and arrange viewings in Thai or English.",
+                  body, alternates=HOME_ALTERNATES)
+
+
+def page_home_th():
+    units_block = ""
+    if LIVE_UNITS:
+        units_block = f"""
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>ห้องว่างให้เช่าตอนนี้</h2><a href="/rent/">ดูทั้งหมด</a></div>
+    {unit_cards(LIVE_UNITS[:6], "th")}
+  </div>
+</section>"""
+    body = f"""
+<section class="hero">
+  <div class="wrap">
+    <p class="lang-switch hero-lang"><a href="/" hreflang="en" lang="en">Read in English</a></p>
+    <h1>คอนโดให้เช่า 4 โครงการ ใกล้ BTS บางนา ติดต่อที่เดียวครบ</h1>
+    <p>เรารู้จัก The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate และ Ideo Mobi Eastpoint แบบห้องต่อห้อง บอกงบและวันที่อยากย้ายเข้า เราส่งห้องว่างจากทั้ง 4 โครงการให้ แล้วพาชมห้องให้เลย</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#compare">เทียบค่าเช่า 4 โครงการ</a>
+      {contact_links("btn btn-ghost", "th").replace('<div class="contact-links">', '').replace('</div>', '')}
+    </div>
+  </div>
+  <div class="line-strip">
+    <div class="wrap">
+      <h2>ทั้ง 4 โครงการอยู่รอบ BTS บางนา</h2>
+      <p class="hint">BTS สายสุขุมวิท ไปอโศกประมาณ 20–25 นาทีโดยไม่ต้องเปลี่ยนขบวน กดชื่อโครงการเพื่อดูรายละเอียด</p>
+      {line_strip("th")}
+    </div>
+  </div>
+</section>
+{units_block}
+<section class="section" id="compare">
+  <div class="wrap">
+    <div class="section-head"><h2>โครงการไหนเข้ากับงบของคุณ</h2></div>
+    {rent_compare("th")}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>คอนโดทั้ง 4 โครงการ</h2></div>
+    {condo_rows(CONDOS, "th")}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split">
+    <div class="prose">
+      <h2>ทำไมต้องเช่าผ่านเรา</h2>
+      <ul class="ticks">
+        <li><strong>หาครั้งเดียว ครบ 4 โครงการ</strong> ไม่ต้องทักหลายเอเจนต์ทีละประกาศ เราส่งห้องว่างจากทุกโครงการรอบ BTS บางนาให้ในครั้งเดียว</li>
+        <li><strong>เราทำเฉพาะย่านนี้</strong> รู้ว่าตึกไหนแดดเช้า ชั้นไหนได้ยินเสียงทางด่วน และนิติฯ แต่ละที่มีกฎอะไร</li>
+        <li><strong>ผู้เช่าไม่เสียค่าบริการ</strong> เจ้าของห้องเป็นผู้จ่าย</li>
+        <li><strong>คุยได้ทั้งไทยและอังกฤษ</strong> ตั้งแต่ดูห้อง ทำสัญญา จนถึงวันย้ายเข้า</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>ขั้นตอนเช่ากับเรา</h3>
+      <ol class="steps">
+        <li>บอกงบ จำนวนห้องนอน วันที่อยากย้ายเข้า และที่ทำงานหรือที่เรียน</li>
+        <li>เราส่งรายการห้องว่างจากทั้ง 4 โครงการ พร้อมรูป</li>
+        <li>นัดดูห้องจริง หรือดูผ่านวิดีโอคอล</li>
+        <li>อธิบายสัญญาก่อนเซ็น และบันทึกสภาพห้องวันย้ายเข้า</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap split">
+    <div class="panel panel-dark">
+      <h2>มีห้องในโครงการเหล่านี้?</h2>
+      <p>ฝากเช่าฟรี ไม่มีวันหมดอายุ จ่ายค่าบริการ 1 เดือน เฉพาะเมื่อได้ผู้เช่าสัญญา 1 ปีผ่านเรา</p>
+      <a class="btn btn-primary" href="/th/list-your-condo.html">ฝากเช่ากับเรา</a>
+    </div>
+    <div>
+      <h2>ติดต่อเรา</h2>
+      <p>บอกงบ จำนวนห้องนอน และวันที่อยากย้ายเข้า เราตอบกลับทาง LINE</p>
+      {contact_links(lang="th")}
+    </div>
+  </div>
+</section>
+"""
+    return layout("/th/", "คอนโดให้เช่า ใกล้ BTS บางนา",
+                  "คอนโดให้เช่าใกล้ BTS บางนา 4 โครงการ: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint เทียบค่าเช่า ดูห้องว่าง นัดชมห้องได้เลย",
+                  body, lang="th", nav_path="/th/", alternates=HOME_ALTERNATES)
 
 
 def page_condos_index():
     body = f"""
 <div class="wrap">
   <div class="detail-head">
-    <h1>Condos in Bang Na</h1>
-    <p class="prose muted">Buildings along the BTS Sukhumvit line from Punnawithi to Bearing. Each page lists the building's facts and what it suits; ask us for units that are available now.</p>
+    <h1>Our four condos at BTS Bang Na</h1>
+    <p class="prose muted">Every building we cover is within reach of BTS Bang Na. Each page lists the building's facts, typical rents and who it suits; ask us for units that are available now.</p>
   </div>
   {condo_rows(CONDOS)}
-  <p class="small muted" style="margin-top:24px">Looking for a building that isn't listed? <a href="/contact.html">Tell us</a> and we'll check availability.</p>
+  <section class="section">
+    <h2>Typical rents compared</h2>
+    {rent_compare()}
+  </section>
 </div>
 <div class="section"></div>
 """
-    return layout("/condos/", "Condos for rent in Bang Na", "Condos for rent in Bang Na near BTS Bang Na and Punnawithi: The Coast Bangkok, Ideo O2, Ideo Mobi Sukhumvit Eastgate.", body)
+    return layout("/condos/", "Condos for rent at BTS Bang Na",
+                  f"Condos for rent at BTS Bang Na: {CONDO_NAMES}. Facilities, unit types and typical rents.", body)
 
 
 def page_condo(c):
@@ -298,25 +483,32 @@ def page_condo(c):
         facts.append(("Buildings", c["towers"]))
     if c.get("units"):
         facts.append(("Size", c["units"]))
+    if rent_from(c):
+        facts.append(("Rents from", f"{baht(rent_from(c))} / month"))
     facts_html = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in facts)
     fac = "".join(f"<li>{e(x)}</li>" for x in c["facilities"])
     near = "".join(f"<li>{e(x)}</li>" for x in c["nearby"])
     src = "".join(f'<li><a href="{e(u)}" rel="nofollow">{e(t)}</a></li>' for t, u in c["sources"])
     here = [u for u in LIVE_UNITS if u["condo"] == c["slug"]]
     units_section = (f'<section class="section"><h2>Units for rent here</h2>{unit_cards(here)}</section>' if here else "")
-    avail = ("<p><strong>Units here are coming to the site soon.</strong> Message us now to hear about them first.</p>"
-             if c.get("featured") else
-             "<p>Ask us which units in this building are available now.</p>")
+    avail = ("<p>Ask us which units in this building are available now. We can also check the other three buildings at BTS Bang Na in the same search.</p>")
+    others = "".join(f'<li><a href="/condos/{o["slug"]}.html">{e(o["name"])}</a>'
+                     + (f' — from {baht(rent_from(o))}' if rent_from(o) else "") + "</li>"
+                     for o in CONDOS if o["slug"] != c["slug"])
+    th = (f'<p lang="th" class="muted">{e(c["summary_th"])}</p>' if c.get("summary_th") else "")
     body = f"""
 <div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/condos/">Condos</a> / {e(c['name'])}</nav>
   <div class="detail-head">
     <h1>{e(c['name'])}</h1>
     <p class="prose" style="font-size:1.1rem">{e(c['summary'])}</p>
+    {th}
     <dl class="facts">{facts_html}</dl>
   </div>
   <div class="split">
     <div class="prose">
+      <h2>Typical rents</h2>
+      {rent_table(c)}
       <h2>Who it suits</h2>
       <p>{e(c['good_for'])}</p>
       <h3>Unit types</h3>
@@ -325,6 +517,8 @@ def page_condo(c):
       <ul class="ticks">{fac}</ul>
       <h3>Nearby</h3>
       <ul class="ticks">{near}</ul>
+      <h3>Sources</h3>
+      <ul class="small">{src}</ul>
     </div>
     <div>
       <div class="panel">
@@ -332,14 +526,19 @@ def page_condo(c):
         {avail}
         {contact_links()}
       </div>
-      <div class="notice small">Building details come from public listings and may change. We confirm everything at the viewing.</div>
+      <div class="panel" style="margin-top:16px">
+        <h3>The other buildings at BTS Bang Na</h3>
+        <ul class="plain">{others}</ul>
+      </div>
+      <div class="notice small">Building details and rents come from public listings and may change. We confirm everything at the viewing.</div>
     </div>
   </div>
   {units_section}
 </div>
 <div class="section"></div>
 """
-    desc = f"{c['name']} condo for rent in Bang Na, Bangkok. {c['walk']}. Facilities, unit types and nearby schools and shops."
+    desc = (f"{c['name']} condo for rent near BTS {c['station']}, Bangkok. {c['walk']}. "
+            f"Typical rents, unit types and facilities.")
     return layout(f"/condos/{c['slug']}.html", f"{c['name']} — condo for rent near BTS {c['station']}", desc, body)
 
 
@@ -362,7 +561,7 @@ def unit_title(u):
     return f'{beds}, {u["size_sqm"]:g} sq m'
 
 
-def unit_cards(units):
+def unit_cards(units, lang="en"):
     if not units:
         return ""
     cards = []
@@ -374,9 +573,9 @@ def unit_cards(units):
   <a href="/rent/{u['slug']}.html">
     {f'<img src="{e(u["photos"][0])}" alt="" loading="lazy" width="600" height="400">' if u.get("photos") else '<div class="unit-card-nophoto">Photos coming soon</div>'}
     <div class="unit-card-body">
-      <div class="unit-price">{baht(u['rent_thb'])}<span> / month</span>{badge}</div>
+      <div class="unit-price">{baht(u['rent_thb'])}<span> / {'month' if lang == 'en' else 'เดือน'}</span>{badge}</div>
       <h3>{e(unit_title(u))}</h3>
-      <p class="muted small">{e(c['name'])} · Floor {u['floor']} · BTS {e(c['station'])}</p>
+      <p class="muted small">{e(c['name'])} · {'Floor' if lang == 'en' else 'ชั้น'} {u['floor']} · BTS {e(c['station'])}</p>
     </div>
   </a>
 </li>""")
@@ -480,7 +679,7 @@ def page_rent_index():
 <div class="wrap">
   <div class="detail-head">
     <h1>Condos for rent in Bang Na</h1>
-    <p class="prose muted">Units we have checked in person, near the BTS from Punnawithi to Bearing.</p>
+    <p class="prose muted">Units we have checked in person at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate and Ideo Mobi Eastpoint, all at BTS Bang Na.</p>
   </div>
   {inner}
 </div>
@@ -504,6 +703,7 @@ def write(rel, content):
 def main():
     pages = [
         ("index.html", "/", page_home()),
+        ("th/index.html", "/th/", page_home_th()),
         ("condos/index.html", "/condos/", page_condos_index()),
     ]
     for c in CONDOS:
@@ -512,16 +712,16 @@ def main():
     for u in UNITS:
         pages.append((f"rent/{u['slug']}.html", f"/rent/{u['slug']}.html", page_unit(u)))
     for name, path, title, desc in [
-        ("bang-na.html", "/bang-na.html", "Living in Bang Na: a guide for expats",
+        ("bang-na.html", "/bang-na.html", "Living around BTS Bang Na",
          "What it's like to live in Bang Na, Bangkok: BTS stations, international schools, shopping, hospitals and getting to the airport."),
         ("renting-guide.html", "/renting-guide.html", "Renting a condo in Thailand as a foreigner",
          "Deposits, leases, TM30 reporting, utilities and what to check before you sign a condo lease in Thailand."),
-        ("list-your-condo.html", "/list-your-condo.html", "List your Bang Na condo for foreign tenants",
-         "Rent your Bang Na condo to foreign professionals and families. We handle marketing, viewings and the lease in English."),
-        ("th/list-your-condo.html", "/th/list-your-condo.html", "ปล่อยเช่าคอนโดบางนาให้ผู้เช่าชาวต่างชาติ",
-         "ปล่อยเช่าคอนโดในบางนาให้พนักงานและครอบครัวชาวต่างชาติ เราดูแลการตลาด การพาชมห้อง และสัญญาเช่าภาษาอังกฤษให้"),
+        ("list-your-condo.html", "/list-your-condo.html", "List your condo at BTS Bang Na",
+         "Rent out your unit at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate or Ideo Mobi Eastpoint. Free listing; one month's rent only when we find your tenant."),
+        ("th/list-your-condo.html", "/th/list-your-condo.html", "ฝากเช่าคอนโด The Coast, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint",
+         "ฝากเช่าคอนโดใกล้ BTS บางนา ลงประกาศฟรี จ่ายค่าบริการ 1 เดือนเฉพาะเมื่อได้ผู้เช่าสัญญา 1 ปีผ่านเรา หาผู้เช่าได้ทั้งคนไทยและชาวต่างชาติ"),
         ("contact.html", "/contact.html", "Contact",
-         "Contact The Thai Base about condo rentals in Bang Na."),
+         "Contact The Thai Base about condos for rent at BTS Bang Na."),
         ("404.html", "/404.html", "Page not found", "Page not found."),
     ]:
         kw = {}

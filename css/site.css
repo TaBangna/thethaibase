@@ -177,3 +177,20 @@ ul.plain li { padding: 6px 0; border-bottom: 1px solid var(--line); }
 .unit-card .unit-price { font-size: 1.4rem; }
 .badge-muted { background: #E6E8EA; color: var(--muted); }
 .unit-card-nophoto { aspect-ratio: 3 / 2; display: grid; place-items: center; background: #DCE3EA; color: var(--muted); font-size: .95rem; }
+
+/* Rents */
+.row-rent { font-family: var(--display); font-weight: 700; color: var(--navy); font-size: 1.05rem; margin-bottom: 2px; }
+.row-rent span { font-family: var(--body); font-weight: 400; font-size: .85rem; color: var(--muted); }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.rent-table { width: 100%; border-collapse: collapse; min-width: 520px; font-variant-numeric: tabular-nums; background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+.prose .rent-table { min-width: 0; }
+.rent-table th, .rent-table td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.rent-table thead th { font-size: .85rem; font-weight: 600; color: var(--muted); background: var(--paper); }
+.rent-table th[scope="row"], .rent-table thead th:first-child { text-align: left; white-space: normal; }
+.rent-table tbody th a { font-weight: 600; text-decoration: none; }
+.rent-table tbody th a:hover { text-decoration: underline; }
+.rent-table tbody tr:last-child > * { border-bottom: 0; }
+.rent-table td.na { color: var(--line); }
+.hero-lang { margin: 0 0 12px; }
+.hero-lang a { color: #A9B6C3; }
+.hero-lang a:hover { color: #fff; }

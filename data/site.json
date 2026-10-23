@@ -1,7 +1,10 @@
 {
   "base_url": "https://thethaibase.com",
   "brand": "The Thai Base",
-  "tagline": "Condo rentals in Bang Na for expats",
+  "tagline": "Condos for rent at BTS Bang Na",
+  "zone": "BTS Bang Na",
+  "rents_as_of": "October 2026",
+  "rents_as_of_th": "ตุลาคม 2569",
   "contact": {
     "whatsapp": "",
     "line": "@199sshug",
