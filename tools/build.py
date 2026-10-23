@@ -374,7 +374,7 @@ def unit_cards(units):
         badge = '<span class="badge badge-muted">Rented</span>' if rented else ""
         cards.append(f"""<li class="unit-card">
   <a href="/rent/{u['slug']}.html">
-    <img src="{e(u['photos'][0])}" alt="" loading="lazy" width="600" height="400">
+    {f'<img src="{e(u["photos"][0])}" alt="" loading="lazy" width="600" height="400">' if u.get("photos") else '<div class="unit-card-nophoto">Photos coming soon</div>'}
     <div class="unit-card-body">
       <div class="unit-price">{baht(u['rent_thb'])}<span> / month</span>{badge}</div>
       <h3>{e(unit_title(u))}</h3>
@@ -388,12 +388,17 @@ def unit_cards(units):
 def page_unit(u):
     c = CONDO_BY_SLUG[u["condo"]]
     title = unit_title(u)
-    photos = u["photos"]
-    gallery = (f'<a class="g-lead" href="{e(photos[0])}"><img src="{e(photos[0])}" alt="Photo 1 of {len(photos)}" width="1200" height="800"></a>'
+    photos = u.get("photos") or []
+    if not photos:
+        gallery_html = '<div class="notice">Photos of this unit are coming soon. Ask us on LINE for current photos or a video call.</div>'
+    gallery = "" if not photos else (f'<a class="g-lead" href="{e(photos[0])}"><img src="{e(photos[0])}" alt="Photo 1 of {len(photos)}" width="1200" height="800"></a>'
                + "".join(f'<a href="{e(ph)}"><img src="{e(ph)}" alt="Photo {i} of {len(photos)}" loading="lazy" width="600" height="400"></a>'
                          for i, ph in enumerate(photos[1:5], 2)))
     more = (f'<p class="small muted">{len(photos) - 5} more photo{"s" if len(photos) - 5 > 1 else ""} — <a href="{e(photos[5])}">view</a> or ask us on LINE.</p>'
             if len(photos) > 5 else "")
+    if photos:
+        gallery_html = f'<div class="gallery">{gallery}</div>'
+
     spec = [("Rent", f"{baht(u['rent_thb'])} / month"),
             ("Bedrooms", "Studio" if u["bedrooms"] == 0 else str(u["bedrooms"])),
             ("Bathrooms", str(u["bathrooms"])),
@@ -429,7 +434,7 @@ def page_unit(u):
 <div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/condos/">Condos</a> / <a href="/condos/{c['slug']}.html">{e(c['name'])}</a> / {e(u['id'])}</nav>
   {sample}
-  <div class="gallery">{gallery}</div>
+  {gallery_html}
   {more}
   <div class="unit-layout">
     <div>
