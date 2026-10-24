@@ -32,8 +32,20 @@ NAV = [
 _units_file = ROOT / "data/units.json"
 UNITS = json.loads(_units_file.read_text(encoding="utf-8")) if _units_file.exists() else []
 CONDO_BY_SLUG = {c["slug"]: c for c in CONDOS}
+# "pending" units are kept in the data file but not published until their details are filled in.
+UNITS = [u for u in UNITS if not u.get("pending")]
 LIVE_UNITS = [u for u in UNITS if not u.get("draft")]
-if LIVE_UNITS:
+
+
+def is_sale(u):
+    return u.get("deal") == "sale"
+
+
+RENT_UNITS = [u for u in LIVE_UNITS if not is_sale(u)]
+SALE_UNITS = [u for u in LIVE_UNITS if is_sale(u)]
+if SALE_UNITS:
+    NAV.insert(1, ("/sale/", "For sale"))
+if RENT_UNITS:
     NAV.insert(1, ("/rent/", "For rent"))
 
 # Stations on the BTS Sukhumvit line, west to east, with x positions in the strip.
@@ -207,8 +219,9 @@ def line_strip(lang="en"):
             f'aria-label="{e(label)}">' + "".join(parts) + "</svg></div>")
 
 
-def units_here(c):
-    return [u for u in LIVE_UNITS if u["condo"] == c["slug"] and u.get("status") != "rented"]
+def units_here(c, sale=False):
+    return [u for u in LIVE_UNITS if u["condo"] == c["slug"] and is_sale(u) == sale
+            and u.get("status") not in ("rented", "sold")]
 
 
 def rent_from(c):
@@ -219,11 +232,14 @@ def condo_rows(items, lang="en"):
     rows = []
     for c in items:
         n = len(units_here(c))
+        ns = len(units_here(c, sale=True))
+        badge = ""
         if n:
-            badge = (f'<span class="badge">{n} unit{"s" if n > 1 else ""} for rent</span>' if lang == "en"
-                     else f'<span class="badge">ว่าง {n} ห้อง</span>')
-        else:
-            badge = ""
+            badge += (f'<span class="badge">{n} unit{"s" if n > 1 else ""} for rent</span>' if lang == "en"
+                      else f'<span class="badge">ให้เช่า {n} ห้อง</span>')
+        if ns:
+            badge += (f'<span class="badge badge-sale">{ns} for sale</span>' if lang == "en"
+                      else f'<span class="badge badge-sale">ขาย {ns} ห้อง</span>')
         frm = rent_from(c)
         price = ""
         if frm:
@@ -283,12 +299,20 @@ HOME_ALTERNATES = [("en", "/"), ("th", "/th/")]
 
 def page_home():
     units_block = ""
-    if LIVE_UNITS:
+    if RENT_UNITS:
         units_block = f"""
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><h2>Units for rent now</h2><a href="/rent/">All units</a></div>
-    {unit_cards(LIVE_UNITS[:6])}
+    <div class="section-head"><h2>Units for rent now</h2><a href="/rent/">All units for rent</a></div>
+    {unit_cards(RENT_UNITS[:6])}
+  </div>
+</section>"""
+    if SALE_UNITS:
+        units_block += f"""
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>Units for sale</h2><a href="/sale/">All units for sale</a></div>
+    {unit_cards(SALE_UNITS[:6])}
   </div>
 </section>"""
     body = f"""
@@ -371,12 +395,20 @@ def page_home():
 
 def page_home_th():
     units_block = ""
-    if LIVE_UNITS:
+    if RENT_UNITS:
         units_block = f"""
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><h2>ห้องว่างให้เช่าตอนนี้</h2><a href="/rent/">ดูทั้งหมด</a></div>
-    {unit_cards(LIVE_UNITS[:6], "th")}
+    <div class="section-head"><h2>ห้องว่างให้เช่าตอนนี้</h2><a href="/rent/">ดูห้องเช่าทั้งหมด</a></div>
+    {unit_cards(RENT_UNITS[:6], "th")}
+  </div>
+</section>"""
+    if SALE_UNITS:
+        units_block += f"""
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>ห้องขาย</h2><a href="/sale/">ดูห้องขายทั้งหมด</a></div>
+    {unit_cards(SALE_UNITS[:6], "th")}
   </div>
 </section>"""
     body = f"""
@@ -489,8 +521,10 @@ def page_condo(c):
     fac = "".join(f"<li>{e(x)}</li>" for x in c["facilities"])
     near = "".join(f"<li>{e(x)}</li>" for x in c["nearby"])
     src = "".join(f'<li><a href="{e(u)}" rel="nofollow">{e(t)}</a></li>' for t, u in c["sources"])
-    here = [u for u in LIVE_UNITS if u["condo"] == c["slug"]]
+    here = [u for u in RENT_UNITS if u["condo"] == c["slug"]]
+    here_sale = [u for u in SALE_UNITS if u["condo"] == c["slug"]]
     units_section = (f'<section class="section"><h2>Units for rent here</h2>{unit_cards(here)}</section>' if here else "")
+    units_section += (f'<section class="section"><h2>Units for sale here</h2>{unit_cards(here_sale)}</section>' if here_sale else "")
     avail = ("<p>Ask us which units in this building are available now. We can also check the other three buildings at BTS Bang Na in the same search.</p>")
     others = "".join(f'<li><a href="/condos/{o["slug"]}.html">{e(o["name"])}</a>'
                      + (f' — from {baht(rent_from(o))}' if rent_from(o) else "") + "</li>"
@@ -561,21 +595,49 @@ def unit_title(u):
     return f'{beds}, {u["size_sqm"]:g} sq m'
 
 
+def unit_url(u):
+    return f"/{'sale' if is_sale(u) else 'rent'}/{u['slug']}.html"
+
+
+def unit_price(u, lang="en"):
+    """Price line for cards and the unit page: monthly rent, or the sale price."""
+    if is_sale(u):
+        if u.get("price_thb"):
+            return baht(u["price_thb"])
+        return "Price on request" if lang == "en" else "สอบถามราคา"
+    if u.get("rent_thb"):
+        return f"{baht(u['rent_thb'])}<span> / {'month' if lang == 'en' else 'เดือน'}</span>"
+    return "Rent on request" if lang == "en" else "สอบถามค่าเช่า"
+
+
+def unit_price_text(u):
+    if is_sale(u):
+        return baht(u["price_thb"]) if u.get("price_thb") else "Price on request"
+    return f"{baht(u['rent_thb'])}/month" if u.get("rent_thb") else "Rent on request"
+
+
+def floor_text(u, lang="en"):
+    if not u.get("floor"):
+        return ""
+    return f"{'Floor' if lang == 'en' else 'ชั้น'} {u['floor']}"
+
+
 def unit_cards(units, lang="en"):
     if not units:
         return ""
     cards = []
     for u in units:
         c = CONDO_BY_SLUG[u["condo"]]
-        rented = u.get("status") == "rented"
-        badge = '<span class="badge badge-muted">Rented</span>' if rented else ""
+        done = u.get("status") in ("rented", "sold")
+        badge = f'<span class="badge badge-muted">{"Sold" if is_sale(u) else "Rented"}</span>' if done else ""
+        meta = " · ".join(x for x in [e(c['name']), floor_text(u, lang), f"BTS {e(c['station'])}"] if x)
         cards.append(f"""<li class="unit-card">
-  <a href="/rent/{u['slug']}.html">
+  <a href="{unit_url(u)}">
     {f'<img src="{e(u["photos"][0])}" alt="" loading="lazy" width="600" height="400">' if u.get("photos") else '<div class="unit-card-nophoto">Photos coming soon</div>'}
     <div class="unit-card-body">
-      <div class="unit-price">{baht(u['rent_thb'])}<span> / {'month' if lang == 'en' else 'เดือน'}</span>{badge}</div>
+      <div class="unit-price">{unit_price(u, lang)}{badge}</div>
       <h3>{e(unit_title(u))}</h3>
-      <p class="muted small">{e(c['name'])} · {'Floor' if lang == 'en' else 'ชั้น'} {u['floor']} · BTS {e(c['station'])}</p>
+      <p class="muted small">{meta}</p>
     </div>
   </a>
 </li>""")
@@ -596,11 +658,13 @@ def page_unit(u):
     if photos:
         gallery_html = f'<div class="gallery">{gallery}</div>'
 
-    spec = [("Rent", f"{baht(u['rent_thb'])} / month"),
+    sale = is_sale(u)
+    floor = (str(u["floor"]) if u.get("floor") else "") + (f", Tower {u['tower']}" if u.get("tower") else "")
+    spec = [("Price" if sale else "Rent", unit_price_text(u)),
             ("Bedrooms", "Studio" if u["bedrooms"] == 0 else str(u["bedrooms"])),
             ("Bathrooms", str(u["bathrooms"])),
             ("Size", f"{u['size_sqm']:g} sq m"),
-            ("Floor", str(u["floor"]) + (f", Tower {u['tower']}" if u.get("tower") else "")),
+            ("Floor", floor.lstrip(", ")),
             ("Facing", u.get("facing", "")),
             ("Furnishing", u.get("furnished", "")),
             ("Available from", u.get("available_from", ""))]
@@ -620,16 +684,18 @@ def page_unit(u):
     exc = tick_list(u.get("not_included", []))
     bills = (f"<h3>Included in the rent</h3>{inc}" if inc else "") + (f"<h3>Paid separately</h3>{exc}" if exc else "")
     desc_th = (f'<p lang="th">{e(u["description_th"])}</p>' if u.get("description_th") else "")
-    ask = line_ask_url(f"Hi, I'm interested in unit {u['id']} at {c['name']} ({title}, {baht(u['rent_thb'])}/month). Is it still available?")
+    ask = line_ask_url(f"Hi, I'm interested in unit {u['id']} at {c['name']} ({title}, {unit_price_text(u)}"
+                       f"{', for sale' if sale else ''}). Is it still available?")
     ask_btn = (f'<a class="btn btn-primary" href="{e(ask)}">Ask about this unit on LINE</a>' if ask else contact_links())
-    rented = u.get("status") == "rented"
-    status = ('<div class="notice"><strong>This unit has been rented.</strong> Ask us about similar units in the building.</div>'
-              if rented else "")
+    status = ""
+    if u.get("status") in ("rented", "sold"):
+        status = (f'<div class="notice"><strong>This unit has been {"sold" if sale else "rented"}.</strong> '
+                  'Ask us about similar units in the building.</div>')
     sample = ('<div class="notice"><strong>Sample listing.</strong> This page previews the layout; it is not a real unit.</div>'
               if u.get("draft") else "")
     body = f"""
 <div class="wrap">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/condos/">Condos</a> / <a href="/condos/{c['slug']}.html">{e(c['name'])}</a> / {e(u['id'])}</nav>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="{'/sale/' if sale else '/rent/'}">{'For sale' if sale else 'For rent'}</a> / <a href="/condos/{c['slug']}.html">{e(c['name'])}</a> / {e(u['id'])}</nav>
   {sample}
   {gallery_html}
   {more}
@@ -637,7 +703,7 @@ def page_unit(u):
     <div>
       <div class="detail-head" style="padding-bottom:0">
         <p class="muted" style="margin:0"><a href="/condos/{c['slug']}.html">{e(c['name'])}</a> · <span class="station-tag">BTS {e(c['station'])}</span> · {e(c['walk'])}</p>
-        <h1>{e(title)}</h1>
+        <h1>{e(title)}{' for sale' if sale else ''}</h1>
       </div>
       {status}
       <dl class="facts">{spec_html}</dl>
@@ -653,7 +719,8 @@ def page_unit(u):
     </div>
     <aside>
       <div class="panel price-panel">
-        <div class="unit-price">{baht(u['rent_thb'])}<span> / month</span></div>
+        <div class="unit-price">{unit_price(u)}</div>
+        {'<p class="small muted" style="margin:4px 0 0">Owner\'s asking price.</p>' if sale and u.get("price_thb") else ''}
         <ul class="plain small">{terms_html}</ul>
         {ask_btn}
         <p class="small muted" style="margin:12px 0 0">Unit ref {e(u['id'])}. We confirm availability before every viewing.</p>
@@ -663,15 +730,17 @@ def page_unit(u):
 </div>
 <div class="section"></div>
 """
-    desc = (f"{title} for rent at {c['name']}, Bang Na — {baht(u['rent_thb'])} a month, floor {u['floor']}, "
-            f"{u.get('furnished', '').lower()}. Near BTS {c['station']}.")
-    return layout(f"/rent/{u['slug']}.html", f"{title} for rent at {c['name']}", desc, body,
-                  nav_path="/rent/", noindex=bool(u.get("draft")))
+    word = "for sale" if sale else "for rent"
+    bits = [unit_price_text(u), floor_text(u).lower(), u.get("furnished", "").lower()]
+    desc = (f"{title} {word} at {c['name']}, Bang Na — " + ", ".join(b for b in bits if b)
+            + f". Near BTS {c['station']}.")
+    return layout(unit_url(u), f"{title} {word} at {c['name']}", desc, body,
+                  nav_path="/sale/" if sale else "/rent/", noindex=bool(u.get("draft")))
 
 
 def page_rent_index():
-    if LIVE_UNITS:
-        inner = unit_cards(LIVE_UNITS)
+    if RENT_UNITS:
+        inner = unit_cards(RENT_UNITS)
     else:
         inner = ('<p class="muted">New units are being added. Tell us your budget and move-in date and we\'ll send you what\'s available.</p>'
                  + contact_links())
@@ -686,6 +755,33 @@ def page_rent_index():
 <div class="section"></div>
 """
     return layout("/rent/", "Condo units for rent in Bang Na", "Condo units for rent in Bang Na near the BTS, with photos, rent and what's included.", body)
+
+
+def page_sale_index():
+    if SALE_UNITS:
+        inner = unit_cards(SALE_UNITS)
+    else:
+        inner = ('<p class="muted">No units for sale right now. Tell us what you are looking for and we\'ll let you know when one comes up.</p>'
+                 + contact_links())
+    body = f"""
+<div class="wrap">
+  <div class="detail-head">
+    <h1>Condos for sale in Bang Na</h1>
+    <p class="prose muted">Units offered by their owners at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate and Ideo Mobi Eastpoint, all at BTS Bang Na. Prices are the owners' asking prices.</p>
+  </div>
+  {inner}
+</div>
+<div class="section"></div>
+"""
+    return layout("/sale/", "Condo units for sale in Bang Na", "Condo units for sale in Bang Na near the BTS, with photos, asking price and unit details.", body)
+
+
+def redirect_page(to):
+    url = SITE["base_url"] + to
+    return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Moved</title>'
+            f'<meta name="robots" content="noindex"><link rel="canonical" href="{e(url)}">'
+            f'<meta http-equiv="refresh" content="0; url={e(to)}"></head>'
+            f'<body><p>This page has moved to <a href="{e(to)}">{e(url)}</a>.</p></body></html>\n')
 
 
 def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None):
@@ -709,8 +805,13 @@ def main():
     for c in CONDOS:
         pages.append((f"condos/{c['slug']}.html", f"/condos/{c['slug']}.html", page_condo(c)))
     pages.append(("rent/index.html", "/rent/", page_rent_index()))
+    pages.append(("sale/index.html", "/sale/", page_sale_index()))
     for u in UNITS:
-        pages.append((f"rent/{u['slug']}.html", f"/rent/{u['slug']}.html", page_unit(u)))
+        pages.append((unit_url(u).lstrip("/"), unit_url(u), page_unit(u)))
+    # Old addresses of units that moved (e.g. a rental now listed for sale) keep working.
+    for u in UNITS:
+        for old in u.get("redirect_from", []):
+            write(old.lstrip("/"), redirect_page(unit_url(u)))
     for name, path, title, desc in [
         ("bang-na.html", "/bang-na.html", "Living around BTS Bang Na",
          "What it's like to live in Bang Na, Bangkok: BTS stations, international schools, shopping, hospitals and getting to the airport."),
@@ -734,7 +835,7 @@ def main():
     for rel, _, content in pages:
         write(rel, content)
 
-    drafts = {f"/rent/{u['slug']}.html" for u in UNITS if u.get("draft")}
+    drafts = {unit_url(u) for u in UNITS if u.get("draft")}
     urls = [p for _, p, _ in pages if p != "/404.html" and p not in drafts]
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']

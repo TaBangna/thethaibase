@@ -176,6 +176,7 @@ ul.plain li { padding: 6px 0; border-bottom: 1px solid var(--line); }
 .unit-card h3 { margin: 6px 0 4px; font-size: 1.1rem; }
 .unit-card .unit-price { font-size: 1.4rem; }
 .badge-muted { background: #E6E8EA; color: var(--muted); }
+.badge-sale { background: #FCE9D6; color: #8A4B0F; }
 .unit-card-nophoto { aspect-ratio: 3 / 2; display: grid; place-items: center; background: #DCE3EA; color: var(--muted); font-size: .95rem; }
 
 /* Rents */
