@@ -926,6 +926,22 @@ ADMIN_PRIVATE = ROOT / "data/private/units-private.json"
 ADMIN_DATA = ROOT / "assets/admin-data.json"
 
 
+ADMIN_PUBLIC = ROOT / "assets/admin-units.json"
+
+
+def write_admin_public():
+    """Non-secret unit fields for the admin table, rebuilt on every build.
+
+    The admin view overlays these on the encrypted rows, so price, size and
+    bedroom changes show up without the passphrase. Floors, owners, room
+    numbers and notes stay in the encrypted file only."""
+    rows = [{"id": u["id"], "url": unit_url(u) if not u.get("pending") else "", "deal": u.get("deal", "rent"),
+             "price": unit_price_text(u) if not u.get("pending") else "", "beds": u.get("bedrooms"),
+             "size": u.get("size_sqm"), "tower": u.get("tower", ""), "status": u.get("status", "")}
+            for u in json.loads(_units_file.read_text(encoding="utf-8"))]
+    ADMIN_PUBLIC.write_text(json.dumps(rows, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def encrypt_admin_data():
     """Encrypt exact floors and owner notes for the admin view.
 
@@ -1038,6 +1054,7 @@ def main():
 
     for rel, _, content in pages:
         write(rel, content)
+    write_admin_public()
     encrypt_admin_data()
 
     drafts = {unit_url(u) for u in UNITS if u.get("draft")}

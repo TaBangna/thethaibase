@@ -88,8 +88,25 @@
     if (form) form.style.display = "none";
   }
 
+  // Price, size, bedrooms etc. come from the public unit list built on every
+  // deploy, so they are current even when the encrypted file is older.
+  async function merge(rows) {
+    var pub;
+    try {
+      var r = await fetch("/assets/admin-units.json", { cache: "no-store" });
+      if (!r.ok) return rows;
+      pub = await r.json();
+    } catch (e) { return rows; }
+    var byId = {};
+    rows.forEach(function (row) { byId[row.id] = row; });
+    return pub.map(function (p) {
+      var priv = byId[p.id] || {};
+      return Object.assign({}, priv, p, { floor: priv.floor, owner: priv.owner, room: priv.room, notes: priv.notes });
+    });
+  }
+
   async function run(raw) {
-    var rows = await decrypt(raw, await blob());
+    var rows = await merge(await decrypt(raw, await blob()));
     fillFloors(rows); adminBar(); table(rows);
   }
 
