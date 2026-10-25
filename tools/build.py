@@ -141,6 +141,19 @@ FOOT_TH = """
     </div>"""
 
 
+_featured = next((c for c in CONDOS if c.get("featured") and c.get("photos")), None)
+DEFAULT_OG_IMAGE = "/assets/og-default.png"  # branded card for pages without their own photo
+HOME_OG_IMAGE = _featured["photos"][0]["src"] if _featured else DEFAULT_OG_IMAGE
+
+# Every click on a LINE link is sent to Analytics as a generate_lead event, with the
+# unit ref when the click is on a unit page and where on the page the link sits.
+LEAD_JS = """
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="line.me"]');
+if(!a||typeof gtag!=='function')return;var u=document.body.getAttribute('data-unit')||'';
+var where=a.closest('header')?'header':a.closest('footer')?'footer':a.closest('.price-panel')?'unit_panel':a.closest('.cta-band')?'owners_band':'page';
+gtag('event','generate_lead',{method:'line',unit_id:u,link_location:where,page_lang:document.documentElement.lang});});</script>"""
+
+
 def analytics_tag():
     """Google Analytics 4, only when data/site.json has a ga4_id (G-XXXXXXXXXX)."""
     gid = SITE.get("ga4_id", "").strip()
@@ -153,7 +166,7 @@ def analytics_tag():
             f"gtag('js',new Date());gtag('config','{gid}');</script>")
 
 
-def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, noindex=False):
+def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, noindex=False, image=None, unit=None):
     current = ' aria-current="page"'
     nav_path = nav_path or path
     alt = "".join(f'\n<link rel="alternate" hreflang="{hl}" href="{SITE["base_url"]}{href}">'
@@ -185,14 +198,18 @@ def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, n
 <meta property="og:title" content="{e(full_title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{canonical}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{e(SITE['brand'])}">
+<meta property="og:image" content="{e(SITE['base_url'] + (image or DEFAULT_OG_IMAGE))}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
-<script src="/assets/admin.js" defer></script>{"" if noindex else analytics_tag()}
+<script src="/assets/admin.js" defer></script>{"" if noindex else analytics_tag()}{"" if noindex else LEAD_JS}
 </head>
-<body>
+<body{f' data-unit="{e(unit)}"' if unit else ""}>
 <header class="site-head">
   <div class="wrap">
     <a class="brand" href="{'/th/' if lang == 'th' else '/'}">{BRAND_MARK}The Thai Base<span class="brand-tag">Bang Na</span></a>
@@ -491,7 +508,7 @@ def page_home():
 {owners_band()}
 """
     return layout("/", "", f"Condos for rent at BTS Bang Na: {CONDO_NAMES}. Units checked in person, real photos, fair-price check, viewings in Thai or English.",
-                  body, alternates=HOME_ALTERNATES)
+                  body, alternates=HOME_ALTERNATES, image=HOME_OG_IMAGE)
 
 
 def page_home_th():
@@ -560,7 +577,7 @@ def page_home_th():
 """
     return layout("/th/", "คอนโดให้เช่า ใกล้ BTS บางนา",
                   "คอนโดให้เช่าใกล้ BTS บางนา 4 โครงการ: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint ห้องจริง รูปจริง เทียบค่าเช่า นัดชมห้องได้เลย",
-                  body, lang="th", nav_path="/th/", alternates=HOME_ALTERNATES)
+                  body, lang="th", nav_path="/th/", alternates=HOME_ALTERNATES, image=HOME_OG_IMAGE)
 
 
 def page_condos_index():
@@ -648,7 +665,9 @@ def page_condo(c):
 """
     desc = (f"{c['name']} condo for rent near BTS {c['station']}, Bangkok. {c['walk']}. "
             f"Typical rents, unit types and facilities.")
-    return layout(f"/condos/{c['slug']}.html", f"{c['name']} — condo for rent near BTS {c['station']}", desc, body)
+    og = (c["photos"][0]["src"] if c.get("photos")
+          else next((x["photos"][0] for x in UNITS if x["condo"] == c["slug"] and x.get("photos")), None))
+    return layout(f"/condos/{c['slug']}.html", f"{c['name']} — condo for rent near BTS {c['station']}", desc, body, image=og)
 
 
 OWNER_ALTERNATES = [("en", "/list-your-condo.html"), ("th", "/th/list-your-condo.html")]
@@ -849,7 +868,8 @@ def page_unit(u):
     desc = (f"{title} {word} at {c['name']}, Bang Na — " + ", ".join(b for b in bits if b)
             + f". Near BTS {c['station']}.")
     return layout(unit_url(u), f"{title} {word} at {c['name']}", desc, body,
-                  nav_path="/sale/" if sale else "/rent/", noindex=bool(u.get("draft")))
+                  nav_path="/sale/" if sale else "/rent/", noindex=bool(u.get("draft")),
+                  image=(photos[0] if photos else None), unit=u["id"])
 
 
 RENT_FILTER = """<form class="filter-bar" id="rent-filter" action="/rent/" method="get">
