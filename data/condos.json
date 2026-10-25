@@ -149,7 +149,22 @@
         "PropertyHub — Ideo O2",
         "https://propertyhub.in.th/en/condo-for-rent/project-ideo-o2"
       ]
-    ]
+    ],
+    "photos": [
+      {
+        "src": "/assets/condos/ideo-o2/01.jpg",
+        "alt": "Ideo O2's three towers at dusk"
+      },
+      {
+        "src": "/assets/condos/ideo-o2/02.jpg",
+        "alt": "Aerial view of Ideo O2's gardens and pools"
+      },
+      {
+        "src": "/assets/condos/ideo-o2/03.jpg",
+        "alt": "Sales-gallery model of Ideo O2 showing Buildings A, B and C"
+      }
+    ],
+    "photo_source": "Ananda Development; Think of Living"
   },
   {
     "slug": "ideo-mobi-sukhumvit-eastgate",
@@ -206,7 +221,26 @@
         "Thailand-Property — Ideo Mobi Sukhumvit Eastgate",
         "https://www.thailand-property.com/condo/3323/ideo-mobi-sukhumvit-eastgate"
       ]
-    ]
+    ],
+    "photos": [
+      {
+        "src": "/assets/condos/ideo-mobi-sukhumvit-eastgate/01.jpg",
+        "alt": "Ideo Mobi Sukhumvit Eastgate entrance sign"
+      },
+      {
+        "src": "/assets/condos/ideo-mobi-sukhumvit-eastgate/02.jpg",
+        "alt": "The tower above the entrance garden"
+      },
+      {
+        "src": "/assets/condos/ideo-mobi-sukhumvit-eastgate/03.jpg",
+        "alt": "Ideo Mobi Sukhumvit Eastgate and the BTS line at night"
+      },
+      {
+        "src": "/assets/condos/ideo-mobi-sukhumvit-eastgate/04.jpg",
+        "alt": "Ideo Mobi Sukhumvit Eastgate beside the BTS line"
+      }
+    ],
+    "photo_source": "Ananda Development"
   },
   {
     "slug": "ideo-mobi-sukhumvit-eastpoint",
@@ -273,6 +307,21 @@
         "PropertyHub — Ideo Mobi Sukhumvit Eastpoint",
         "https://propertyhub.in.th/en/condo-for-rent/project-ideo-mobi-sukhumvit-eastpoint"
       ]
-    ]
+    ],
+    "photos": [
+      {
+        "src": "/assets/condos/ideo-mobi-sukhumvit-eastpoint/01.jpg",
+        "alt": "Ideo Mobi Sukhumvit Eastpoint towers at night"
+      },
+      {
+        "src": "/assets/condos/ideo-mobi-sukhumvit-eastpoint/02.jpg",
+        "alt": "Aerial view of Ideo Mobi Sukhumvit Eastpoint along the BTS line"
+      },
+      {
+        "src": "/assets/condos/ideo-mobi-sukhumvit-eastpoint/03.jpg",
+        "alt": "Entrance and garden at Ideo Mobi Sukhumvit Eastpoint"
+      }
+    ],
+    "photo_source": "Ananda Development; Think of Living"
   }
 ]
