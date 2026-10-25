@@ -64,7 +64,7 @@ p { margin: 0 0 1em; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--display); font-weight: 800; font-size: 1.2rem; letter-spacing: -.02em; }
 .brand:hover { color: var(--ink); }
 .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: var(--brand); display: grid; place-items: center; flex: none; }
-.brand-mark svg { width: 20px; height: 20px; }
+.brand-mark svg { width: 28px; height: 28px; }
 .brand-tag { font-family: var(--body); font-size: .72rem; font-weight: 600; letter-spacing: 0; padding: 3px 8px; border-radius: 999px; background: var(--brand-soft); color: var(--brand-ink); }
 .site-nav { display: flex; gap: 4px 20px; flex-wrap: wrap; align-items: center; }
 .site-nav a { color: var(--ink); text-decoration: none; font-size: .95rem; font-weight: 500; padding: 6px 0; }
