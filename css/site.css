@@ -295,3 +295,16 @@ ul.plain li { padding: 8px 0; border-bottom: 1px solid var(--line-2); }
 .rent-table tbody tr:last-child > * { border-bottom: 0; }
 .rent-table td.na { color: #C9CDD0; }
 .table-scroll + .small { margin-top: 10px; }
+
+/* Building photo strip (home) */
+.photo-strip { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.photo-strip li { border-radius: 14px; overflow: hidden; background: var(--line); }
+.photo-strip img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.photo-strip li:first-child { grid-column: 1 / -1; }
+.photo-strip li:first-child img { aspect-ratio: 16 / 9; }
+@media (min-width: 860px) {
+  .photo-strip { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, 1fr); }
+  .photo-strip li:first-child { grid-column: 1; grid-row: 1 / span 2; }
+  .photo-strip li:first-child img { aspect-ratio: auto; }
+}
+.photo-credit { margin: 10px 0 0; }

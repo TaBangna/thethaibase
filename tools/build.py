@@ -318,8 +318,11 @@ def featured_card(lang="en"):
     c = next((x for x in CONDOS if x.get("featured")), CONDOS[0])
     here = units_here(c)
     rents = [u["rent_thb"] for u in here if u.get("rent_thb")]
-    photo = next((u["photos"][0] for u in here if u.get("photos")), "")
-    img = f'<img src="{e(photo)}" alt="" width="1200" height="900">' if photo else ""
+    if c.get("photos"):
+        photo, alt = c["photos"][0]["src"], c["photos"][0]["alt"]
+    else:
+        photo, alt = next((u["photos"][0] for u in here if u.get("photos")), ""), ""
+    img = f'<img src="{e(photo)}" alt="{e(alt)}" width="1200" height="900">' if photo else ""
     walk = c["walk"] if lang == "en" else c.get("walk_th", c["walk"])
     if lang == "en":
         tag, count, per = "Featured building", f'{len(here)} unit{"s" if len(here) != 1 else ""} from', "/ month"
@@ -334,6 +337,29 @@ def featured_card(lang="en"):
     {price}
   </div>
 </a>"""
+
+
+def building_photos(lang="en"):
+    """Photo strip of the featured building for the home page."""
+    c = next((x for x in CONDOS if x.get("featured")), None)
+    if not c or len(c.get("photos", [])) < 2:
+        return ""
+    en = lang == "en"
+    tiles = "".join(f'<li><img src="{e(p["src"])}" alt="{e(p["alt"])}" loading="lazy" width="600" height="450"></li>'
+                    for p in c["photos"][1:6])
+    credit = (f'<p class="small muted photo-credit">{"Photos" if en else "ภาพ"}: {e(c["photo_credit"])}, '
+              f'{"used with permission" if en else "ใช้โดยได้รับอนุญาต"}.</p>' if c.get("photo_credit") else "")
+    head = ("Inside The Coast Bangkok" if en else f"บรรยากาศ {c['name']}")
+    sub = (f"{c['walk']}, next to BITEC, with pools, a gym and a community mall at its base."
+           if en else f"{c.get('walk_th', c['walk'])} ติดไบเทค มีสระว่ายน้ำ ฟิตเนส และคอมมูนิตี้มอลล์ด้านล่าง")
+    link = (f'<a href="/condos/{c["slug"]}.html">{"Building details" if en else "ข้อมูลโครงการ"} →</a>')
+    return f"""<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div><h2>{e(head)}</h2><p>{e(sub)}</p></div>{link}</div>
+    <ul class="photo-strip">{tiles}</ul>
+    {credit}
+  </div>
+</section>"""
 
 
 def search_form(lang="en"):
@@ -413,6 +439,7 @@ def page_home():
     {featured_card()}
   </div>
 </section>
+{building_photos()}
 {units_block}
 <section class="section">
   <div class="wrap">
@@ -487,6 +514,7 @@ def page_home_th():
     {featured_card("th")}
   </div>
 </section>
+{building_photos("th")}
 {units_block}
 <section class="section">
   <div class="wrap">

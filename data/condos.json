@@ -31,14 +31,65 @@
     "good_for": "Families and couples who want a 2 or 3-bedroom unit within walking distance of the BTS, with a pool and play area in the building.",
     "good_for_th": "ครอบครัวและคู่รักที่ต้องการห้อง 2–3 ห้องนอน เดินถึง BTS มีสระว่ายน้ำและสนามเด็กเล่น",
     "rents": [
-      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 20000, "low": 13000, "high": 28000},
-      {"type": "2 bedrooms", "type_th": "2 ห้องนอน", "typical": 28000, "low": 20000, "high": 40000},
-      {"type": "3 bedrooms", "type_th": "3 ห้องนอน", "typical": 60000, "low": 55000, "high": 80000}
+      {
+        "type": "1 bedroom",
+        "type_th": "1 ห้องนอน",
+        "typical": 20000,
+        "low": 13000,
+        "high": 28000
+      },
+      {
+        "type": "2 bedrooms",
+        "type_th": "2 ห้องนอน",
+        "typical": 28000,
+        "low": 20000,
+        "high": 40000
+      },
+      {
+        "type": "3 bedrooms",
+        "type_th": "3 ห้องนอน",
+        "typical": 60000,
+        "low": 55000,
+        "high": 80000
+      }
     ],
     "sources": [
-      ["PropertyHub — The Coast Condominium", "https://propertyhub.in.th/en/condo-for-rent/project-the-coast-condominium"],
-      ["CondoDee — The Coast Bangkok Bangna", "https://condodee.com/p/658"]
-    ]
+      [
+        "PropertyHub — The Coast Condominium",
+        "https://propertyhub.in.th/en/condo-for-rent/project-the-coast-condominium"
+      ],
+      [
+        "CondoDee — The Coast Bangkok Bangna",
+        "https://condodee.com/p/658"
+      ]
+    ],
+    "photos": [
+      {
+        "src": "/assets/condos/the-coast-bangkok/01.jpg",
+        "alt": "The Coast Bangkok's two towers"
+      },
+      {
+        "src": "/assets/condos/the-coast-bangkok/02.jpg",
+        "alt": "The Coast Bangkok entrance and community mall"
+      },
+      {
+        "src": "/assets/condos/the-coast-bangkok/03.jpg",
+        "alt": "The Coast Bangkok towers above the garden"
+      },
+      {
+        "src": "/assets/condos/the-coast-bangkok/04.jpg",
+        "alt": "Fountain plaza at The Coast's community mall"
+      },
+      {
+        "src": "/assets/condos/the-coast-bangkok/05.jpg",
+        "alt": "Plaza in front of the mall with the towers behind"
+      },
+      {
+        "src": "/assets/condos/the-coast-bangkok/06.jpg",
+        "alt": "Rooftop pool looking toward BTS Bang Na"
+      }
+    ],
+    "photo_credit": "The Coast Bangkok Official"
   },
   {
     "slug": "ideo-o2",
@@ -71,12 +122,33 @@
     "good_for": "Singles and couples who want plenty of shared space and newer facilities at a lower rent than the BTS-front buildings.",
     "good_for_th": "คนโสดและคู่รักที่ชอบส่วนกลางกว้าง สิ่งอำนวยความสะดวกใหม่ ในค่าเช่าที่ถูกกว่าคอนโดติด BTS",
     "rents": [
-      {"type": "Studio", "type_th": "สตูดิโอ", "typical": 12000, "low": 11000, "high": 14000},
-      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 14500, "low": 11000, "high": 16000},
-      {"type": "2 bedrooms", "type_th": "2 ห้องนอน", "typical": 24000, "low": 19500, "high": 28000}
+      {
+        "type": "Studio",
+        "type_th": "สตูดิโอ",
+        "typical": 12000,
+        "low": 11000,
+        "high": 14000
+      },
+      {
+        "type": "1 bedroom",
+        "type_th": "1 ห้องนอน",
+        "typical": 14500,
+        "low": 11000,
+        "high": 16000
+      },
+      {
+        "type": "2 bedrooms",
+        "type_th": "2 ห้องนอน",
+        "typical": 24000,
+        "low": 19500,
+        "high": 28000
+      }
     ],
     "sources": [
-      ["PropertyHub — Ideo O2", "https://propertyhub.in.th/en/condo-for-rent/project-ideo-o2"]
+      [
+        "PropertyHub — Ideo O2",
+        "https://propertyhub.in.th/en/condo-for-rent/project-ideo-o2"
+      ]
     ]
   },
   {
@@ -110,12 +182,30 @@
     "good_for": "Single professionals who want a small, easy-to-manage unit near the BTS at the lowest rent in the area.",
     "good_for_th": "คนทำงานที่อยู่คนเดียว ต้องการห้องเล็กดูแลง่าย ใกล้ BTS ในค่าเช่าที่ประหยัดที่สุด",
     "rents": [
-      {"type": "Studio", "type_th": "สตูดิโอ", "typical": 10000, "low": 9000, "high": 11000},
-      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 13000, "low": 10000, "high": 15000}
+      {
+        "type": "Studio",
+        "type_th": "สตูดิโอ",
+        "typical": 10000,
+        "low": 9000,
+        "high": 11000
+      },
+      {
+        "type": "1 bedroom",
+        "type_th": "1 ห้องนอน",
+        "typical": 13000,
+        "low": 10000,
+        "high": 15000
+      }
     ],
     "sources": [
-      ["PropertyHub — Ideo Mobi Sukhumvit Eastgate", "https://propertyhub.in.th/en/condo-for-rent/project-ideo-mobi-sukhumvit-eastgate"],
-      ["Thailand-Property — Ideo Mobi Sukhumvit Eastgate", "https://www.thailand-property.com/condo/3323/ideo-mobi-sukhumvit-eastgate"]
+      [
+        "PropertyHub — Ideo Mobi Sukhumvit Eastgate",
+        "https://propertyhub.in.th/en/condo-for-rent/project-ideo-mobi-sukhumvit-eastgate"
+      ],
+      [
+        "Thailand-Property — Ideo Mobi Sukhumvit Eastgate",
+        "https://www.thailand-property.com/condo/3323/ideo-mobi-sukhumvit-eastgate"
+      ]
     ]
   },
   {
@@ -149,13 +239,40 @@
     "good_for": "Professionals and couples who want a newer building on the BTS, with layouts from studio to 2 bedrooms.",
     "good_for_th": "คนทำงานและคู่รักที่อยากได้ตึกใหม่ ใกล้ BTS มีตั้งแต่สตูดิโอถึง 2 ห้องนอน",
     "rents": [
-      {"type": "Studio", "type_th": "สตูดิโอ", "typical": 14000, "low": 13000, "high": 15000},
-      {"type": "1 bedroom", "type_th": "1 ห้องนอน", "typical": 17000, "low": 13000, "high": 20000},
-      {"type": "1-bedroom duplex", "type_th": "1 ห้องนอน ดูเพล็กซ์", "typical": 25000, "low": 25000, "high": 27000},
-      {"type": "2 bedrooms", "type_th": "2 ห้องนอน", "typical": 30000, "low": 28000, "high": 35000}
+      {
+        "type": "Studio",
+        "type_th": "สตูดิโอ",
+        "typical": 14000,
+        "low": 13000,
+        "high": 15000
+      },
+      {
+        "type": "1 bedroom",
+        "type_th": "1 ห้องนอน",
+        "typical": 17000,
+        "low": 13000,
+        "high": 20000
+      },
+      {
+        "type": "1-bedroom duplex",
+        "type_th": "1 ห้องนอน ดูเพล็กซ์",
+        "typical": 25000,
+        "low": 25000,
+        "high": 27000
+      },
+      {
+        "type": "2 bedrooms",
+        "type_th": "2 ห้องนอน",
+        "typical": 30000,
+        "low": 28000,
+        "high": 35000
+      }
     ],
     "sources": [
-      ["PropertyHub — Ideo Mobi Sukhumvit Eastpoint", "https://propertyhub.in.th/en/condo-for-rent/project-ideo-mobi-sukhumvit-eastpoint"]
+      [
+        "PropertyHub — Ideo Mobi Sukhumvit Eastpoint",
+        "https://propertyhub.in.th/en/condo-for-rent/project-ideo-mobi-sukhumvit-eastpoint"
+      ]
     ]
   }
 ]
