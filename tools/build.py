@@ -602,6 +602,25 @@ def page_condos_index():
                   f"Condos for rent & sale at BTS Bang Na: {CONDO_NAMES}. Facilities, unit types and typical rents.", body)
 
 
+def building_gallery(c):
+    """Building photos at the top of a condo page: one lead photo plus up to four more."""
+    photos = c.get("photos") or []
+    if not photos:
+        return ""
+    n = len(photos)
+    lead, rest = photos[0], photos[1:5]
+    tiles = (f'<a class="g-lead" href="{e(lead["src"])}"><img src="{e(lead["src"])}" alt="{e(lead["alt"])}" width="1200" height="800"></a>'
+             + "".join(f'<a href="{e(p["src"])}"><img src="{e(p["src"])}" alt="{e(p["alt"])}" loading="lazy" width="600" height="400"></a>'
+                       for p in rest))
+    if c.get("photo_credit"):
+        credit = f'<p class="small muted photo-credit">Photos: {e(c["photo_credit"])}, used with permission.</p>'
+    elif c.get("photo_source"):
+        credit = f'<p class="small muted photo-credit">Photos: {e(c["photo_source"])}.</p>'
+    else:
+        credit = ""
+    return f'<div class="gallery gallery-{min(n, 5)}">{tiles}</div>{credit}'
+
+
 def page_condo(c):
     facts = [("Nearest BTS", f"BTS {c['station']}"), ("Distance", c["walk"]), ("Completed", str(c["completed"]))]
     if c.get("developer"):
@@ -625,6 +644,7 @@ def page_condo(c):
                      + (f' — from {baht(rent_from(o))}' if rent_from(o) else "") + "</li>"
                      for o in CONDOS if o["slug"] != c["slug"])
     th = (f'<p lang="th" class="muted">{e(c["summary_th"])}</p>' if c.get("summary_th") else "")
+    gallery = building_gallery(c)
     body = f"""
 <div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/condos/">Condos</a> / {e(c['name'])}</nav>
@@ -634,6 +654,7 @@ def page_condo(c):
     {th}
     <dl class="facts">{facts_html}</dl>
   </div>
+  {gallery}
   <div class="split">
     <div class="prose">
       <h2>Typical rents</h2>

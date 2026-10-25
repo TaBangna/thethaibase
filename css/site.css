@@ -249,7 +249,17 @@ h1:lang(th), h2:lang(th) { letter-spacing: 0; line-height: 1.3; font-weight: 700
   .gallery a:nth-child(3) { border-top-right-radius: 18px; }
   .gallery a:nth-child(5) { border-bottom-right-radius: 18px; }
   .gallery .g-lead img { aspect-ratio: auto; }
+  /* Building pages with fewer than five photos */
+  .gallery-2, .gallery-3 { grid-template-columns: 2fr 1fr; }
+  .gallery-2 { grid-template-rows: 1fr; }
+  .gallery-2 .g-lead { grid-row: 1; }
+  .gallery-4 a:nth-child(4) { grid-column: 2 / -1; border-bottom-right-radius: 18px; }
+  .gallery-2 a:nth-child(2), .gallery-3 a:nth-child(2) { border-top-right-radius: 18px; }
+  .gallery-2 a:nth-child(2), .gallery-3 a:nth-child(3) { border-bottom-right-radius: 18px; }
+  .gallery-3 a:nth-child(3) { border-top-right-radius: 0; }
 }
+@media (max-width: 859px) { .gallery-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.gallery + .photo-credit { margin: 0 0 24px; }
 .unit-layout { display: grid; gap: 32px; }
 @media (min-width: 860px) { .unit-layout { grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: start; } .unit-layout aside { position: sticky; top: 24px; margin-top: 24px; } }
 .unit-price { font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--ink); line-height: 1.1; letter-spacing: -.02em; }
