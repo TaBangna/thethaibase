@@ -141,6 +141,18 @@ FOOT_TH = """
     </div>"""
 
 
+def analytics_tag():
+    """Google Analytics 4, only when data/site.json has a ga4_id (G-XXXXXXXXXX)."""
+    gid = SITE.get("ga4_id", "").strip()
+    if not gid:
+        return ""
+    if not gid.startswith("G-") or not gid[2:].isalnum():
+        raise SystemExit(f"data/site.json ga4_id looks wrong: {gid!r} (expected G-XXXXXXXXXX)")
+    return (f'\n<script async src="https://www.googletagmanager.com/gtag/js?id={gid}"></script>'
+            f"\n<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}"
+            f"gtag('js',new Date());gtag('config','{gid}');</script>")
+
+
 def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, noindex=False):
     current = ' aria-current="page"'
     nav_path = nav_path or path
@@ -178,7 +190,7 @@ def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, n
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
-<script src="/assets/admin.js" defer></script>
+<script src="/assets/admin.js" defer></script>{"" if noindex else analytics_tag()}
 </head>
 <body>
 <header class="site-head">
