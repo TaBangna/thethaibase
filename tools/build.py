@@ -98,7 +98,7 @@ def contact_links(cls="btn btn-primary", lang="en"):
 EN_FOOT = """
     <div>
       <h3>The Thai Base</h3>
-      <p>Condos for rent at BTS Bang Na: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate and Ideo Mobi Eastpoint. We help Thai and foreign renters, in Thai or English.</p>
+      <p>Condos for rent &amp; sale at BTS Bang Na: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate and Ideo Mobi Eastpoint. We help Thai and foreign renters and buyers, in Thai or English.</p>
       {contact}
     </div>
     <div>
@@ -123,7 +123,7 @@ EN_FOOT = """
 FOOT_TH = """
     <div>
       <h3>The Thai Base</h3>
-      <p>คอนโดให้เช่าย่าน BTS บางนา: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate และ Ideo Mobi Eastpoint ดูแลทั้งผู้เช่าคนไทยและชาวต่างชาติ</p>
+      <p>คอนโดเช่า-ขาย ย่าน BTS บางนา: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate และ Ideo Mobi Eastpoint ดูแลทั้งผู้เช่าและผู้ซื้อ คนไทยและชาวต่างชาติ</p>
       {contact}
     </div>
     <div>
@@ -462,7 +462,7 @@ def page_home():
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Condo rentals for expats · BTS Bang Na</p>
+      <p class="eyebrow">Condos for rent &amp; sale · BTS Bang Na</p>
       <h1>Bang Na condos, checked before you see them.</h1>
       <p class="hero-lead">Real units at {e(CONDO_NAMES)}, with real photos and a fair-price check against each building's typical rent. We help in Thai or English, from first viewing to move-in.</p>
       {search_form()}
@@ -510,7 +510,7 @@ def page_home():
 </section>
 {owners_band()}
 """
-    return layout("/", "", f"Condos for rent at BTS Bang Na: {CONDO_NAMES}. Units checked in person, real photos, fair-price check, viewings in Thai or English.",
+    return layout("/", "", f"Condos for rent & sale at BTS Bang Na: {CONDO_NAMES}. Units checked in person, real photos, fair-price check, viewings in Thai or English.",
                   body, alternates=HOME_ALTERNATES, image=HOME_OG_IMAGE)
 
 
@@ -537,7 +537,7 @@ def page_home_th():
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">คอนโดให้เช่า ใกล้ BTS บางนา</p>
+      <p class="eyebrow">คอนโดเช่า-ขาย ใกล้ BTS บางนา</p>
       <h1>คอนโดบางนา ตรวจห้องให้ก่อนคุณไปดู</h1>
       <p class="hero-lead">ห้องจริงใน {e(CONDO_NAMES)} รูปจริง และเทียบค่าเช่ากับราคาทั่วไปของแต่ละโครงการ ดูแลทั้งภาษาไทยและอังกฤษ ตั้งแต่ดูห้องจนถึงวันย้ายเข้า</p>
       {search_form("th")}
@@ -578,8 +578,8 @@ def page_home_th():
 </section>
 {owners_band("th")}
 """
-    return layout("/th/", "คอนโดให้เช่า ใกล้ BTS บางนา",
-                  "คอนโดให้เช่าใกล้ BTS บางนา 4 โครงการ: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint ห้องจริง รูปจริง เทียบค่าเช่า นัดชมห้องได้เลย",
+    return layout("/th/", "คอนโดเช่า-ขาย ใกล้ BTS บางนา",
+                  "คอนโดเช่า-ขาย ใกล้ BTS บางนา 4 โครงการ: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint ห้องจริง รูปจริง เทียบค่าเช่า นัดชมห้องได้เลย",
                   body, lang="th", nav_path="/th/", alternates=HOME_ALTERNATES, image=HOME_OG_IMAGE)
 
 
@@ -598,8 +598,8 @@ def page_condos_index():
 </div>
 <div class="section"></div>
 """
-    return layout("/condos/", "Condos for rent at BTS Bang Na",
-                  f"Condos for rent at BTS Bang Na: {CONDO_NAMES}. Facilities, unit types and typical rents.", body)
+    return layout("/condos/", "Condos for rent & sale at BTS Bang Na",
+                  f"Condos for rent & sale at BTS Bang Na: {CONDO_NAMES}. Facilities, unit types and typical rents.", body)
 
 
 def page_condo(c):
@@ -1077,7 +1077,7 @@ def main():
         ("th/list-your-condo.html", "/th/list-your-condo.html", "ฝากเช่าคอนโด The Coast, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint",
          "ฝากเช่าคอนโดใกล้ BTS บางนา ลงประกาศฟรี จ่ายค่าบริการ 1 เดือนเฉพาะเมื่อได้ผู้เช่าสัญญา 1 ปีผ่านเรา หาผู้เช่าได้ทั้งคนไทยและชาวต่างชาติ"),
         ("contact.html", "/contact.html", "Contact",
-         "Contact The Thai Base about condos for rent at BTS Bang Na."),
+         "Contact The Thai Base about condos for rent or sale at BTS Bang Na."),
         ("404.html", "/404.html", "Page not found", "Page not found."),
     ]:
         kw = {}
