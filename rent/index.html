@@ -12,15 +12,19 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
 <script src="/assets/admin.js" defer></script>
 </head>
 <body>
 <header class="site-head">
   <div class="wrap">
-    <a class="brand" href="/">The Thai Base</a>
-    <nav class="site-nav" aria-label="Main"><a href="/">Home</a><a href="/rent/" aria-current="page">For rent</a><a href="/sale/">For sale</a><a href="/condos/">Condos</a><a href="/bang-na.html">Living in Bang Na</a><a href="/renting-guide.html">Renting guide</a><a href="/list-your-condo.html">For owners</a><a href="/contact.html">Contact</a><a href="/th/">ภาษาไทย</a></nav>
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 4l9 6.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/></svg></span>The Thai Base<span class="brand-tag">Bang Na</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="/condos/">Condos</a><a href="/rent/" aria-current="page">For rent</a><a href="/sale/">For sale</a><a href="/bang-na.html">Living in Bang Na</a><a href="/renting-guide.html">Renting guide</a><a href="/list-your-condo.html">For owners</a></nav>
+    <div class="head-actions">
+      <a class="lang-btn" href="/th/" hreflang="th" lang="th">ภาษาไทย</a>
+      <a class="btn btn-line btn-sm" href="https://line.me/R/ti/p/@199sshug">Chat on LINE</a>
+    </div>
   </div>
 </header>
 <main>
@@ -30,115 +34,163 @@
     <h1>Condos for rent in Bang Na</h1>
     <p class="prose muted">Units we have checked in person at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate and Ideo Mobi Eastpoint, all at BTS Bang Na.</p>
   </div>
-  <ul class="unit-grid"><li class="unit-card">
+  <form class="filter-bar" id="rent-filter" action="/rent/" method="get">
+  <label for="f-beds">Bedrooms</label>
+  <select id="f-beds" name="beds"><option value="">Any bedrooms</option><option value="1">1 bedroom</option><option value="2">2 bedrooms</option><option value="3">3 bedrooms</option></select>
+  <label for="f-max">Budget</label>
+  <select id="f-max" name="max"><option value="">Any budget</option><option value="20000">Up to ฿20,000</option><option value="30000">Up to ฿30,000</option><option value="40000">Up to ฿40,000</option></select>
+  <span class="filter-count" id="filter-count" aria-live="polite"></span>
+</form><ul class="unit-grid"><li class="unit-card" data-beds="2" data-rent="33000">
   <a href="/rent/the-coast-2br-tcr-001.html">
-    <img src="/assets/units/tcr-001/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-001/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿33,000<span> / month</span></div>
-      <h3>2-bedroom, 63 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-001" data-floor-tower="" data-lang="en">Floors 11–20</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿33,000<span> / month</span></div></div>
+      <h3>2-bedroom, 63 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-001" data-floor-tower="" data-lang="en">Floors 11–20</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="2" data-rent="22000">
   <a href="/rent/the-coast-2br-tcr-002.html">
-    <img src="/assets/units/tcr-002/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-002/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿22,000<span> / month</span></div>
-      <h3>2-bedroom, 52 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-002" data-floor-tower="" data-lang="en">Floors 11–20</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿22,000<span> / month</span></div><span class="badge">Fair price</span></div>
+      <h3>2-bedroom, 52 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-002" data-floor-tower="" data-lang="en">Floors 11–20</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="">
   <a href="/rent/the-coast-1br-tcr-003.html">
-    <img src="/assets/units/tcr-003/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-003/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">Rent on request</div>
-      <h3>1-bedroom, 36 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-003" data-floor-tower="" data-lang="en">Floors 11–20</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">Rent on request</div></div>
+      <h3>1-bedroom, 36 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-003" data-floor-tower="" data-lang="en">Floors 11–20</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="2" data-rent="38000">
   <a href="/rent/the-coast-2br-tcr-004.html">
-    <img src="/assets/units/tcr-004/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-004/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿38,000<span> / month</span></div>
-      <h3>2-bedroom, 58 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-004" data-floor-tower="" data-lang="en">Floors 21–30</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿38,000<span> / month</span></div></div>
+      <h3>2-bedroom, 58 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-004" data-floor-tower="" data-lang="en">Floors 21–30</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="2" data-rent="35000">
   <a href="/rent/the-coast-2br-tcr-005.html">
-    <img src="/assets/units/tcr-005/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-005/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿35,000<span> / month</span></div>
-      <h3>2-bedroom, 58 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-005" data-floor-tower="" data-lang="en">Floors 21–30</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿35,000<span> / month</span></div></div>
+      <h3>2-bedroom, 58 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-005" data-floor-tower="" data-lang="en">Floors 21–30</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="30000">
   <a href="/rent/the-coast-1br-tcr-006.html">
-    <img src="/assets/units/tcr-006/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-006/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿30,000<span> / month</span></div>
-      <h3>1-bedroom, 45 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-006" data-floor-tower="" data-lang="en">Floors 11–20</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿30,000<span> / month</span></div></div>
+      <h3>1-bedroom, 45 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-006" data-floor-tower="" data-lang="en">Floors 11–20</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="23000">
   <a href="/rent/the-coast-1br-tcr-007.html">
-    <img src="/assets/units/tcr-007/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-007/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿23,000<span> / month</span></div>
-      <h3>1-bedroom, 45 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-007" data-floor-tower="" data-lang="en">Floors 11–20</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿23,000<span> / month</span></div></div>
+      <h3>1-bedroom, 45 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-007" data-floor-tower="" data-lang="en">Floors 11–20</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="22000">
   <a href="/rent/the-coast-1br-tcr-008.html">
-    <img src="/assets/units/tcr-008/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-008/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿22,000<span> / month</span></div>
-      <h3>1-bedroom, 45 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-008" data-floor-tower="" data-lang="en">Floors 11–20</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿22,000<span> / month</span></div></div>
+      <h3>1-bedroom, 45 sq m · Furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-008" data-floor-tower="" data-lang="en">Floors 11–20</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="22000">
   <a href="/rent/the-coast-1br-tcr-009.html">
-    <img src="/assets/units/tcr-009/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-009/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿22,000<span> / month</span></div>
-      <h3>1-bedroom, 45 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-009" data-floor-tower="" data-lang="en">Floors 21–30</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿22,000<span> / month</span></div></div>
+      <h3>1-bedroom, 45 sq m · Furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-009" data-floor-tower="" data-lang="en">Floors 21–30</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="16000">
   <a href="/rent/the-coast-1br-tcr-010.html">
-    <img src="/assets/units/tcr-010/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-010/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿16,000<span> / month</span></div>
-      <h3>1-bedroom, 35 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-010" data-floor-tower="" data-lang="en">Floors 11–20</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿16,000<span> / month</span></div><span class="badge">Fair price</span></div>
+      <h3>1-bedroom, 35 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-010" data-floor-tower="" data-lang="en">Floors 11–20</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="15000">
   <a href="/rent/the-coast-1br-tcr-011.html">
-    <img src="/assets/units/tcr-011/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-011/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">฿15,000<span> / month</span></div>
-      <h3>1-bedroom, 35 sq m</h3>
-      <p class="muted small">The Coast Bangkok · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">฿15,000<span> / month</span></div><span class="badge">Fair price</span></div>
+      <h3>1-bedroom, 35 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok</p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
-</li><li class="unit-card">
+</li><li class="unit-card" data-beds="1" data-rent="">
   <a href="/rent/the-coast-1br-tcr-012.html">
-    <img src="/assets/units/tcr-012/01.jpg" alt="" loading="lazy" width="600" height="400">
+    <div class="unit-card-media"><img src="/assets/units/tcr-012/01.jpg" alt="" loading="lazy" width="600" height="400"><span class="chip">✓ Checked in person</span></div>
     <div class="unit-card-body">
-      <div class="unit-price">Rent on request</div>
-      <h3>1-bedroom, 45 sq m</h3>
-      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-012" data-floor-tower="" data-lang="en">Floors 21–30</span> · BTS Bang Na</p>
+      <div class="unit-card-top"><div class="unit-price">Rent on request</div></div>
+      <h3>1-bedroom, 45 sq m · Fully furnished</h3>
+      <p class="muted small">The Coast Bangkok · <span data-floor-id="TCR-012" data-floor-tower="" data-lang="en">Floors 21–30</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
     </div>
   </a>
 </li></ul>
+<div class="filter-empty" id="filter-empty" hidden><p>No units match these filters right now.</p>
+  <p class="muted">Tell us your budget and move-in date on LINE and we'll check all four buildings for you.</p><div class="contact-links"><a class="btn btn-line" href="https://line.me/R/ti/p/@199sshug">Add us on LINE</a></div></div>
+<p class="small muted" style="margin-top:12px">“Fair price” means the rent is at or below the building&#x27;s typical asking rent for that unit type.</p>
+<script>(function () {
+  var form = document.getElementById('rent-filter');
+  if (!form) return;
+  var beds = form.elements.beds, max = form.elements.max;
+  var cards = document.querySelectorAll('.unit-grid .unit-card');
+  var count = document.getElementById('filter-count'), empty = document.getElementById('filter-empty');
+  var q = new URLSearchParams(location.search);
+  if (q.get('beds')) beds.value = q.get('beds');
+  if (q.get('max')) max.value = q.get('max');
+  function apply() {
+    var b = beds.value, m = parseInt(max.value, 10), shown = 0;
+    cards.forEach(function (c) {
+      var rent = parseInt(c.getAttribute('data-rent'), 10);
+      var ok = (!b || c.getAttribute('data-beds') === b) && (!m || isNaN(rent) || rent <= m);
+      c.hidden = !ok; if (ok) shown++;
+    });
+    count.textContent = shown + (shown === 1 ? ' unit' : ' units');
+    empty.hidden = shown !== 0;
+    var p = new URLSearchParams();
+    if (b) p.set('beds', b); if (m) p.set('max', m);
+    var url = location.pathname + (p.toString() ? '?' + p : '');
+    try { history.replaceState(null, '', url); } catch (e) {}
+  }
+  form.addEventListener('change', apply);
+  form.addEventListener('submit', function (ev) { ev.preventDefault(); apply(); });
+  apply();
+})();</script>
 </div>
 <div class="section"></div>
 
