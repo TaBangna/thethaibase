@@ -167,7 +167,7 @@ def analytics_tag():
             f"gtag('js',new Date());gtag('config','{gid}');</script>")
 
 
-def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, noindex=False, image=None, unit=None):
+def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, noindex=False, image=None, unit=None, head_extra=""):
     current = ' aria-current="page"'
     nav_path = nav_path or path
     alt = "".join(f'\n<link rel="alternate" hreflang="{hl}" href="{SITE["base_url"]}{href}">'
@@ -210,7 +210,7 @@ def layout(path, title, desc, body, lang="en", nav_path=None, alternates=None, n
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
-<script src="/assets/admin.js" defer></script>{"" if noindex else analytics_tag()}{"" if noindex else LEAD_JS}
+<script src="/assets/admin.js" defer></script>{"" if noindex else analytics_tag()}{"" if noindex else LEAD_JS}{head_extra}
 </head>
 <body{f' data-unit="{e(unit)}"' if unit else ""}>
 <header class="site-head">
@@ -624,7 +624,48 @@ def building_gallery(c):
     return f'<div class="gallery gallery-{min(n, 5)}">{tiles}</div>{credit}'
 
 
+def condo_faqs(c):
+    """Questions renters (and AI assistants) ask about a building, answered from the data."""
+    qs = []
+    if c.get("rents"):
+        parts = [f"{r['type'].lower()} {baht(r['low'])}–{baht(r['high'])} (typically {baht(r['typical'])})" for r in c["rents"]]
+        qs.append((f"How much is rent at {c['name']}?",
+                   f"As of {RENTS_AS_OF}, typical asking rents for a 12-month lease are: " + "; ".join(parts) + " per month."))
+    qs.append((f"How far is {c['name']} from BTS {c['station']}?", c["walk"] + "."))
+    if c.get("pets"):
+        qs.append((f"Are pets allowed at {c['name']}?", c["pets"] + ". Most owners do not accept pets."))
+    qs += [tuple(x) for x in c.get("faqs", [])]
+    return qs
+
+
+def condo_jsonld(c, faqs):
+    url = f"{SITE['base_url']}/condos/{c['slug']}.html"
+    building = {"@type": "ApartmentComplex", "@id": url + "#building", "name": c["name"], "url": url,
+                "description": c["summary"],
+                "address": {"@type": "PostalAddress", "addressLocality": "Bang Na", "addressRegion": "Bangkok",
+                            "addressCountry": "TH"},
+                "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": f, "value": True}
+                                   for f in c.get("facilities", [])]}
+    if c.get("name_th"):
+        building["alternateName"] = c["name_th"]
+    if c.get("pets"):
+        building["petsAllowed"] = False
+    if c.get("photos"):
+        building["image"] = SITE["base_url"] + c["photos"][0]["src"]
+    graph = [building,
+             {"@type": "RealEstateAgent", "@id": SITE["base_url"] + "/#agent", "name": SITE["brand"],
+              "url": SITE["base_url"] + "/", "areaServed": "Bang Na, Bangkok"},
+             {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q,
+                                                   "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faqs]},
+             {"@type": "BreadcrumbList", "itemListElement": [
+                 {"@type": "ListItem", "position": 1, "name": "Condos", "item": SITE["base_url"] + "/condos/"},
+                 {"@type": "ListItem", "position": 2, "name": c["name"], "item": url}]}]
+    data = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
+    return '\n<script type="application/ld+json">' + data.replace("</", "<\\/") + "</script>"
+
+
 def page_condo(c):
+    faqs = condo_faqs(c)
     facts = [("Nearest BTS", f"BTS {c['station']}"), ("Distance", c["walk"]), ("Completed", str(c["completed"]))]
     if c.get("developer"):
         facts.append(("Developer", c["developer"]))
@@ -634,6 +675,8 @@ def page_condo(c):
         facts.append(("Size", c["units"]))
     if rent_from(c):
         facts.append(("Rents from", f"{baht(rent_from(c))} / month"))
+    if c.get("pets"):
+        facts.append(("Pets", "Not allowed"))
     facts_html = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in facts)
     fac = "".join(f"<li>{e(x)}</li>" for x in c["facilities"])
     near = "".join(f"<li>{e(x)}</li>" for x in c["nearby"])
@@ -647,14 +690,22 @@ def page_condo(c):
                      + (f' — from {baht(rent_from(o))}' if rent_from(o) else "") + "</li>"
                      for o in CONDOS if o["slug"] != c["slug"])
     th = (f'<p lang="th" class="muted">{e(c["summary_th"])}</p>' if c.get("summary_th") else "")
+    alt_name = f' <span class="muted" lang="th" style="font-size:.6em;font-weight:500">{e(c["name_th"])}</span>' if c.get("name_th") else ""
+    not_for = "".join(f"<li>{e(x)}</li>" for x in c.get("not_for", []))
+    not_for_html = f"<h3>Not ideal for</h3><ul>{not_for}</ul>" if not_for else ""
+    notes = "".join(f"<li>{e(x)}</li>" for x in c.get("notes", []))
+    notes_html = f"<h2>Good to know</h2><ul>{notes}</ul>" if notes else ""
+    faq_html = "".join(f'<details class="faq"{" open" if i == 0 else ""}><summary>{e(q)}</summary><p>{e(a)}</p></details>'
+                       for i, (q, a) in enumerate(faqs))
     gallery = building_gallery(c)
     body = f"""
 <div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/condos/">Condos</a> / {e(c['name'])}</nav>
   <div class="detail-head">
-    <h1>{e(c['name'])}</h1>
+    <h1>{e(c['name'])}{alt_name}</h1>
     <p class="prose" style="font-size:1.1rem">{e(c['summary'])}</p>
     {th}
+    <p class="small muted">Last updated: {e(RENTS_AS_OF)}. Rents checked monthly by The Thai Base.</p>
     <dl class="facts">{facts_html}</dl>
   </div>
   {gallery}
@@ -664,12 +715,16 @@ def page_condo(c):
       {rent_table(c)}
       <h2>Who it suits</h2>
       <p>{e(c['good_for'])}</p>
+      {not_for_html}
+      {notes_html}
       <h3>Unit types</h3>
       <p>{e(c['unit_types'])}</p>
       <h3>Facilities</h3>
       <ul class="ticks">{fac}</ul>
       <h3>Nearby</h3>
       <ul class="ticks">{near}</ul>
+      <h2>FAQ</h2>
+      {faq_html}
       <h3>Sources</h3>
       <ul class="small">{src}</ul>
     </div>
@@ -694,7 +749,8 @@ def page_condo(c):
             f"Typical rents, unit types and facilities.")
     og = (c["photos"][0]["src"] if c.get("photos")
           else next((x["photos"][0] for x in UNITS if x["condo"] == c["slug"] and x.get("photos")), None))
-    return layout(f"/condos/{c['slug']}.html", f"{c['name']} — condo for rent near BTS {c['station']}", desc, body, image=og)
+    return layout(f"/condos/{c['slug']}.html", f"{c['name']} — condo for rent near BTS {c['station']}", desc, body, image=og,
+                  head_extra=condo_jsonld(c, faqs))
 
 
 OWNER_ALTERNATES = [("en", "/list-your-condo.html"), ("th", "/th/list-your-condo.html")]
