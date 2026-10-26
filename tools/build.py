@@ -30,7 +30,12 @@ _units_file = ROOT / "data/units.json"
 UNITS = json.loads(_units_file.read_text(encoding="utf-8")) if _units_file.exists() else []
 CONDO_BY_SLUG = {c["slug"]: c for c in CONDOS}
 # "pending" units are kept in the data file but not published until their details are filled in.
-UNITS = [u for u in UNITS if not u.get("pending")]
+# "hidden" units are complete but held back; remove "hidden" to open one on the site.
+def unpublished(u):
+    return bool(u.get("pending") or u.get("hidden"))
+
+
+UNITS = [u for u in UNITS if not unpublished(u)]
 LIVE_UNITS = [u for u in UNITS if not u.get("draft")]
 
 
@@ -1050,9 +1055,10 @@ def write_admin_public():
     The admin view overlays these on the encrypted rows, so price, size and
     bedroom changes show up without the passphrase. Floors, owners, room
     numbers and notes stay in the encrypted file only."""
-    rows = [{"id": u["id"], "url": unit_url(u) if not u.get("pending") else "", "deal": u.get("deal", "rent"),
+    rows = [{"id": u["id"], "url": unit_url(u) if not unpublished(u) else "", "deal": u.get("deal", "rent"),
              "price": unit_price_text(u) if not u.get("pending") else "", "beds": u.get("bedrooms"),
-             "size": u.get("size_sqm"), "tower": u.get("tower", ""), "status": u.get("status", "")}
+             "size": u.get("size_sqm"), "tower": u.get("tower", ""),
+             "status": "hidden" if u.get("hidden") else u.get("status", "")}
             for u in json.loads(_units_file.read_text(encoding="utf-8"))]
     ADMIN_PUBLIC.write_text(json.dumps(rows, ensure_ascii=False) + "\n", encoding="utf-8")
 
@@ -1077,7 +1083,7 @@ def encrypt_admin_data():
     rows = []
     for u in json.loads(_units_file.read_text(encoding="utf-8")):
         p = private.get(u["id"], {})
-        rows.append({"id": u["id"], "url": unit_url(u) if not u.get("pending") else "", "deal": u.get("deal", "rent"),
+        rows.append({"id": u["id"], "url": unit_url(u) if not unpublished(u) else "", "deal": u.get("deal", "rent"),
                      "price": unit_price_text(u), "beds": u.get("bedrooms"), "size": u.get("size_sqm"),
                      "tower": u.get("tower", ""), "floor": p.get("floor"), "owner": p.get("owner", ""),
                      "room": p.get("room", ""), "notes": p.get("notes", "")})
@@ -1194,6 +1200,16 @@ def main():
     sitemap.append("</urlset>")
     write("sitemap.xml", "\n".join(sitemap) + "\n")
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE['base_url']}/sitemap.xml\n")
+
+    # Remove unit pages left over from units that are now hidden, pending or renamed.
+    keep = {unit_url(u).lstrip("/") for u in UNITS}
+    keep |= {old.lstrip("/") for u in UNITS for old in u.get("redirect_from", [])}
+    for folder in ("rent", "sale"):
+        for f in (ROOT / folder).glob("*.html"):
+            rel = f"{folder}/{f.name}"
+            if f.name != "index.html" and rel not in keep:
+                f.unlink()
+                print(f"Removed unpublished page {rel}")
 
     print(f"Built {len(pages)} pages.")
     if not any(SITE["contact"].values()):
