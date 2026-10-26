@@ -35,7 +35,8 @@
     "listed": "2026-10-24",
     "deal": "sale",
     "price_thb": 4500000,
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -79,7 +80,8 @@
     ],
     "description_en": "A quiet two-bedroom, two-bathroom corner unit in Tower A, ready to move in. Fully furnished with three air conditioners, a washing machine, microwave, air fryer and digital door lock. The Coast is about 300 m from BTS Bang Na, with MK, McDonald's and shops on site.",
     "description_th": "ห้องมุม 2 ห้องนอน 2 ห้องน้ำ ตึก A เงียบ เป็นส่วนตัว พร้อมเข้าอยู่ ตกแต่งครบ แอร์ 3 ตัว เครื่องซักผ้า ไมโครเวฟ หม้อทอดไร้น้ำมัน ประตูดิจิทัล ห่าง BTS บางนาประมาณ 300 เมตร ใต้ตึกมี MK แมคโดนัลด์ และร้านค้า",
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -119,7 +121,8 @@
     ],
     "description_en": "A two-bedroom, two-bathroom unit of about 52 sq m in Tower B, ready to move in. Fully furnished with three air conditioners and a new washer-dryer and electric stove. No pets and no smoking. Minimum one-year lease.",
     "description_th": "ห้อง 2 ห้องนอน 2 ห้องน้ำ ประมาณ 52 ตร.ม. ตึก B พร้อมเข้าอยู่ เฟอร์นิเจอร์และเครื่องใช้ไฟฟ้าครบ แอร์ 3 ตัว เครื่องซักอบผ้าและเตาไฟฟ้าตัวใหม่ ห้ามเลี้ยงสัตว์ ห้ามสูบบุหรี่ สัญญาขั้นต่ำ 1 ปี",
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -163,7 +166,8 @@
     "description_en": "A one-bedroom unit of 36 sq m, on the BTS side of the building opposite BITEC. Furnished with a sofa, bed, wardrobe and dining table, plus two air conditioners, fridge, electric stove, microwave and TV. Ask us on LINE for the rent.",
     "description_th": "ห้อง 1 ห้องนอน 1 ห้องน้ำ 36 ตร.ม. ฝั่ง BTS ตรงข้ามไบเทค มีโซฟา เตียง ตู้เสื้อผ้า โต๊ะทานข้าว แอร์ 2 ตัว ตู้เย็น เตาไฟฟ้า ไมโครเวฟ ทีวี สอบถามค่าเช่าทาง LINE",
     "tower": "A",
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -209,7 +213,8 @@
     ],
     "description_en": "A two-bedroom corner unit of 58 sq m in Tower B, with city views on two sides. Fully furnished, with beds in both bedrooms, three air conditioners and a bathtub in one of the two bathrooms.",
     "description_th": "ห้องมุม 2 ห้องนอน 2 ห้องน้ำ 58 ตร.ม. ตึก B วิวเมือง 2 ด้าน ตกแต่งครบ เตียงพร้อมฟูกทั้ง 2 ห้อง แอร์ 3 ตัว ห้องน้ำหนึ่งมีอ่างอาบน้ำ",
-    "floor_band": "21–30"
+    "floor_band": "21–30",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -254,7 +259,8 @@
     ],
     "description_en": "A two-bedroom unit of 58 sq m in Tower A, facing east. Fully furnished and ready to move in, with a walk-in closet, three air conditioners, two TVs, oven and washing machine. One bathroom has a bathtub, the other a shower.",
     "description_th": "ห้อง 2 ห้องนอน 2 ห้องน้ำ 58 ตร.ม. ตึก A หันทิศตะวันออก ตกแต่งครบ หิ้วกระเป๋าเข้าอยู่ได้ ตู้ walk-in closet แอร์ 3 ตัว ทีวี 2 เครื่อง เตาอบ เครื่องซักผ้า ห้องน้ำหนึ่งมีอ่างอาบน้ำ",
-    "floor_band": "21–30"
+    "floor_band": "21–30",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -304,7 +310,8 @@
     ],
     "description_en": "A specially fitted one-bedroom corner unit of 45 sq m in Tower A, with windows on two sides of the bedroom. Fully furnished: walk-in closet, recliner sofa, balcony set, louvred ventilation doors with screens and blackout curtains.",
     "description_th": "ห้องมุม 1 ห้องนอน 45 ตร.ม. ตึก A ห้องนอนมีหน้าต่าง 2 ฝั่ง ตกแต่งพิเศษ ตู้ walk-in closet โซฟา Lazyboy ชุดโต๊ะริมระเบียง ประตูบานเกล็ดพร้อมมุ้งลวด ม่านปรับแสง",
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -349,7 +356,8 @@
     ],
     "description_en": "A one-bedroom unit of 45 sq m in Tower B, facing north. Nicely decorated and fully furnished, with a walk-in closet, two air conditioners, two TVs, oven and washing machine. Bring your suitcase and move in.",
     "description_th": "ห้อง 1 ห้องนอน 45 ตร.ม. ตึก B หันทิศเหนือ ตกแต่งสวย เฟอร์นิเจอร์และเครื่องใช้ไฟฟ้าครบ ตู้ walk-in closet แอร์ 2 ตัว ทีวี 2 เครื่อง เตาอบ เครื่องซักผ้า หิ้วกระเป๋าเข้าอยู่ได้เลย",
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -381,7 +389,8 @@
     "furnished": "Furnished",
     "description_en": "A one-bedroom unit of 45 sq m in Tower A, facing east. Ask us on LINE for the full furniture list and a viewing.",
     "description_th": "ห้อง 1 ห้องนอน 45 ตร.ม. ตึก A หันทิศตะวันออก สอบถามรายการเฟอร์นิเจอร์และนัดชมห้องทาง LINE",
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -411,7 +420,8 @@
     "furnished": "Furnished",
     "description_en": "A one-bedroom unit of 45 sq m in Tower A, facing east. Ask us on LINE for the full furniture list and a viewing.",
     "description_th": "ห้อง 1 ห้องนอน 45 ตร.ม. ตึก A หันทิศตะวันออก สอบถามรายการเฟอร์นิเจอร์และนัดชมห้องทาง LINE",
-    "floor_band": "21–30"
+    "floor_band": "21–30",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -455,7 +465,8 @@
     ],
     "description_en": "A one-bedroom unit of 35 sq m in Tower A, facing west. Fully furnished in wood, with two air conditioners, two TVs and washing machine, and the owner has set up high-speed internet.",
     "description_th": "ห้อง 1 ห้องนอน 35 ตร.ม. ตึก A หันทิศตะวันตก ตกแต่งเฟอร์นิเจอร์ไม้ แอร์ 2 ตัว ทีวี 2 เครื่อง เครื่องซักผ้า เจ้าของติดตั้งอินเทอร์เน็ตความเร็วสูงไว้ให้แล้ว",
-    "floor_band": "11–20"
+    "floor_band": "11–20",
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -498,7 +509,8 @@
       "Washing machine",
       "Microwave"
     ],
-    "floor_band": null
+    "floor_band": null,
+    "hidden": true
   },
   {
     "condo": "the-coast-bangkok",
@@ -543,7 +555,8 @@
       "Microwave",
       "TV"
     ],
-    "floor_band": "21–30"
+    "floor_band": "21–30",
+    "hidden": true
   },
   {
     "id": "TCS-002",
@@ -572,6 +585,7 @@
     "listed": "2026-10-24",
     "description_en": "A two-bedroom, two-bathroom unit of about 55 sq m in Tower A, for sale by the owner. The Coast is a short walk from BTS Bang Na and Bangkok Mall, next to the Bang Na expressway ramps and close to several international schools. Ask us on LINE for a viewing or the video tour.",
     "description_th": "ขายห้อง 2 ห้องนอน 2 ห้องน้ำ ประมาณ 55 ตร.ม. ตึก A ขายโดยเจ้าของ เดินถึง BTS บางนาและ Bangkok Mall ติดทางขึ้นลงทางด่วนบางนา ใกล้โรงเรียนนานาชาติหลายแห่ง นัดชมห้องหรือขอวิดีโอห้องทาง LINE",
-    "floor_band": "21–30"
+    "floor_band": "21–30",
+    "hidden": true
   }
 ]
