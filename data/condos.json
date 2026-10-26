@@ -82,8 +82,8 @@
     "towers": "3 buildings, 33–34 floors",
     "units": "1,559 units",
     "unit_types": "Studios, 1 and 2 bedrooms (roughly 26–53 sq m)",
-    "summary": "The biggest of the four: an Ananda Development project with almost 10 rai of shared space, gardens, a futsal pitch and a running track.",
-    "summary_th": "โครงการใหญ่ที่สุดในสี่โครงการ ของอนันดา ส่วนกลางเกือบ 10 ไร่ มีสวน สนามฟุตซอล และลู่วิ่ง",
+    "summary": "The most shared space of the five: an Ananda Development project with almost 10 rai of grounds, gardens, a futsal pitch and a running track.",
+    "summary_th": "ส่วนกลางกว้างที่สุดในห้าโครงการ ของอนันดา พื้นที่เกือบ 10 ไร่ มีสวน สนามฟุตซอล และลู่วิ่ง",
     "developer": "Ananda Development",
     "facilities": [
       "Pool, gym, sauna and running track",
@@ -157,8 +157,8 @@
     "towers": "1 tower, 30 floors",
     "units": "844 units",
     "unit_types": "Studios (about 22 sq m) and 1 bedrooms (about 30 sq m)",
-    "summary": "A compact Ananda Development tower on Sukhumvit Road near BTS Bang Na, built for single professionals, with the lowest rents of the four.",
-    "summary_th": "คอนโดตึกเดียวของอนันดา ริมถนนสุขุมวิท ใกล้ BTS บางนา เหมาะกับคนทำงานที่อยู่คนเดียว ค่าเช่าถูกที่สุดในสี่โครงการ",
+    "summary": "A compact Ananda Development tower on Sukhumvit Road near BTS Bang Na, built for single professionals, with the area's cheapest studios.",
+    "summary_th": "คอนโดตึกเดียวของอนันดา ริมถนนสุขุมวิท ใกล้ BTS บางนา เหมาะกับคนทำงานที่อยู่คนเดียว ห้องสตูดิโอค่าเช่าถูกที่สุดในย่าน",
     "developer": "Ananda Development",
     "facilities": [
       "50 m saltwater pool and gym",
@@ -233,8 +233,8 @@
     "towers": "2 towers, 32 floors",
     "units": "1,162 units",
     "unit_types": "Studios, 1 bedrooms, 1-bedroom duplexes and 2 bedrooms (roughly 26–56 sq m)",
-    "summary": "The newest of the four: an Ananda Development project on Sukhumvit Road next to Ideo Mobi Eastgate, with a pool deck, garden walkways and a top-floor gym.",
-    "summary_th": "โครงการใหม่ที่สุดในสี่โครงการ ของอนันดา ริมถนนสุขุมวิท ติดกับ Ideo Mobi Eastgate มีสระว่ายน้ำ สวน และฟิตเนสชั้นบนสุด",
+    "summary": "One of the newest of the five: an Ananda Development project on Sukhumvit Road next to Ideo Mobi Eastgate, with a pool deck, garden walkways and a top-floor gym.",
+    "summary_th": "หนึ่งในโครงการใหม่ที่สุดในห้าโครงการ ของอนันดา ริมถนนสุขุมวิท ติดกับ Ideo Mobi Eastgate มีสระว่ายน้ำ สวน และฟิตเนสชั้นบนสุด",
     "developer": "Ananda Development",
     "facilities": [
       "Pool with jacuzzi and garden deck",
@@ -303,5 +303,57 @@
       }
     ],
     "photo_source": "Ananda Development; Think of Living"
+  },
+  {
+    "slug": "regent-home-bangna",
+    "zone": "bang-na",
+    "name": "Regent Home Bangna",
+    "station": "Bang Na",
+    "walk": "About 10 minutes' walk to BTS Bang Na, via a rear gate and canal-side path",
+    "walk_th": "ออกประตูด้านหลัง เดินเลียบคลองถึง BTS บางนาประมาณ 10 นาที",
+    "completed": 2024,
+    "towers": "1 building with 4 towers, 32 floors",
+    "units": "5,007 units",
+    "unit_types": "Compact 1 bedrooms of 28 sq m in four layouts, each with a separate bedroom, balcony and kitchen area",
+    "summary": "A new four-tower condo on Sanphawut Road, around a landscaped courtyard. Every unit is a 28 sq m one-bedroom with a separate bedroom: more privacy than a studio at studio rents. Home to a mix of Thai and international residents.",
+    "summary_th": "คอนโดใหม่ 4 ทาวเวอร์ ถนนสรรพาวุธ ห้อง 1 ห้องนอน 28 ตร.ม. ทุกห้อง ห้องนอนแยก ในค่าเช่าระดับสตูดิโอ มีผู้เช่าทั้งคนไทยและชาวต่างชาติ",
+    "developer": "Regent Green Power",
+    "facilities": [
+      "Lap pool and sky garden on the 4th floor",
+      "Gym, yoga studio and boxing room",
+      "Kids' play room",
+      "Sky-view co-working space on the 32nd floor",
+      "Ground-floor courtyard garden and a private lobby for each tower",
+      "Key-card access, floor-locked lifts, CCTV, 24-hour security",
+      "Parking"
+    ],
+    "nearby": [
+      "BTS Bang Na via the canal-side path",
+      "BITEC, The Bangkok Mall and Central Bangna",
+      "Bang Na Expressway",
+      "Bang Phli and Amata industrial estates; ABAC and Huachiew universities"
+    ],
+    "good_for": "Singles and couples on a budget who want a separate bedroom rather than a studio, and renters working at BITEC or the Bang Na–Trat industrial estates.",
+    "good_for_th": "คนโสดและคู่รักที่ต้องการห้องนอนแยกในงบประหยัด และผู้ที่ทำงานแถวไบเทคหรือนิคมอุตสาหกรรมถนนบางนา-ตราด",
+    "rents": [
+      {
+        "type": "1 bedroom",
+        "type_th": "1 ห้องนอน",
+        "typical": 11000,
+        "low": 9500,
+        "high": 13000
+      }
+    ],
+    "sources": [
+      [
+        "PropertyHub — Regent Home Bangna",
+        "https://propertyhub.in.th/%E0%B9%80%E0%B8%8A%E0%B9%88%E0%B8%B2%E0%B8%84%E0%B8%AD%E0%B8%99%E0%B9%82%E0%B8%94/%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3-regent-home-bangna"
+      ],
+      [
+        "Regent Green Power — project brochure",
+        "https://rgp.co.th/backend/pics/Regent-Home-Bangna.pdf"
+      ]
+    ],
+    "photos": []
   }
 ]
