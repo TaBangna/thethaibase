@@ -354,6 +354,12 @@
         "https://rgp.co.th/backend/pics/Regent-Home-Bangna.pdf"
       ]
     ],
-    "photos": []
+    "photos": [
+      {
+        "src": "/assets/condos/regent-home-bangna/01.jpg",
+        "alt": "Artist's impression of Regent Home Bangna's four towers at dusk"
+      }
+    ],
+    "photo_source": "Regent Green Power (artist's impression)"
   }
 ]
