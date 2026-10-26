@@ -1118,9 +1118,18 @@ def redirect_page(to):
             f'<body><p>This page has moved to <a href="{e(to)}">{e(url)}</a>.</p></body></html>\n')
 
 
-def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None):
+def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None, head_extra=""):
     frag = (SRC / name).read_text(encoding="utf-8").replace("{{CONTACT}}", contact_links(lang=lang))
-    return layout(path, title, desc, frag, lang, nav_path, alternates)
+    return layout(path, title, desc, frag, lang, nav_path, alternates, head_extra=head_extra)
+
+
+def article_jsonld(path, title, desc, modified):
+    data = {"@context": "https://schema.org", "@type": "Article", "headline": title, "description": desc,
+            "dateModified": modified, "inLanguage": "en",
+            "mainEntityOfPage": SITE["base_url"] + path,
+            "author": {"@type": "Organization", "name": SITE["brand"], "url": SITE["base_url"] + "/"},
+            "publisher": {"@type": "Organization", "name": SITE["brand"], "url": SITE["base_url"] + "/"}}
+    return '\n<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + "</script>"
 
 
 def write(rel, content):
@@ -1156,11 +1165,16 @@ def main():
          "Rent out your unit at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint or Regent Home Bangna. Free listing; one month's rent only when we find your tenant."),
         ("th/list-your-condo.html", "/th/list-your-condo.html", "ฝากเช่าคอนโด The Coast, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint, Regent Home Bangna",
          "ฝากเช่าคอนโดใกล้ BTS บางนา ลงประกาศฟรี จ่ายค่าบริการ 1 เดือนเฉพาะเมื่อได้ผู้เช่าสัญญา 1 ปีผ่านเรา หาผู้เช่าได้ทั้งคนไทยและชาวต่างชาติ"),
+        ("blog/thailand-visas.html", "/blog/thailand-visas.html", "Which Thai visa fits your condo lease? (2026)",
+         "Thai visa options in 2026 (30-day visa exemption, DTV, Non-B, retirement, LTR, Thailand Privilege) and which condo lease length each one fits."),
         ("contact.html", "/contact.html", "Contact",
          "Contact The Thai Base about condos for rent or sale at BTS Bang Na."),
         ("404.html", "/404.html", "Page not found", "Page not found."),
     ]:
         kw = {}
+        if name == "blog/thailand-visas.html":
+            kw.update(nav_path="/renting-guide.html",
+                      head_extra=article_jsonld(path, title, desc, "2026-10-26"))
         if name.endswith("list-your-condo.html"):
             kw["alternates"] = OWNER_ALTERNATES
             if name.startswith("th/"):
