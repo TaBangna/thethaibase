@@ -312,7 +312,7 @@
     "walk": "About 10 minutes' walk to BTS Bang Na, via a rear gate and canal-side path",
     "walk_th": "ออกประตูด้านหลัง เดินเลียบคลองถึง BTS บางนาประมาณ 10 นาที",
     "completed": 2024,
-    "towers": "1 building with 4 towers, 32 floors",
+    "towers": "1 building, 4 towers, 32 floors (Tower A 1,339 · B 999 · C 1,666 · D 1,003 units)",
     "units": "5,007 units",
     "unit_types": "Compact 1 bedrooms of 28 sq m in four layouts, each with a separate bedroom, balcony and kitchen area",
     "summary": "A new four-tower condo on Sanphawut Road, around a landscaped courtyard. Every unit is a 28 sq m one-bedroom with a separate bedroom: more privacy than a studio at studio rents. Home to a mix of Thai and international residents.",
@@ -324,6 +324,7 @@
       "Kids' play room",
       "Sky-view co-working space on the 32nd floor",
       "Ground-floor courtyard garden and a private lobby for each tower",
+      "17 shop units within the project",
       "Key-card access, floor-locked lifts, CCTV, 24-hour security",
       "Parking"
     ],
@@ -358,6 +359,18 @@
       {
         "src": "/assets/condos/regent-home-bangna/01.jpg",
         "alt": "Artist's impression of Regent Home Bangna's four towers at dusk"
+      },
+      {
+        "src": "/assets/condos/regent-home-bangna/02.jpg",
+        "alt": "Artist's impression of the 4th-floor lap pool"
+      },
+      {
+        "src": "/assets/condos/regent-home-bangna/03.jpg",
+        "alt": "Artist's impression of the sky garden between the towers"
+      },
+      {
+        "src": "/assets/condos/regent-home-bangna/04.jpg",
+        "alt": "Artist's impression of the 32nd-floor co-working space"
       }
     ],
     "photo_source": "Regent Green Power (artist's impression)"
