@@ -34,9 +34,9 @@
       {
         "type": "1 bedroom",
         "type_th": "1 ห้องนอน",
-        "typical": 20000,
-        "low": 13000,
-        "high": 28000
+        "typical": 13000,
+        "low": 12000,
+        "high": 14500
       },
       {
         "type": "2 bedrooms",
