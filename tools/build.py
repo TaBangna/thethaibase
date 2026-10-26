@@ -274,7 +274,10 @@ def units_here(c, sale=False):
 
 
 def rent_from(c):
-    return min(r["typical"] for r in c["rents"]) if c.get("rents") else None
+    """Lowest of the typical rents and the cheapest unit we have listed for rent now."""
+    prices = [r["typical"] for r in c.get("rents", [])]
+    prices += [u["rent_thb"] for u in units_here(c) if u.get("rent_thb")]
+    return min(prices) if prices else None
 
 
 def condo_rows(items, lang="en"):
