@@ -109,6 +109,7 @@ EN_FOOT = """
         <li><a href="/bang-na.html">Living in Bang Na</a></li>
         <li><a href="/renting-guide.html">Renting guide</a></li>
         <li><a href="/blog/thailand-visas.html">Visa types</a></li>
+        <li><a href="/where-to-stay.html">Where to stay while you look</a></li>
       </ul>
     </div>
     <div>
@@ -1118,8 +1119,28 @@ def redirect_page(to):
             f'<body><p>This page has moved to <a href="{e(to)}">{e(url)}</a>.</p></body></html>\n')
 
 
+def trip_link(hotel_id, slug, label):
+    """Trip.com hotel link carrying our affiliate IDs from data/site.json (trip_affiliate)."""
+    aff = SITE.get("trip_affiliate", {})
+    params = []
+    if aff.get("alliance_id"):
+        params.append(f"Allianceid={quote(str(aff['alliance_id']))}")
+    if aff.get("sid"):
+        params.append(f"SID={quote(str(aff['sid']))}")
+    if aff.get("sub1"):
+        params.append(f"trip_sub1={quote(str(aff['sub1']))}")
+    url = f"https://www.trip.com/hotels/bangkok-hotel-detail-{hotel_id}/{slug}/" + ("?" + "&".join(params) if params else "")
+    return f'<a href="{e(url)}" rel="sponsored nofollow noopener" target="_blank">{label}</a>'
+
+
+def expand_trip_links(frag):
+    import re
+    return re.sub(r"\{\{TRIP:(\d+)/([a-z0-9-]+)\|([^}]+)\}\}", lambda m: trip_link(m.group(1), m.group(2), m.group(3)), frag)
+
+
 def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None, head_extra=""):
     frag = (SRC / name).read_text(encoding="utf-8").replace("{{CONTACT}}", contact_links(lang=lang))
+    frag = expand_trip_links(frag)
     return layout(path, title, desc, frag, lang, nav_path, alternates, head_extra=head_extra)
 
 
@@ -1167,11 +1188,16 @@ def main():
          "ฝากเช่าคอนโดใกล้ BTS บางนา ลงประกาศฟรี จ่ายค่าบริการ 1 เดือนเฉพาะเมื่อได้ผู้เช่าสัญญา 1 ปีผ่านเรา หาผู้เช่าได้ทั้งคนไทยและชาวต่างชาติ"),
         ("blog/thailand-visas.html", "/blog/thailand-visas.html", "Which Thai visa fits your condo lease? (2026)",
          "Thai visa options in 2026 (30-day visa exemption, DTV, Non-B, retirement, LTR, Thailand Privilege) and which condo lease length each one fits."),
+        ("where-to-stay.html", "/where-to-stay.html", "Where to stay near BTS Bang Na while you look for a condo",
+         "Hotels within walking distance of BTS Bang Na, BITEC and BTS Udom Suk, for a short stay while you view condos in Bang Na."),
         ("contact.html", "/contact.html", "Contact",
          "Contact The Thai Base about condos for rent or sale at BTS Bang Na."),
         ("404.html", "/404.html", "Page not found", "Page not found."),
     ]:
         kw = {}
+        if name == "where-to-stay.html":
+            kw.update(nav_path="/bang-na.html",
+                      head_extra=article_jsonld(path, title, desc, "2026-10-26"))
         if name == "blog/thailand-visas.html":
             kw.update(nav_path="/renting-guide.html",
                       head_extra=article_jsonld(path, title, desc, "2026-10-26"))

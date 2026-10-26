@@ -10,5 +10,10 @@
     "line": "@thethaibase",
     "email": ""
   },
-  "ga4_id": "G-S3WLSVLH3E"
+  "ga4_id": "G-S3WLSVLH3E",
+  "trip_affiliate": {
+    "alliance_id": "6419841",
+    "sid": "",
+    "sub1": "thethaibase"
+  }
 }
