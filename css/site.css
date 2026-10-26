@@ -318,3 +318,8 @@ ul.plain li { padding: 8px 0; border-bottom: 1px solid var(--line-2); }
   .photo-strip li:first-child img { aspect-ratio: auto; }
 }
 .photo-credit { margin: 10px 0 0; }
+
+/* Condo page FAQ */
+details.faq { border-bottom: 1px solid var(--line); padding: 10px 0; }
+details.faq summary { font-weight: 600; cursor: pointer; }
+details.faq p { margin: .5em 0 0; }

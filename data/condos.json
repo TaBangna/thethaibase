@@ -34,9 +34,9 @@
       {
         "type": "1 bedroom",
         "type_th": "1 ห้องนอน",
-        "typical": 20000,
-        "low": 13000,
-        "high": 28000
+        "typical": 13000,
+        "low": 12000,
+        "high": 14500
       },
       {
         "type": "2 bedrooms",
@@ -81,15 +81,36 @@
         "alt": "Fitness room with river-bridge view, The Coast Bangkok"
       }
     ],
-    "photo_credit": "The Coast Bangkok Official"
+    "photo_credit": "The Coast Bangkok Official",
+    "name_th": "เดอะ โคสต์ แบงค็อก",
+    "not_for": [
+      "Tight budgets: rents are the highest of the five buildings",
+      "Pet owners",
+      "Renters who want a brand-new building"
+    ],
+    "notes": [
+      "A walkway links the project to BTS Bang Na, so the walk to the station is short and easy in the rain.",
+      "This is the only building of the five with 3-bedroom and duplex units."
+    ],
+    "faqs": [
+      [
+        "Is The Coast Bangkok connected to BTS Bang Na?",
+        "Yes. A walkway links the project to BTS Bang Na, about 300 m away."
+      ],
+      [
+        "Does The Coast Bangkok have 2- and 3-bedroom units?",
+        "Yes. It has 1, 2 and 3-bedroom units, including duplex layouts, from roughly 30 to 130 sq m."
+      ]
+    ],
+    "pets": "Not allowed unless approved by the building's juristic office"
   },
   {
     "slug": "ideo-o2",
     "zone": "bang-na",
     "name": "Ideo O2",
     "station": "Bang Na",
-    "walk": "About 750 m to BTS Bang Na, with a building shuttle",
-    "walk_th": "ห่าง BTS บางนาประมาณ 750 เมตร มีรถรับส่ง",
+    "walk": "About 500–650 m (7–9 minutes' walk) to BTS Bang Na, depending on the building, plus a building shuttle",
+    "walk_th": "ห่าง BTS บางนาประมาณ 500–650 เมตร (เดิน 7–9 นาที) และมีรถรับส่ง",
     "completed": 2018,
     "towers": "3 buildings, 33–34 floors",
     "units": "1,559 units",
@@ -156,15 +177,30 @@
         "alt": "Sales-gallery model of Ideo O2 showing Buildings A, B and C"
       }
     ],
-    "photo_source": "Ananda Development; Think of Living"
+    "photo_source": "Ananda Development; Think of Living",
+    "name_th": "ไอดีโอ โอทู",
+    "not_for": [
+      "Renters who want the shortest possible walk to the BTS",
+      "Pet owners"
+    ],
+    "notes": [
+      "Some property portals list Ideo O2 at 0.9 km from BTS Bang Na. The actual walk is about 500–650 m depending on the building; there is also a shuttle."
+    ],
+    "faqs": [
+      [
+        "Ideo O2 or The Coast Bangkok?",
+        "Ideo O2 has more shared space and lower rents; The Coast is closer to the BTS, with a walkway and shops on site, and has larger units."
+      ]
+    ],
+    "pets": "Not allowed unless approved by the building's juristic office"
   },
   {
     "slug": "ideo-mobi-sukhumvit-eastgate",
     "zone": "bang-na",
     "name": "Ideo Mobi Sukhumvit Eastgate",
     "station": "Bang Na",
-    "walk": "Short walk to BTS Bang Na",
-    "walk_th": "เดินไป BTS บางนาได้",
+    "walk": "About 300 m (5 minutes' walk) to BTS Bang Na",
+    "walk_th": "ห่าง BTS บางนาประมาณ 300 เมตร (เดิน 5 นาที)",
     "completed": 2016,
     "towers": "1 tower, 30 floors",
     "units": "844 units",
@@ -232,7 +268,22 @@
         "alt": "Ideo Mobi Sukhumvit Eastgate beside the BTS line"
       }
     ],
-    "photo_source": "Ananda Development"
+    "photo_source": "Ananda Development",
+    "name_th": "ไอดีโอ โมบิ สุขุมวิท อีสท์เกต",
+    "not_for": [
+      "Anyone who needs space: most units are 22–30 sq m",
+      "Pet owners"
+    ],
+    "notes": [
+      "Ideo Mobi Sukhumvit Eastgate and Ideo Mobi Sukhumvit Eastpoint are two different buildings right next to each other. Listings and AI answers often mix them up, so check the building name on any listing."
+    ],
+    "faqs": [
+      [
+        "Is Ideo Mobi Eastgate the same as Ideo Mobi Eastpoint?",
+        "No. They are two separate Ananda Development buildings next to each other on Sukhumvit Road. Eastgate was completed in 2016 and has studios and 1-bedrooms; Eastpoint was completed in 2020 and also has duplexes and 2-bedrooms."
+      ]
+    ],
+    "pets": "Not allowed unless approved by the building's juristic office"
   },
   {
     "slug": "ideo-mobi-sukhumvit-eastpoint",
@@ -314,15 +365,30 @@
         "alt": "Entrance and garden at Ideo Mobi Sukhumvit Eastpoint"
       }
     ],
-    "photo_source": "Ananda Development; Think of Living"
+    "photo_source": "Ananda Development; Think of Living",
+    "name_th": "ไอดีโอ โมบิ สุขุมวิท อีสท์พอยท์",
+    "not_for": [
+      "Tight budgets: rents are above the older Ideo Mobi Eastgate next door",
+      "Pet owners"
+    ],
+    "notes": [
+      "Ideo Mobi Sukhumvit Eastpoint and Ideo Mobi Sukhumvit Eastgate are two different buildings right next to each other. Check the building name on any listing."
+    ],
+    "faqs": [
+      [
+        "Is Ideo Mobi Eastpoint the same as Ideo Mobi Eastgate?",
+        "No. They are two separate Ananda Development buildings next to each other on Sukhumvit Road. Eastpoint (2020) is newer and has layouts up to 2 bedrooms; Eastgate (2016) has studios and 1-bedrooms at lower rents."
+      ]
+    ],
+    "pets": "Not allowed unless approved by the building's juristic office"
   },
   {
     "slug": "regent-home-bangna",
     "zone": "bang-na",
     "name": "Regent Home Bangna",
     "station": "Bang Na",
-    "walk": "About 10 minutes' walk to BTS Bang Na, via a rear gate and canal-side path",
-    "walk_th": "ออกประตูด้านหลัง เดินเลียบคลองถึง BTS บางนาประมาณ 10 นาที",
+    "walk": "About 0.7 km (10 minutes' walk) to BTS Bang Na, via a rear gate and canal-side path",
+    "walk_th": "ห่าง BTS บางนาประมาณ 0.7 กม. ออกประตูด้านหลัง เดินเลียบคลองประมาณ 10 นาที",
     "completed": 2024,
     "towers": "1 building, 4 towers, 32 floors (Tower A 1,339 · B 999 · C 1,666 · D 1,003 units)",
     "units": "5,007 units",
@@ -385,6 +451,22 @@
         "alt": "Artist's impression of the 32nd-floor co-working space"
       }
     ],
-    "photo_source": "Regent Green Power (artist's impression)"
+    "photo_source": "Regent Green Power (artist's impression)",
+    "name_th": "รีเจ้นท์ โฮม บางนา",
+    "not_for": [
+      "Anyone who needs more than 28 sq m: every unit is the same size",
+      "Pet owners",
+      "People who dislike very large projects: there are about 5,000 units"
+    ],
+    "notes": [
+      "Some listings advertise Regent Home Bangna as 350 m from BTS Bang Na. The actual walk is about 0.7 km, around 10 minutes, and varies by tower."
+    ],
+    "faqs": [
+      [
+        "Regent Home Bangna or Ideo Mobi Eastgate?",
+        "Regent Home is newer and every unit has a separate bedroom at studio-level rents; Ideo Mobi Eastgate is closer to the BTS (about 300 m) on Sukhumvit Road."
+      ]
+    ],
+    "pets": "Not allowed unless approved by the building's juristic office"
   }
 ]
