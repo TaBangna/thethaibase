@@ -23,10 +23,11 @@
 <script src="/assets/admin.js" defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S3WLSVLH3E"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S3WLSVLH3E');</script>
-<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="line.me"]');
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="line.me"],a[href*="wa.me"],a[href="/whatsapp/"],a[href="/line/"]');
 if(!a||typeof gtag!=='function')return;var u=document.body.getAttribute('data-unit')||'';
 var where=a.closest('header')?'header':a.closest('footer')?'footer':a.closest('.price-panel')?'unit_panel':a.closest('.cta-band')?'owners_band':'page';
-gtag('event','generate_lead',{method:'line',unit_id:u,link_location:where,page_lang:document.documentElement.lang});});</script>
+var m=/wa\.me|whatsapp/.test(a.getAttribute('href'))?'whatsapp':'line';
+gtag('event','generate_lead',{method:m,unit_id:u,link_location:where,page_lang:document.documentElement.lang});});</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "ApartmentComplex", "@id": "https://thethaibase.com/condos/ideo-mobi-sukhumvit-eastgate.html#building", "name": "Ideo Mobi Sukhumvit Eastgate", "url": "https://thethaibase.com/condos/ideo-mobi-sukhumvit-eastgate.html", "description": "A compact Ananda Development tower on Sukhumvit Road near BTS Bang Na, built for single professionals, with the area's cheapest studios.", "address": {"@type": "PostalAddress", "addressLocality": "Bang Na", "addressRegion": "Bangkok", "addressCountry": "TH"}, "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "50 m saltwater pool and gym", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Sky gardens on the 24th and 30th floors", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Rooftop library and sky lounge", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Supermarket at the front of the building", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Key-card access, CCTV, 24-hour security", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Parking", "value": true}], "alternateName": "ไอดีโอ โมบิ สุขุมวิท อีสท์เกต", "petsAllowed": false, "image": "https://thethaibase.com/assets/condos/ideo-mobi-sukhumvit-eastgate/01.jpg"}, {"@type": "RealEstateAgent", "@id": "https://thethaibase.com/#agent", "name": "The Thai Base", "url": "https://thethaibase.com/", "areaServed": "Bang Na, Bangkok"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much is rent at Ideo Mobi Sukhumvit Eastgate?", "acceptedAnswer": {"@type": "Answer", "text": "As of October 2026, typical asking rents for a 12-month lease are: studio ฿9,000–฿11,000 (typically ฿10,000); 1 bedroom ฿10,000–฿15,000 (typically ฿13,000) per month."}}, {"@type": "Question", "name": "How far is Ideo Mobi Sukhumvit Eastgate from BTS Bang Na?", "acceptedAnswer": {"@type": "Answer", "text": "About 300 m (5 minutes' walk) to BTS Bang Na."}}, {"@type": "Question", "name": "Are pets allowed at Ideo Mobi Sukhumvit Eastgate?", "acceptedAnswer": {"@type": "Answer", "text": "Not allowed unless approved by the building's juristic office. Most owners do not accept pets."}}, {"@type": "Question", "name": "Is Ideo Mobi Eastgate the same as Ideo Mobi Eastpoint?", "acceptedAnswer": {"@type": "Answer", "text": "No. They are two separate Ananda Development buildings next to each other on Sukhumvit Road. Eastgate was completed in 2016 and has studios and 1-bedrooms; Eastpoint was completed in 2020 and also has duplexes and 2-bedrooms."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Condos", "item": "https://thethaibase.com/condos/"}, {"@type": "ListItem", "position": 2, "name": "Ideo Mobi Sukhumvit Eastgate", "item": "https://thethaibase.com/condos/ideo-mobi-sukhumvit-eastgate.html"}]}]}</script>
 </head>
 <body>
@@ -75,7 +76,7 @@ gtag('event','generate_lead',{method:'line',unit_id:u,link_location:where,page_l
       <div class="panel">
         <h2>Rent a unit here</h2>
         <p>Ask us which units in this building are available now. We can also check the other four buildings at BTS Bang Na in the same search.</p>
-        <div class="contact-links"><a class="btn btn-line" href="https://line.me/R/ti/p/@thethaibase">Add us on LINE</a></div>
+        <div class="contact-links"><a class="btn btn-wa" href="https://wa.me/66898166689">Message on WhatsApp</a><a class="btn btn-line" href="https://line.me/R/ti/p/@thethaibase">Add us on LINE</a></div>
       </div>
       <div class="panel" style="margin-top:16px">
         <h3>The other buildings at BTS Bang Na</h3>
@@ -94,7 +95,7 @@ gtag('event','generate_lead',{method:'line',unit_id:u,link_location:where,page_l
     <div>
       <h3>The Thai Base</h3>
       <p>Condos for rent &amp; sale at BTS Bang Na: The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint and Regent Home Bangna. We help Thai and foreign renters and buyers, in Thai or English.</p>
-      <div class="contact-links"><a class="btn btn-ghost" href="https://line.me/R/ti/p/@thethaibase">Add us on LINE</a></div>
+      <div class="contact-links"><a class="btn btn-ghost" href="https://wa.me/66898166689">Message on WhatsApp</a><a class="btn btn-ghost" href="https://line.me/R/ti/p/@thethaibase">Add us on LINE</a></div>
     </div>
     <div>
       <h3>Renters</h3>

@@ -71,6 +71,11 @@ LABELS = {
 }
 
 
+def wa_number():
+    """WhatsApp number as digits for wa.me links, or "" when not set."""
+    return "".join(ch for ch in SITE["contact"].get("whatsapp", "") if ch.isdigit())
+
+
 def line_url():
     lid = SITE["contact"].get("line", "").strip()
     if not lid:
@@ -90,7 +95,7 @@ def contact_links(cls="btn btn-primary", lang="en"):
     links = []
     if c.get("whatsapp"):
         num = "".join(ch for ch in c["whatsapp"] if ch.isdigit())
-        links.append(f'<a class="{cls}" href="https://wa.me/{num}">{L["wa"]}</a>')
+        links.append(f'<a class="{cls.replace("btn-primary", "btn-wa")}" href="https://wa.me/{num}">{L["wa"]}</a>')
     if c.get("line"):
         line_cls = cls.replace("btn-primary", "btn-line")
         links.append(f'<a class="{line_cls}" href="{e(line_url())}">{L["line"]}</a>')
@@ -155,10 +160,11 @@ HOME_OG_IMAGE = _featured["photos"][0]["src"] if _featured else DEFAULT_OG_IMAGE
 # Every click on a LINE link is sent to Analytics as a generate_lead event, with the
 # unit ref when the click is on a unit page and where on the page the link sits.
 LEAD_JS = """
-<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="line.me"]');
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="line.me"],a[href*="wa.me"],a[href="/whatsapp/"],a[href="/line/"]');
 if(!a||typeof gtag!=='function')return;var u=document.body.getAttribute('data-unit')||'';
 var where=a.closest('header')?'header':a.closest('footer')?'footer':a.closest('.price-panel')?'unit_panel':a.closest('.cta-band')?'owners_band':'page';
-gtag('event','generate_lead',{method:'line',unit_id:u,link_location:where,page_lang:document.documentElement.lang});});</script>"""
+var m=/wa\\.me|whatsapp/.test(a.getAttribute('href'))?'whatsapp':'line';
+gtag('event','generate_lead',{method:m,unit_id:u,link_location:where,page_lang:document.documentElement.lang});});</script>"""
 
 
 def analytics_tag():
@@ -926,9 +932,14 @@ def page_unit(u):
     exc = tick_list(u.get("not_included", []))
     bills = (f"<h3>Included in the rent</h3>{inc}" if inc else "") + (f"<h3>Paid separately</h3>{exc}" if exc else "")
     desc_th = (f'<p lang="th">{e(u["description_th"])}</p>' if u.get("description_th") else "")
-    ask = line_ask_url(f"Hi, I'm interested in unit {u['id']} at {c['name']} ({title}, {unit_price_text(u)}"
-                       f"{', for sale' if sale else ''}). Is it still available?")
+    ask_text = (f"Hi, I'm interested in unit {u['id']} at {c['name']} ({title}, {unit_price_text(u)}"
+                f"{', for sale' if sale else ''}). Is it still available?")
+    ask = line_ask_url(ask_text)
     ask_btn = (f'<a class="btn btn-line" href="{e(ask)}">Ask about this unit on LINE</a>' if ask else contact_links())
+    if ask and wa_number():
+        wa = f"https://wa.me/{wa_number()}?text=" + quote(ask_text + " " + SITE["base_url"] + unit_url(u))
+        ask_btn += f'\n      <a class="btn btn-wa" href="{e(wa)}">Ask on WhatsApp</a>'
+
     status = ""
     if u.get("status") in ("rented", "sold"):
         status = (f'<div class="notice"><strong>This unit has been {"sold" if sale else "rented"}.</strong> '
@@ -1148,8 +1159,17 @@ def redirect_page(to):
             f'<body><p>This page has moved to <a href="{e(to)}">{e(url)}</a>.</p></body></html>\n')
 
 
+def external_redirect(url, label):
+    return (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>The Thai Base on {label}</title>'
+            f'<meta name="robots" content="noindex"><meta name="viewport" content="width=device-width, initial-scale=1">'
+            f'<meta http-equiv="refresh" content="0; url={e(url)}">'
+            f'<script>location.replace({json.dumps(url)});</script></head>'
+            f'<body><p>Opening {label}… <a href="{e(url)}">Continue to The Thai Base on {label}</a>.</p></body></html>\n')
+
+
 def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None, head_extra=""):
-    frag = (SRC / name).read_text(encoding="utf-8").replace("{{CONTACT}}", contact_links(lang=lang))
+    frag = ((SRC / name).read_text(encoding="utf-8").replace("{{CONTACT}}", contact_links(lang=lang))
+            .replace("{{WA_NUM}}", wa_number()))
     return layout(path, title, desc, frag, lang, nav_path, alternates, head_extra=head_extra)
 
 
@@ -1221,6 +1241,12 @@ def main():
 
     for rel, _, content in pages:
         write(rel, content)
+    # Short links to share in posts, cards and QR codes. If the number or LINE ID
+    # changes, edit data/site.json and rebuild; links already shared keep working.
+    if wa_number():
+        write("whatsapp/index.html", external_redirect(f"https://wa.me/{wa_number()}", "WhatsApp"))
+    if line_url():
+        write("line/index.html", external_redirect(line_url(), "LINE"))
     write_admin_public()
     encrypt_admin_data()
 

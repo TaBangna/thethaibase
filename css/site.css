@@ -360,3 +360,8 @@ ol.steps-plain li { margin-bottom: .6em; }
 .request-band h2 { margin: 0 0 6px; }
 .request-band p { margin: 0; max-width: 60ch; }
 .chips-check input[type=checkbox] { width: 16px; height: 16px; min-height: 0; padding: 0; flex: none; }
+.send-btns { display: grid; gap: 10px; }
+@media (min-width: 560px) { .send-btns { grid-template-columns: 1fr 1fr; } }
+.btn-wa { background: #25D366; color: #08331B; }
+.btn-wa:hover { background: #1EBE5A; color: #08331B; }
+.price-panel .btn + .btn { margin-top: 10px; }

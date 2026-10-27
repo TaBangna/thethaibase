@@ -1,6 +1,6 @@
 // "Tell us what you need" form. Nothing is sent to or stored by the website:
-// the request is written out as a message and opened in a LINE chat with
-// @thethaibase, where the renter presses send. It is also copied to the
+// the request is written out as a message and opened in a LINE (@thethaibase)
+// or WhatsApp chat with us, where the renter presses send. It is also copied to the
 // clipboard and shown on the page in case LINE isn't installed.
 (function () {
   var LINE_ID = "@thethaibase";
@@ -10,16 +10,16 @@
       budget: "Budget", beds: "Bedrooms", movein: "Move-in", lease: "Lease", people: "People",
       pets: "Pets", work: "Work/study", bld: "Buildings", notes: "Notes", name: "Name",
       missing: "Please fill in the fields marked *.",
-      opening: "Opening LINE… If nothing happens, copy the request below.",
-      copied: "Copied. Paste it into a LINE chat with @thethaibase."
+      opening: "Opening the app… If nothing happens, copy the request below.",
+      copied: "Copied. Paste it into a chat with us on LINE or WhatsApp."
     },
     th: {
       head: "แจ้งหาห้องเช่า ผ่าน thethaibase.com",
       budget: "งบ", beds: "ห้องนอน", movein: "ย้ายเข้า", lease: "สัญญา", people: "ผู้พักอาศัย",
       pets: "สัตว์เลี้ยง", work: "ที่ทำงาน/ที่เรียน", bld: "โครงการ", notes: "รายละเอียดเพิ่มเติม", name: "ชื่อ",
       missing: "กรุณากรอกช่องที่มีเครื่องหมาย *",
-      opening: "กำลังเปิด LINE… ถ้าไม่เปิด คัดลอกข้อความด้านล่างได้เลย",
-      copied: "คัดลอกแล้ว วางในแชท LINE @thethaibase ได้เลย"
+      opening: "กำลังเปิดแอป… ถ้าไม่เปิด คัดลอกข้อความด้านล่างได้เลย",
+      copied: "คัดลอกแล้ว วางในแชท LINE หรือ WhatsApp ของเราได้เลย"
     }
   };
 
@@ -27,6 +27,8 @@
     var form = document.getElementById("need-form");
     if (!form) return;
     var L = T[form.getAttribute("data-lang")] || T.en;
+    var WA = (form.getAttribute("data-wa") || "").replace(/\D/g, "");
+    if (!WA) form.querySelectorAll("[data-wa-only]").forEach(function (b) { b.remove(); });
     var msg = document.getElementById("need-msg");
     var box = document.getElementById("need-fallback");
     var text = document.getElementById("need-text");
@@ -66,6 +68,7 @@
 
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
+      var via = (ev.submitter && ev.submitter.value) || "line";
       var bad = ["budget", "beds", "movein", "name"].filter(function (n) { return !val(n); });
       form.querySelectorAll(".field").forEach(function (f) { f.classList.remove("field-bad"); });
       if (bad.length) {
@@ -80,10 +83,11 @@
       msg.textContent = L.opening;
       try { if (navigator.clipboard) navigator.clipboard.writeText(m).catch(function () {}); } catch (e) {}
       if (typeof gtag === "function") {
-        gtag("event", "generate_lead", { method: "request_form", link_location: "find_a_condo",
+        gtag("event", "generate_lead", { method: "request_form_" + via, link_location: "find_a_condo",
           budget: val("budget"), bedrooms: val("beds"), page_lang: document.documentElement.lang });
       }
-      window.location.href = "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(m);
+      if (via === "whatsapp" && WA) window.location.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(m);
+      else window.location.href = "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_ID) + "/?" + encodeURIComponent(m);
     });
 
     document.getElementById("need-copy").addEventListener("click", function () {
