@@ -1,5 +1,5 @@
 // Admin view for The Thai Base.
-// Public pages show floor ranges only. Exact floors, owners and room numbers live in
+// Public pages show floor ranges only. Exact floors, owners, phones and room numbers live in
 // /assets/admin-data.json, encrypted (AES-GCM, key from the passphrase via PBKDF2).
 // After sign-in the derived key is kept on this device so listing pages show exact floors.
 (function () {
@@ -70,15 +70,23 @@
     });
   }
 
+  function phone(p) {
+    // One or more numbers separated by commas; each becomes a tap-to-call link.
+    return String(p || "").split(",").map(function (n) {
+      n = n.trim(); if (!n) return "";
+      return '<a href="tel:' + esc(n.replace(/[^0-9+]/g, "")) + '" style="white-space:nowrap">' + esc(n) + "</a>";
+    }).filter(Boolean).join("<br>");
+  }
+
   function table(rows) {
     var host = document.getElementById("admin-table");
     if (!host) return;
-    var head = ["Ref", "Deal", "Price", "Beds", "Size", "Tower", "Floor", "Owner", "Room", "Notes"];
+    var head = ["Ref", "Deal", "Price", "Beds", "Size", "Tower", "Floor", "Owner", "Phone", "Room", "Notes"];
     var body = rows.map(function (r) {
       var ref = r.url ? '<a href="' + esc(r.url) + '">' + esc(r.id) + "</a>" : esc(r.id);
       return "<tr><td>" + ref + "</td><td>" + esc(r.deal) + "</td><td>" + esc(r.price) + "</td><td>" +
         esc(r.beds) + "</td><td>" + esc(r.size) + "</td><td>" + esc(r.tower) + "</td><td><strong>" +
-        esc(r.floor) + "</strong></td><td>" + esc(r.owner) + "</td><td>" + esc(r.room) + "</td><td>" +
+        esc(r.floor) + "</strong></td><td>" + esc(r.owner) + "</td><td>" + phone(r.phone) + "</td><td>" + esc(r.room) + "</td><td>" +
         esc(r.notes) + "</td></tr>";
     }).join("");
     host.innerHTML = '<div class="table-scroll"><table class="rent-table"><thead><tr>' +
@@ -101,7 +109,7 @@
     rows.forEach(function (row) { byId[row.id] = row; });
     return pub.map(function (p) {
       var priv = byId[p.id] || {};
-      return Object.assign({}, priv, p, { floor: priv.floor, owner: priv.owner, room: priv.room, notes: priv.notes });
+      return Object.assign({}, priv, p, { floor: priv.floor, owner: priv.owner, phone: priv.phone, room: priv.room, notes: priv.notes });
     });
   }
 

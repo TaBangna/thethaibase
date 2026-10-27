@@ -20,7 +20,7 @@ python3 tools/build.py
 - Unit codes: building code + R (rent) or S (sale) + number, e.g. `TCR-001` = The Coast, rent; `TCS-001` = The Coast, sale.
 - Units for rent and sale: `data/units.json` (`"deal": "sale"` with `price_thb` for sale units).
 - Public pages show a floor range (`floor_band`, e.g. `11–20`), never the exact floor.
-- Exact floors, owners and room numbers are kept in `data/private/units-private.json`, which is **not committed**. The build encrypts it into `assets/admin-data.json` when the passphrase is set:
+- Exact floors, owners, owner phone numbers (`phone`, comma-separated) and room numbers are kept in `data/private/units-private.json`, which is **not committed**. The build encrypts it into `assets/admin-data.json` when the passphrase is set:
 
 ```
 TTB_ADMIN_PASSPHRASE='…' python3 tools/build.py
