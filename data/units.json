@@ -607,9 +607,15 @@
     "furniture": [
       "Sofa bed",
       "6-ft bed",
-      "Open east-facing view"
+      "Dining table for two",
+      "Built-in wardrobe",
+      "TV cabinet"
     ],
     "appliances": [
+      "Air conditioning",
+      "TV",
+      "Fridge",
+      "Microwave",
       "Washing machine",
       "Digital door lock"
     ],
@@ -620,9 +626,8 @@
       "/assets/units/rhr-001/04.jpg",
       "/assets/units/rhr-001/05.jpg"
     ],
-    "description_en": "A bright one-bedroom unit of 28 sq m in Tower D, high floor with an open east-facing view. Furnished with a sofa bed and 6-ft bed, plus washing machine and digital door lock. Regent Home Bangna is about 10 minutes' walk to BTS Bang Na.",
-    "description_th": "ห้อง 1 ห้องนอน 28 ตร.ม. ตึก D ชั้นสูง วิวโล่งทิศตะวันออก มีโซฟาเบด เตียง 6 ฟุต เครื่องซักผ้า ประตูดิจิทัล เดินไป BTS บางนาประมาณ 10 นาที",
-    "listed": "2026-10-27",
-    "hidden": true
+    "description_en": "A bright one-bedroom unit of 28 sq m in Tower D, high floor with an open east-facing city view. Fully furnished with a sofa bed, 6-ft bed, dining table and built-in wardrobe, plus TV, fridge, microwave, washing machine and digital door lock. Regent Home Bangna is about 10 minutes' walk to BTS Bang Na.",
+    "description_th": "ห้อง 1 ห้องนอน 28 ตร.ม. ตึก D ชั้นสูง วิวเมืองโล่งทิศตะวันออก ตกแต่งครบ มีโซฟาเบด เตียง 6 ฟุต โต๊ะทานข้าว ตู้เสื้อผ้าบิวท์อิน ทีวี ตู้เย็น ไมโครเวฟ เครื่องซักผ้า ประตูดิจิทัล เดินไป BTS บางนาประมาณ 10 นาที",
+    "listed": "2026-10-27"
   }
 ]

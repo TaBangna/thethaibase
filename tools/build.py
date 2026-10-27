@@ -453,7 +453,7 @@ def page_home():
         units_block = f"""
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2>Available now</h2><p>Units we have checked in person, with real photos.</p></div><a href="/rent/">All {len(RENT_UNITS)} units for rent →</a></div>
+    <div class="section-head"><div><h2>Available now</h2><p>Units we have checked in person, with real photos.</p></div><a href="/rent/">All {len(RENT_UNITS)} unit{"s" if len(RENT_UNITS) != 1 else ""} for rent →</a></div>
     {unit_cards(RENT_UNITS[:6])}
     <p class="small muted" style="margin-top:12px">{e(FAIR_NOTE['en'])}</p>
   </div>
