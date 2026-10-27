@@ -65,7 +65,16 @@ STATIONS = [("Udom Suk", 140), ("Bang Na", 400), ("Bearing", 660)]
 
 # Condos are grouped by zone so new areas can be added later; the site currently markets one.
 ZONE_NAME = SITE.get("zone", "BTS Bang Na")
+STATION_CODES = {"Udom Suk": "E12", "Bang Na": "E13", "Bearing": "E14"}
+FURNISH_TH = {"Fully furnished": "ตกแต่งครบ", "Partly furnished": "ตกแต่งบางส่วน", "Furnished": "มีเฟอร์นิเจอร์", "Unfurnished": "ห้องเปล่า"}
+
+
+def furnish_text(f, lang="en"):
+    return FURNISH_TH.get(f, f) if lang == "th" else f
+
+
 CONDO_NAMES = ", ".join(c["name"] for c in CONDOS[:-1]) + f" and {CONDOS[-1]['name']}" if len(CONDOS) > 1 else CONDOS[0]["name"]
+CONDO_NAMES_TH = CONDO_NAMES.replace(f" and {CONDOS[-1]['name']}", f" และ {CONDOS[-1]['name']}")
 RENTS_AS_OF = SITE.get("rents_as_of", "")
 RENTS_AS_OF_TH = SITE.get("rents_as_of_th", RENTS_AS_OF)
 
@@ -506,7 +515,7 @@ def page_home():
     <div>
       <p class="eyebrow">Condos for rent &amp; sale · BTS Bang Na</p>
       <h1>Bang Na condos, checked before you see them.</h1>
-      <p class="hero-lead">Real units at {e(CONDO_NAMES)}, with real photos and a fair-price check against each building's typical rent. We help in Thai or English, from first viewing to move-in.</p>
+      <p class="hero-lead">Real units at {e(CONDO_NAMES)}, with unit details and a fair-price check against each building's typical rent. We help in Thai or English, from first viewing to move-in.</p>
       {search_form()}
       <p class="hero-alt">Not sure which building? <a href="/find-a-condo.html">Tell us what you need and we'll find it →</a></p>
       <ul class="trust"><li>Units visited in person</li><li>No fee for renters</li><li>Help in English &amp; Thai</li></ul>
@@ -553,7 +562,7 @@ def page_home():
 </section>
 {owners_band()}
 """
-    return layout("/", "", f"Condos for rent & sale at BTS Bang Na: {CONDO_NAMES}. Units checked in person, real photos, fair-price check, viewings in Thai or English.",
+    return layout("/", "", f"Condos for rent & sale at BTS Bang Na: {CONDO_NAMES}. Unit details, fair-price check, viewings in Thai or English.",
                   body, alternates=HOME_ALTERNATES, image=HOME_OG_IMAGE)
 
 
@@ -582,7 +591,7 @@ def page_home_th():
     <div>
       <p class="eyebrow">คอนโดเช่า-ขาย ใกล้ BTS บางนา</p>
       <h1>คอนโดบางนา ตรวจห้องให้ก่อนคุณไปดู</h1>
-      <p class="hero-lead">ห้องจริงใน {e(CONDO_NAMES)} รูปจริง และเทียบค่าเช่ากับราคาทั่วไปของแต่ละโครงการ ดูแลทั้งภาษาไทยและอังกฤษ ตั้งแต่ดูห้องจนถึงวันย้ายเข้า</p>
+      <p class="hero-lead">ห้องจริงใน {e(CONDO_NAMES_TH)} พร้อมรายละเอียดห้อง และเทียบค่าเช่ากับราคาทั่วไปของแต่ละโครงการ ดูแลทั้งภาษาไทยและอังกฤษ ตั้งแต่ดูห้องจนถึงวันย้ายเข้า</p>
       {search_form("th")}
       <p class="hero-alt">ยังไม่รู้จะเลือกโครงการไหน? <a href="/th/find-a-condo.html">บอกความต้องการ เราหาให้ →</a></p>
       <ul class="trust"><li>ไปดูห้องจริงทุกห้อง</li><li>ผู้เช่าไม่เสียค่าบริการ</li><li>คุยได้ทั้งไทยและอังกฤษ</li></ul>
@@ -707,7 +716,7 @@ def condo_jsonld(c, faqs):
 
 def page_condo(c):
     faqs = condo_faqs(c)
-    facts = [("Nearest BTS", f"BTS {c['station']}"), ("Distance", c["walk"]), ("Completed", str(c["completed"]))]
+    facts = [("Nearest BTS", f"BTS {c['station']} ({STATION_CODES.get(c['station'], '')})" if STATION_CODES.get(c['station']) else f"BTS {c['station']}"), ("Distance", c["walk"]), ("Completed", str(c["completed"]))]
     if c.get("developer"):
         facts.append(("Developer", c["developer"]))
     if c.get("towers"):
@@ -808,7 +817,10 @@ def line_ask_url(text):
     return f"https://line.me/R/oaMessage/{lid}/?{quote(text)}"
 
 
-def unit_title(u):
+def unit_title(u, lang="en"):
+    if lang == "th":
+        beds = "สตูดิโอ" if u["bedrooms"] == 0 else f'{u["bedrooms"]} ห้องนอน'
+        return f'{beds}, {u["size_sqm"]:g} ตร.ม.'
     beds = "Studio" if u["bedrooms"] == 0 else f'{u["bedrooms"]}-bedroom'
     return f'{beds}, {u["size_sqm"]:g} sq m'
 
@@ -902,7 +914,7 @@ def unit_cards(units, lang="en"):
     <div class="unit-card-media">{img}{checked}</div>
     <div class="unit-card-body">
       <div class="unit-card-top"><div class="unit-price">{unit_price(u, lang)}</div>{badge}</div>
-      <h3>{e(unit_title(u))}{' · ' + e(u['furnished']) if u.get('furnished') else ''}</h3>
+      <h3>{e(unit_title(u, lang))}{' · ' + e(furnish_text(u.get('furnished'), lang)) if u.get('furnished') else ''}</h3>
       <p class="muted small">{meta}</p>
       <p class="station-line"><span class="bts">BTS</span>{e(c['station'])}</p>
     </div>
