@@ -1,0 +1,72 @@
+<div class="wrap">
+  <div class="detail-head prose">
+    <p class="eyebrow">ผู้เช่าไม่เสียค่าบริการ</p>
+    <h1>บอกเราว่าต้องการห้องแบบไหน เราหาให้</h1>
+    <p style="font-size:1.1rem">กำลังหาคอนโดแถวบางนา? บอกงบและวันที่อยากย้ายเข้า เราเช็คห้องว่างจริงรอบ BTS บางนาให้ รวมถึงห้องที่ยังไม่ได้ลงในเว็บ แล้วส่งรายการห้องพร้อมรูปให้ทาง LINE</p>
+  </div>
+  <div class="split request-split">
+    <form id="need-form" class="panel request-form" novalidate data-lang="th">
+      <h2>ความต้องการของคุณ</h2>
+      <div class="field-grid">
+        <label class="field"><span>งบต่อเดือน (บาท) *</span>
+          <select name="budget" required>
+            <option value="">เลือก…</option>
+            <option>ไม่เกิน ฿10,000</option><option>฿10,000–15,000</option><option>฿15,000–20,000</option>
+            <option>฿20,000–30,000</option><option>฿30,000–40,000</option><option>มากกว่า ฿40,000</option>
+          </select></label>
+        <label class="field"><span>จำนวนห้องนอน *</span>
+          <select name="beds" required>
+            <option value="">เลือก…</option><option>สตูดิโอ / 1 ห้องนอน</option><option>1 ห้องนอน</option>
+            <option>2 ห้องนอน</option><option>3 ห้องนอน</option><option>ยังไม่แน่ใจ</option>
+          </select></label>
+        <label class="field"><span>วันที่อยากย้ายเข้า *</span><input type="date" name="movein" required></label>
+        <label class="field"><span>ระยะสัญญา</span>
+          <select name="lease">
+            <option>12 เดือน</option><option>6 เดือน</option><option>น้อยกว่า 6 เดือน</option><option>2 ปีขึ้นไป</option>
+          </select></label>
+        <label class="field"><span>จำนวนผู้พักอาศัย</span>
+          <select name="people"><option>1</option><option>2</option><option>ครอบครัวมีเด็ก</option><option>ผู้ใหญ่ 3 คนขึ้นไป</option></select></label>
+        <label class="field"><span>สัตว์เลี้ยง</span>
+          <select name="pets"><option>ไม่มี</option><option>แมว</option><option>สุนัข</option><option>อื่นๆ</option></select></label>
+      </div>
+      <label class="field"><span>ที่ทำงานหรือที่เรียน</span><input type="text" name="work" placeholder="เช่น ไบเทค, บางนา-ตราด กม. 20" maxlength="120"></label>
+      <fieldset class="field">
+        <legend>โครงการที่สนใจ</legend>
+        <div class="chips-check">
+          <label><input type="checkbox" name="bld" value="Any in Bang Na" checked> ที่ไหนก็ได้ใกล้ BTS บางนา</label>
+          <label><input type="checkbox" name="bld" value="The Coast Bangkok"> The Coast Bangkok</label>
+          <label><input type="checkbox" name="bld" value="Ideo O2"> Ideo O2</label>
+          <label><input type="checkbox" name="bld" value="Ideo Mobi Eastgate"> Ideo Mobi Eastgate</label>
+          <label><input type="checkbox" name="bld" value="Ideo Mobi Eastpoint"> Ideo Mobi Eastpoint</label>
+          <label><input type="checkbox" name="bld" value="Regent Home Bangna"> Regent Home Bangna</label>
+        </div>
+      </fieldset>
+      <label class="field"><span>สิ่งที่ต้องมี หรือรายละเอียดอื่นๆ</span><textarea name="notes" rows="3" maxlength="400" placeholder="เช่น ชั้นสูง มีอ่างอาบน้ำ ใกล้ BTS มีที่จอดรถ"></textarea></label>
+      <label class="field"><span>ชื่อของคุณ *</span><input type="text" name="name" required maxlength="60" autocomplete="name"></label>
+      <p class="small muted">เว็บไซต์ไม่เก็บข้อมูลใดๆ ปุ่มด้านล่างจะเปิด LINE พร้อมข้อความที่กรอกไว้ แค่กดส่ง</p>
+      <button class="btn btn-line btn-block" type="submit">ส่งความต้องการทาง LINE →</button>
+      <p id="need-msg" class="small" role="status" style="margin:10px 0 0"></p>
+      <div id="need-fallback" class="need-fallback" hidden>
+        <p class="small">ไม่มี LINE ในเครื่องนี้? คัดลอกข้อความแล้วส่งไปที่ <strong>@thethaibase</strong> ทาง LINE</p>
+        <textarea id="need-text" rows="7" readonly></textarea>
+        <button class="btn btn-ghost btn-sm" type="button" id="need-copy">คัดลอกข้อความ</button>
+      </div>
+    </form>
+    <div>
+      <div class="panel">
+        <h2>ขั้นตอน</h2>
+        <ol class="steps-plain">
+          <li><strong>ส่งความต้องการ</strong> ใช้เวลาประมาณ 1 นาที</li>
+          <li><strong>เราหาห้องให้</strong> จากห้องที่เราดูแล เจ้าของห้องที่เรารู้จักในแต่ละโครงการ และเอเจนต์ที่ไว้ใจได้ในพื้นที่</li>
+          <li><strong>รับรายการห้องทาง LINE</strong> พร้อมรูป ค่าเช่า และความเห็นของเรา ส่วนใหญ่ภายในวันเดียวกันหรือวันถัดไป</li>
+          <li><strong>ดูห้องจริงหรือวิดีโอคอล</strong> เราไปดูห้องกับคุณ</li>
+          <li><strong>เซ็นสัญญาและย้ายเข้า</strong> เราช่วยอ่านสัญญาและบันทึกสภาพห้องกับคุณ</li>
+        </ol>
+        <p class="small muted">ผู้เช่าไม่เสียค่าบริการ เจ้าของห้องเป็นผู้จ่ายเมื่อเซ็นสัญญา</p>
+      </div>
+      <p class="small muted" lang="en" style="margin-top:16px">English: <a href="/find-a-condo.html">Tell us what you need</a></p>
+    </div>
+  </div>
+</div>
+<div class="section"></div>
+<script src="/assets/request.js" defer></script>
