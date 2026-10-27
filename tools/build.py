@@ -31,6 +31,7 @@ UNITS = json.loads(_units_file.read_text(encoding="utf-8")) if _units_file.exist
 CONDO_BY_SLUG = {c["slug"]: c for c in CONDOS}
 # "pending" units are kept in the data file but not published until their details are filled in.
 # "hidden" units are complete but held back; remove "hidden" to open one on the site.
+# "checked": false hides the "Checked in person" badge for a unit we have not visited yet.
 def unpublished(u):
     return bool(u.get("pending") or u.get("hidden"))
 
@@ -453,7 +454,7 @@ def page_home():
         units_block = f"""
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2>Available now</h2><p>Units we have checked in person, with real photos.</p></div><a href="/rent/">All {len(RENT_UNITS)} unit{"s" if len(RENT_UNITS) != 1 else ""} for rent →</a></div>
+    <div class="section-head"><div><h2>Available now</h2><p>Real units with real photos and full details.</p></div><a href="/rent/">All {len(RENT_UNITS)} unit{"s" if len(RENT_UNITS) != 1 else ""} for rent →</a></div>
     {unit_cards(RENT_UNITS[:6])}
     <p class="small muted" style="margin-top:12px">{e(FAIR_NOTE['en'])}</p>
   </div>
@@ -848,7 +849,7 @@ def unit_cards(units, lang="en"):
             badge = f'<span class="badge">{"Fair price" if lang == "en" else "ราคาดี"}</span>'
         elif is_sale(u):
             badge = f'<span class="badge badge-sale">{"For sale" if lang == "en" else "ขาย"}</span>'
-        checked = "" if is_sale(u) else f'<span class="chip">✓ {"Checked in person" if lang == "en" else "ตรวจห้องแล้ว"}</span>'
+        checked = "" if is_sale(u) or u.get("checked") is False else f'<span class="chip">✓ {"Checked in person" if lang == "en" else "ตรวจห้องแล้ว"}</span>'
         img = (f'<img src="{e(u["photos"][0])}" alt="" loading="lazy" width="600" height="400">' if u.get("photos")
                else '<div class="unit-card-nophoto">Photos coming soon</div>')
         meta = " · ".join(x for x in [e(c['name']), floor_text(u, lang)] if x)
@@ -1014,7 +1015,7 @@ def page_rent_index():
 <div class="wrap">
   <div class="detail-head">
     <h1>Condos for rent in Bang Na</h1>
-    <p class="prose muted">Units we have checked in person at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint and Regent Home Bangna, all at BTS Bang Na.</p>
+    <p class="prose muted">Units for rent at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint and Regent Home Bangna, all at BTS Bang Na.</p>
   </div>
   {inner}
 </div>
