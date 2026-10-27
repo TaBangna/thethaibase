@@ -1071,8 +1071,8 @@ def write_admin_public():
     """Non-secret unit fields for the admin table, rebuilt on every build.
 
     The admin view overlays these on the encrypted rows, so price, size and
-    bedroom changes show up without the passphrase. Floors, owners, room
-    numbers and notes stay in the encrypted file only."""
+    bedroom changes show up without the passphrase. Floors, owners, phones,
+    room numbers and notes stay in the encrypted file only."""
     rows = [{"id": u["id"], "url": unit_url(u) if not unpublished(u) else "", "deal": u.get("deal", "rent"),
              "price": unit_price_text(u) if not u.get("pending") else "", "beds": u.get("bedrooms"),
              "size": u.get("size_sqm"), "tower": u.get("tower", ""),
@@ -1104,7 +1104,7 @@ def encrypt_admin_data():
         rows.append({"id": u["id"], "url": unit_url(u) if not unpublished(u) else "", "deal": u.get("deal", "rent"),
                      "price": unit_price_text(u), "beds": u.get("bedrooms"), "size": u.get("size_sqm"),
                      "tower": u.get("tower", ""), "floor": p.get("floor"), "owner": p.get("owner", ""),
-                     "room": p.get("room", ""), "notes": p.get("notes", "")})
+                     "phone": p.get("phone", ""), "room": p.get("room", ""), "notes": p.get("notes", "")})
     iters = 600000
     salt, iv = os.urandom(16), os.urandom(12)
     key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive(pw.encode())
@@ -1119,7 +1119,7 @@ def page_admin():
 <div class="wrap">
   <div class="detail-head">
     <h1>Admin</h1>
-    <p class="prose muted">Sign in to see exact floors, owners and room numbers. Signed in, the listing pages also show exact floors on this device.</p>
+    <p class="prose muted">Sign in to see exact floors, owners, phone numbers and room numbers. Signed in, the listing pages also show exact floors on this device.</p>
   </div>
   <form id="admin-login" class="panel" style="max-width:420px">
     <label for="admin-pass"><strong>Passphrase</strong></label>
