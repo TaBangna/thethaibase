@@ -10,7 +10,7 @@
     "completed": 2012,
     "towers": "2 towers, 35 and 39 floors",
     "units": "775 units",
-    "unit_types": "1, 2 and 3 bedrooms, including duplex layouts (roughly 30–130 sq m)",
+    "unit_types": "1 bedrooms (35 and 45 sq m), 2 and 3 bedrooms, including duplex layouts (up to about 130 sq m)",
     "summary": "A two-tower condo a short walk from BTS Bang Na, next to the BITEC exhibition centre, with the area's largest units and a small shopping mall at its base.",
     "summary_th": "คอนโด 2 ตึก เดินไป BTS บางนาได้ ติดไบเทค มีห้องขนาดใหญ่ที่สุดในย่าน ตั้งแต่ 1 ถึง 3 ห้องนอน และมีร้านค้าด้านล่าง",
     "facilities": [
@@ -34,9 +34,9 @@
       {
         "type": "1 bedroom",
         "type_th": "1 ห้องนอน",
-        "typical": 13000,
+        "typical": 17000,
         "low": 12000,
-        "high": 14500
+        "high": 22000
       },
       {
         "type": "2 bedrooms",
@@ -84,7 +84,7 @@
     "photo_credit": "The Coast Bangkok Official",
     "name_th": "เดอะ โคสต์ แบงค็อก",
     "not_for": [
-      "Tight budgets: rents are the highest of the five buildings",
+      "Tight budgets: there are no studios, and units are larger than in the other buildings",
       "Pet owners",
       "Renters who want a brand-new building"
     ],
@@ -99,7 +99,7 @@
       ],
       [
         "Does The Coast Bangkok have 2- and 3-bedroom units?",
-        "Yes. It has 1, 2 and 3-bedroom units, including duplex layouts, from roughly 30 to 130 sq m."
+        "Yes. It has 1, 2 and 3-bedroom units, including duplex layouts, from 35 sq m up to about 130 sq m."
       ]
     ],
     "pets": "Not allowed unless approved by the building's juristic office"
@@ -132,8 +132,8 @@
       "Bangkok Mall, BITEC and Central Bangna",
       "Bang Na Expressway"
     ],
-    "good_for": "Singles and couples who want plenty of shared space and newer facilities at a lower rent than the BTS-front buildings.",
-    "good_for_th": "คนโสดและคู่รักที่ชอบส่วนกลางกว้าง สิ่งอำนวยความสะดวกใหม่ ในค่าเช่าที่ถูกกว่าคอนโดติด BTS",
+    "good_for": "Singles and couples who want plenty of shared space and newer facilities at a lower rent than The Coast Bangkok or Ideo Mobi Eastpoint.",
+    "good_for_th": "คนโสดและคู่รักที่ชอบส่วนกลางกว้าง สิ่งอำนวยความสะดวกใหม่ ในค่าเช่าที่ถูกกว่า The Coast Bangkok และ Ideo Mobi Eastpoint",
     "rents": [
       {
         "type": "Studio",
@@ -390,7 +390,7 @@
     "walk": "About 0.7 km (10 minutes' walk) to BTS Bang Na, via a rear gate and canal-side path",
     "walk_th": "ห่าง BTS บางนาประมาณ 0.7 กม. ออกประตูด้านหลัง เดินเลียบคลองประมาณ 10 นาที",
     "completed": 2024,
-    "towers": "1 building, 4 towers, 32 floors (Tower A 1,339 · B 999 · C 1,666 · D 1,003 units)",
+    "towers": "4 towers, 32 floors (Tower A 1,339 · B 999 · C 1,666 · D 1,003 units)",
     "units": "5,007 units",
     "unit_types": "Compact 1 bedrooms of 28 sq m in four layouts, each with a separate bedroom, balcony and kitchen area",
     "summary": "A new four-tower condo on Sanphawut Road, around a landscaped courtyard. Every unit is a 28 sq m one-bedroom with a separate bedroom: more privacy than a studio at studio rents. Home to a mix of Thai and international residents.",
