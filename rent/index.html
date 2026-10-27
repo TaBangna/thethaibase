@@ -32,7 +32,7 @@ gtag('event','generate_lead',{method:'line',unit_id:u,link_location:where,page_l
 <header class="site-head">
   <div class="wrap">
     <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 4C20.4 4 11 13.2 11 24.6 11 39.5 32 60 32 60s21-20.5 21-35.4C53 13.2 43.6 4 32 4z" fill="#fff"/><circle cx="32" cy="24.5" r="12.5" fill="#0B6E6E"/><rect x="19.5" y="21.5" width="25" height="6" rx="3" fill="#8BD15A"/><circle cx="32" cy="24.5" r="5.5" fill="#fff" stroke="#5E9E32" stroke-width="2.5"/></svg></span>The Thai Base<span class="brand-tag">Bang Na</span></a>
-    <nav class="site-nav" aria-label="Main"><a href="/condos/">Condos</a><a href="/bang-na.html">Living in Bang Na</a><a href="/renting-guide.html">Renting guide</a><a href="/list-your-condo.html">For owners</a></nav>
+    <nav class="site-nav" aria-label="Main"><a href="/condos/">Condos</a><a href="/rent/" aria-current="page">For rent</a><a href="/bang-na.html">Living in Bang Na</a><a href="/renting-guide.html">Renting guide</a><a href="/list-your-condo.html">For owners</a></nav>
     <div class="head-actions">
       <a class="lang-btn" href="/th/" hreflang="th" lang="th">ภาษาไทย</a>
       <a class="btn btn-line btn-sm" href="https://line.me/R/ti/p/@thethaibase">Chat on LINE</a>
@@ -44,9 +44,55 @@ gtag('event','generate_lead',{method:'line',unit_id:u,link_location:where,page_l
 <div class="wrap">
   <div class="detail-head">
     <h1>Condos for rent in Bang Na</h1>
-    <p class="prose muted">Units we have checked in person at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint and Regent Home Bangna, all at BTS Bang Na.</p>
+    <p class="prose muted">Units for rent at The Coast Bangkok, Ideo O2, Ideo Mobi Eastgate, Ideo Mobi Eastpoint and Regent Home Bangna, all at BTS Bang Na.</p>
   </div>
-  <p class="muted">New units are being added. Tell us your budget and move-in date and we'll send you what's available.</p><div class="contact-links"><a class="btn btn-line" href="https://line.me/R/ti/p/@thethaibase">Add us on LINE</a></div>
+  <form class="filter-bar" id="rent-filter" action="/rent/" method="get">
+  <label for="f-beds">Bedrooms</label>
+  <select id="f-beds" name="beds"><option value="">Any bedrooms</option><option value="1">1 bedroom</option><option value="2">2 bedrooms</option><option value="3">3 bedrooms</option></select>
+  <label for="f-max">Budget</label>
+  <select id="f-max" name="max"><option value="">Any budget</option><option value="20000">Up to ฿20,000</option><option value="30000">Up to ฿30,000</option><option value="40000">Up to ฿40,000</option></select>
+  <span class="filter-count" id="filter-count" aria-live="polite"></span>
+</form><ul class="unit-grid"><li class="unit-card" data-beds="1" data-rent="11500">
+  <a href="/rent/regent-home-1br-rhr-001.html">
+    <div class="unit-card-media"><img src="/assets/units/rhr-001/01.jpg" alt="" loading="lazy" width="600" height="400"></div>
+    <div class="unit-card-body">
+      <div class="unit-card-top"><div class="unit-price">฿11,500<span> / month</span></div></div>
+      <h3>1-bedroom, 28 sq m · Fully furnished</h3>
+      <p class="muted small">Regent Home Bangna · <span data-floor-id="RHR-001" data-floor-tower="" data-lang="en">Floors 21–30</span></p>
+      <p class="station-line"><span class="bts">BTS</span>Bang Na</p>
+    </div>
+  </a>
+</li></ul>
+<div class="filter-empty" id="filter-empty" hidden><p>No units match these filters right now.</p>
+  <p class="muted">Tell us your budget and move-in date on LINE and we'll check all five buildings for you.</p><div class="contact-links"><a class="btn btn-line" href="https://line.me/R/ti/p/@thethaibase">Add us on LINE</a></div></div>
+<p class="small muted" style="margin-top:12px">“Fair price” means the rent is at or below the building&#x27;s typical asking rent for that unit type.</p>
+<script>(function () {
+  var form = document.getElementById('rent-filter');
+  if (!form) return;
+  var beds = form.elements.beds, max = form.elements.max;
+  var cards = document.querySelectorAll('.unit-grid .unit-card');
+  var count = document.getElementById('filter-count'), empty = document.getElementById('filter-empty');
+  var q = new URLSearchParams(location.search);
+  if (q.get('beds')) beds.value = q.get('beds');
+  if (q.get('max')) max.value = q.get('max');
+  function apply() {
+    var b = beds.value, m = parseInt(max.value, 10), shown = 0;
+    cards.forEach(function (c) {
+      var rent = parseInt(c.getAttribute('data-rent'), 10);
+      var ok = (!b || c.getAttribute('data-beds') === b) && (!m || isNaN(rent) || rent <= m);
+      c.hidden = !ok; if (ok) shown++;
+    });
+    count.textContent = shown + (shown === 1 ? ' unit' : ' units');
+    empty.hidden = shown !== 0;
+    var p = new URLSearchParams();
+    if (b) p.set('beds', b); if (m) p.set('max', m);
+    var url = location.pathname + (p.toString() ? '?' + p : '');
+    try { history.replaceState(null, '', url); } catch (e) {}
+  }
+  form.addEventListener('change', apply);
+  form.addEventListener('submit', function (ev) { ev.preventDefault(); apply(); });
+  apply();
+})();</script>
 </div>
 <div class="section"></div>
 

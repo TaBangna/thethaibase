@@ -587,5 +587,48 @@
     "description_th": "ขายห้อง 2 ห้องนอน 2 ห้องน้ำ ประมาณ 55 ตร.ม. ตึก A ขายโดยเจ้าของ เดินถึง BTS บางนาและ Bangkok Mall ติดทางขึ้นลงทางด่วนบางนา ใกล้โรงเรียนนานาชาติหลายแห่ง นัดชมห้องหรือขอวิดีโอห้องทาง LINE",
     "floor_band": "21–30",
     "hidden": true
+  },
+  {
+    "id": "RHR-001",
+    "slug": "regent-home-1br-rhr-001",
+    "condo": "regent-home-bangna",
+    "status": "available",
+    "rent_thb": 11500,
+    "deposit_months": 2,
+    "advance_months": 1,
+    "min_lease_months": 12,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "size_sqm": 28,
+    "tower": "D",
+    "facing": "East",
+    "floor_band": "21–30",
+    "furnished": "Fully furnished",
+    "furniture": [
+      "Sofa bed",
+      "6-ft bed",
+      "Dining table for two",
+      "Built-in wardrobe",
+      "TV cabinet"
+    ],
+    "appliances": [
+      "Air conditioning",
+      "TV",
+      "Fridge",
+      "Microwave",
+      "Washing machine",
+      "Digital door lock"
+    ],
+    "photos": [
+      "/assets/units/rhr-001/01.jpg",
+      "/assets/units/rhr-001/02.jpg",
+      "/assets/units/rhr-001/03.jpg",
+      "/assets/units/rhr-001/04.jpg",
+      "/assets/units/rhr-001/05.jpg"
+    ],
+    "description_en": "A bright one-bedroom unit of 28 sq m in Tower D, high floor with an open east-facing city view. Fully furnished with a sofa bed, 6-ft bed, dining table and built-in wardrobe, plus TV, fridge, microwave, washing machine and digital door lock. Regent Home Bangna is about 10 minutes' walk to BTS Bang Na.",
+    "description_th": "ห้อง 1 ห้องนอน 28 ตร.ม. ตึก D ชั้นสูง วิวเมืองโล่งทิศตะวันออก ตกแต่งครบ มีโซฟาเบด เตียง 6 ฟุต โต๊ะทานข้าว ตู้เสื้อผ้าบิวท์อิน ทีวี ตู้เย็น ไมโครเวฟ เครื่องซักผ้า ประตูดิจิทัล เดินไป BTS บางนาประมาณ 10 นาที",
+    "listed": "2026-10-27",
+    "checked": false
   }
 ]
