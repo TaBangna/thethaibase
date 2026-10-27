@@ -355,8 +355,17 @@ def rent_table(c, lang="en"):
 HOME_ALTERNATES = [("en", "/"), ("th", "/th/")]
 
 
+def featured_condo():
+    """The building with the most units listed now, so the home page matches the listings.
+    Falls back to the condo marked "featured" when nothing is listed."""
+    flagged = next((x for x in CONDOS if x.get("featured")), CONDOS[0])
+    counts = {c["slug"]: len(units_here(c)) + len(units_here(c, sale=True)) for c in CONDOS}
+    best = max(CONDOS, key=lambda c: (counts[c["slug"]], c is flagged))
+    return best if counts[best["slug"]] else flagged
+
+
 def featured_card(lang="en"):
-    c = next((x for x in CONDOS if x.get("featured")), CONDOS[0])
+    c = featured_condo()
     here = units_here(c)
     rents = [u["rent_thb"] for u in here if u.get("rent_thb")]
     if c.get("photos"):
@@ -382,17 +391,25 @@ def featured_card(lang="en"):
 
 def building_photos(lang="en"):
     """Photo strip of the featured building for the home page."""
-    c = next((x for x in CONDOS if x.get("featured")), None)
+    c = featured_condo()
     if not c or len(c.get("photos", [])) < 2:
         return ""
     en = lang == "en"
     tiles = "".join(f'<li><img src="{e(p["src"])}" alt="{e(p["alt"])}" loading="lazy" width="600" height="450"></li>'
                     for p in c["photos"][1:6])
-    credit = (f'<p class="small muted photo-credit">{"Photos" if en else "ภาพ"}: {e(c["photo_credit"])}, '
-              f'{"used with permission" if en else "ใช้โดยได้รับอนุญาต"}.</p>' if c.get("photo_credit") else "")
-    head = ("Inside The Coast Bangkok" if en else f"บรรยากาศ {c['name']}")
-    sub = (f"{c['walk']}, next to BITEC, with pools, a gym and a community mall at its base."
-           if en else f"{c.get('walk_th', c['walk'])} ติดไบเทค มีสระว่ายน้ำ ฟิตเนส และคอมมูนิตี้มอลล์ด้านล่าง")
+    if c.get("photo_credit"):
+        credit = (f'<p class="small muted photo-credit">{"Photos" if en else "ภาพ"}: {e(c["photo_credit"])}, '
+                  f'{"used with permission" if en else "ใช้โดยได้รับอนุญาต"}.</p>')
+    elif c.get("photo_source"):
+        credit = f'<p class="small muted photo-credit">{"Images" if en else "ภาพ"}: {e(c["photo_source"])}.</p>'
+    else:
+        credit = ""
+    head = (f"Inside {c['name']}" if en else f"บรรยากาศ {c['name']}")
+    if c["slug"] == "the-coast-bangkok":
+        sub = (f"{c['walk']}, next to BITEC, with pools, a gym and a community mall at its base."
+               if en else f"{c.get('walk_th', c['walk'])} ติดไบเทค มีสระว่ายน้ำ ฟิตเนส และคอมมูนิตี้มอลล์ด้านล่าง")
+    else:
+        sub = f"{c['walk']}." if en else f"{c.get('walk_th', c['walk'])}"
     link = (f'<a href="/condos/{c["slug"]}.html">{"Building details" if en else "ข้อมูลโครงการ"} →</a>')
     return f"""<section class="section">
   <div class="wrap">
@@ -480,8 +497,8 @@ def page_home():
     {featured_card()}
   </div>
 </section>
-{building_photos()}
 {units_block}
+{building_photos()}
 <section class="section">
   <div class="wrap">
     <div class="section-head"><div><h2>Why Bang Na</h2><p>More space for the money than central Sukhumvit, still on the BTS line.</p></div><a href="/bang-na.html">Living in Bang Na →</a></div>
@@ -555,8 +572,8 @@ def page_home_th():
     {featured_card("th")}
   </div>
 </section>
-{building_photos("th")}
 {units_block}
+{building_photos("th")}
 <section class="section">
   <div class="wrap">
     <div class="section-head"><h2>ทั้ง 5 โครงการอยู่รอบ BTS บางนา</h2></div>
