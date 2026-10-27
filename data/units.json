@@ -630,5 +630,51 @@
     "description_th": "ห้อง 1 ห้องนอน 28 ตร.ม. ตึก D ชั้นสูง วิวเมืองโล่งทิศตะวันออก ตกแต่งครบ มีโซฟาเบด เตียง 6 ฟุต โต๊ะทานข้าว ตู้เสื้อผ้าบิวท์อิน ทีวี ตู้เย็น ไมโครเวฟ เครื่องซักผ้า ประตูดิจิทัล เดินไป BTS บางนาประมาณ 10 นาที",
     "listed": "2026-10-27",
     "checked": false
+  },
+  {
+    "id": "RHR-002",
+    "slug": "regent-home-1br-rhr-002",
+    "condo": "regent-home-bangna",
+    "status": "available",
+    "rent_thb": 9500,
+    "deposit_months": 2,
+    "advance_months": 1,
+    "min_lease_months": 12,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "size_sqm": 28,
+    "tower": "A",
+    "floor_band": "11–20",
+    "furnished": "Fully furnished",
+    "furniture": [
+      "Brand-new unit",
+      "Sliding door between bedroom and living area",
+      "Bed and mattress",
+      "Wardrobe",
+      "Dressing table and chair",
+      "Sofa"
+    ],
+    "appliances": [
+      "2 air conditioners",
+      "Samsung 43-inch TV",
+      "Samsung fridge",
+      "Microwave",
+      "Water heater",
+      "Washing machine"
+    ],
+    "photos": [
+      "/assets/units/rhr-002/01.jpg",
+      "/assets/units/rhr-002/02.jpg",
+      "/assets/units/rhr-002/03.jpg",
+      "/assets/units/rhr-002/04.jpg",
+      "/assets/units/rhr-002/05.jpg",
+      "/assets/units/rhr-002/06.jpg",
+      "/assets/units/rhr-002/07.jpg",
+      "/assets/units/rhr-002/08.jpg"
+    ],
+    "description_en": "A brand-new one-bedroom unit of 28 sq m in Tower A, with a sliding door separating the bedroom from the living area and an open view. Fully furnished and ready to move in: two air conditioners, Samsung 43-inch TV and fridge, microwave, water heater and washing machine. Regent Home Bangna is about 10 minutes' walk to BTS Bang Na. The owner asks for tenants in full-time employment; foreign tenants need a work permit.",
+    "description_th": "ห้องใหม่แกะกล่อง 1 ห้องนอน 28 ตร.ม. ตึก A มีประตูกั้นแยกห้องนอนกับห้องนั่งเล่น วิวโล่ง ตกแต่งครบพร้อมเข้าอยู่ แอร์ 2 ตัว ทีวี Samsung 43 นิ้ว ตู้เย็น Samsung ไมโครเวฟ เครื่องทำน้ำอุ่น เครื่องซักผ้า เดินไป BTS บางนาประมาณ 10 นาที เจ้าของรับเฉพาะผู้เช่าที่ทำงานประจำ ชาวต่างชาติต้องมี work permit",
+    "listed": "2026-10-27",
+    "checked": false
   }
 ]
