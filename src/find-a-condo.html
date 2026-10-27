@@ -1,0 +1,81 @@
+<div class="wrap">
+  <div class="detail-head prose">
+    <p class="eyebrow">Free for renters</p>
+    <h1>Tell us what you need. We'll find the condo.</h1>
+    <p style="font-size:1.1rem">Moving to Bang Na? Send us your budget and move-in date. We check what's actually available around BTS Bang Na, including units that aren't on this website yet, and send you a shortlist with photos.</p>
+  </div>
+  <div class="split request-split">
+    <form id="need-form" class="panel request-form" novalidate data-lang="en">
+      <h2>Your requirements</h2>
+      <div class="field-grid">
+        <label class="field"><span>Monthly budget (THB) *</span>
+          <select name="budget" required>
+            <option value="">Choose…</option>
+            <option>Up to ฿10,000</option><option>฿10,000–15,000</option><option>฿15,000–20,000</option>
+            <option>฿20,000–30,000</option><option>฿30,000–40,000</option><option>Over ฿40,000</option>
+          </select></label>
+        <label class="field"><span>Bedrooms *</span>
+          <select name="beds" required>
+            <option value="">Choose…</option><option>Studio / 1 bedroom</option><option>1 bedroom</option>
+            <option>2 bedrooms</option><option>3 bedrooms</option><option>Not sure</option>
+          </select></label>
+        <label class="field"><span>Move-in date *</span><input type="date" name="movein" required></label>
+        <label class="field"><span>Lease length</span>
+          <select name="lease">
+            <option>12 months</option><option>6 months</option><option>Under 6 months</option><option>2 years or more</option>
+          </select></label>
+        <label class="field"><span>People moving in</span>
+          <select name="people"><option>1</option><option>2</option><option>Family with children</option><option>3 or more adults</option></select></label>
+        <label class="field"><span>Pets</span>
+          <select name="pets"><option>No pets</option><option>Cat</option><option>Dog</option><option>Other</option></select></label>
+      </div>
+      <label class="field"><span>Where you work or study</span><input type="text" name="work" placeholder="e.g. BITEC, Bangkok Patana School, Bangna-Trad km 20" maxlength="120"></label>
+      <fieldset class="field">
+        <legend>Buildings you'd consider</legend>
+        <div class="chips-check">
+          <label><input type="checkbox" name="bld" value="Any in Bang Na" checked> Any near BTS Bang Na</label>
+          <label><input type="checkbox" name="bld" value="The Coast Bangkok"> The Coast Bangkok</label>
+          <label><input type="checkbox" name="bld" value="Ideo O2"> Ideo O2</label>
+          <label><input type="checkbox" name="bld" value="Ideo Mobi Eastgate"> Ideo Mobi Eastgate</label>
+          <label><input type="checkbox" name="bld" value="Ideo Mobi Eastpoint"> Ideo Mobi Eastpoint</label>
+          <label><input type="checkbox" name="bld" value="Regent Home Bangna"> Regent Home Bangna</label>
+        </div>
+      </fieldset>
+      <label class="field"><span>Must-haves or anything else</span><textarea name="notes" rows="3" maxlength="400" placeholder="e.g. high floor, bathtub, gym, near the BTS, parking"></textarea></label>
+      <label class="field"><span>Your name *</span><input type="text" name="name" required maxlength="60" autocomplete="name"></label>
+      <p class="small muted">Nothing is stored on this website. The button opens LINE with your request typed out. Just press send.</p>
+      <button class="btn btn-line btn-block" type="submit">Send my request on LINE →</button>
+      <p id="need-msg" class="small" role="status" style="margin:10px 0 0"></p>
+      <div id="need-fallback" class="need-fallback" hidden>
+        <p class="small">No LINE on this device? Copy your request and send it to <strong>@thethaibase</strong> on LINE, or use the contact options below.</p>
+        <textarea id="need-text" rows="7" readonly></textarea>
+        <button class="btn btn-ghost btn-sm" type="button" id="need-copy">Copy request</button>
+      </div>
+    </form>
+    <div>
+      <div class="panel">
+        <h2>How it works</h2>
+        <ol class="steps-plain">
+          <li><strong>You send your requirements.</strong> It takes about a minute.</li>
+          <li><strong>We search.</strong> Our own listings, owners we know in each building, and trusted agents in the area.</li>
+          <li><strong>You get a shortlist</strong> on LINE, with photos, rent and our honest notes, usually the same or next day.</li>
+          <li><strong>View in person or by video call.</strong> We go with you, in English or Thai.</li>
+          <li><strong>Sign and move in.</strong> We go through the lease and record the unit's condition with you.</li>
+        </ol>
+        <p class="small muted">No fee for renters. The owner pays our fee when a lease is signed.</p>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h2>Good to know</h2>
+        <ul class="ticks">
+          <li>Most leases are 12 months, with a 2-month deposit and 1 month in advance.</li>
+          <li>Many owners ask foreign tenants for a passport and a work permit or visa.</li>
+          <li>Moving from abroad? We can do the viewings for you by live video.</li>
+        </ul>
+        <p><a href="/renting-guide.html">Renting guide →</a></p>
+      </div>
+      <p class="small muted" lang="th" style="margin-top:16px">ภาษาไทย: <a href="/th/find-a-condo.html">แจ้งความต้องการหาห้องเช่า</a></p>
+    </div>
+  </div>
+</div>
+<div class="section"></div>
+<script src="/assets/request.js" defer></script>

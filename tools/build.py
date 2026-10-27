@@ -353,6 +353,7 @@ def rent_table(c, lang="en"):
 
 
 HOME_ALTERNATES = [("en", "/"), ("th", "/th/")]
+FIND_ALTERNATES = [("en", "/find-a-condo.html"), ("th", "/th/find-a-condo.html")]
 
 
 def featured_condo():
@@ -492,6 +493,7 @@ def page_home():
       <h1>Bang Na condos, checked before you see them.</h1>
       <p class="hero-lead">Real units at {e(CONDO_NAMES)}, with real photos and a fair-price check against each building's typical rent. We help in Thai or English, from first viewing to move-in.</p>
       {search_form()}
+      <p class="hero-alt">Not sure which building? <a href="/find-a-condo.html">Tell us what you need and we'll find it →</a></p>
       <ul class="trust"><li>Units visited in person</li><li>No fee for renters</li><li>Help in English &amp; Thai</li></ul>
     </div>
     {featured_card()}
@@ -527,7 +529,7 @@ def page_home():
   <div class="wrap">
     <div class="section-head"><h2>How renting with us works</h2><a href="/renting-guide.html">Renting guide →</a></div>
     <ol class="step-list">
-      <li><h3>Tell us what you need</h3><p>Budget, bedrooms, move-in date and where you work or study. Message us on LINE.</p></li>
+      <li><h3>Tell us what you need</h3><p>Budget, bedrooms, move-in date and where you work or study. <a href="/find-a-condo.html">Send your requirements</a> in a minute.</p></li>
       <li><h3>Get a shortlist</h3><p>Available units across the five buildings, with photos and our notes.</p></li>
       <li><h3>View in person or by video</h3><p>Still abroad? We walk you through the unit on a live video call.</p></li>
       <li><h3>Sign and move in</h3><p>We go through the lease with you and record the unit's condition at move-in.</p></li>
@@ -567,6 +569,7 @@ def page_home_th():
       <h1>คอนโดบางนา ตรวจห้องให้ก่อนคุณไปดู</h1>
       <p class="hero-lead">ห้องจริงใน {e(CONDO_NAMES)} รูปจริง และเทียบค่าเช่ากับราคาทั่วไปของแต่ละโครงการ ดูแลทั้งภาษาไทยและอังกฤษ ตั้งแต่ดูห้องจนถึงวันย้ายเข้า</p>
       {search_form("th")}
+      <p class="hero-alt">ยังไม่รู้จะเลือกโครงการไหน? <a href="/th/find-a-condo.html">บอกความต้องการ เราหาให้ →</a></p>
       <ul class="trust"><li>ไปดูห้องจริงทุกห้อง</li><li>ผู้เช่าไม่เสียค่าบริการ</li><li>คุยได้ทั้งไทยและอังกฤษ</li></ul>
     </div>
     {featured_card("th")}
@@ -595,7 +598,7 @@ def page_home_th():
   <div class="wrap">
     <div class="section-head"><h2>ขั้นตอนเช่ากับเรา</h2></div>
     <ol class="step-list">
-      <li><h3>บอกสิ่งที่ต้องการ</h3><p>งบ จำนวนห้องนอน วันที่อยากย้ายเข้า และที่ทำงานหรือที่เรียน ทักเราทาง LINE</p></li>
+      <li><h3>บอกสิ่งที่ต้องการ</h3><p>งบ จำนวนห้องนอน วันที่อยากย้ายเข้า และที่ทำงานหรือที่เรียน <a href="/th/find-a-condo.html">กรอกความต้องการ</a> ใช้เวลา 1 นาที</p></li>
       <li><h3>รับรายการห้อง</h3><p>ห้องว่างจากทั้ง 5 โครงการ พร้อมรูปและข้อสังเกตของเรา</p></li>
       <li><h3>ดูห้องจริงหรือวิดีโอคอล</h3><p>อยู่ต่างประเทศก็ดูห้องผ่านวิดีโอคอลสดได้</p></li>
       <li><h3>เซ็นสัญญาและย้ายเข้า</h3><p>อธิบายสัญญาก่อนเซ็น และบันทึกสภาพห้องวันย้ายเข้า</p></li>
@@ -1022,12 +1025,15 @@ def page_rent_index():
     if RENT_UNITS:
         inner = RENT_FILTER + unit_cards(RENT_UNITS) + f"""
 <div class="filter-empty" id="filter-empty" hidden><p>No units match these filters right now.</p>
-  <p class="muted">Tell us your budget and move-in date on LINE and we'll check all five buildings for you.</p>{contact_links()}</div>
+  <p class="muted">Tell us your budget and move-in date and we'll search Bang Na for you, including units not listed here.</p><a class="btn btn-primary" href="/find-a-condo.html">Tell us what you need →</a></div>
 <p class="small muted" style="margin-top:12px">{e(FAIR_NOTE['en'])}</p>
+<div class="panel request-band"><div><h2>Don't see the right unit?</h2>
+  <p>We only list a few units here; many more are available in Bang Na. Tell us your budget and move-in date and we'll send you a shortlist on LINE. Free for renters.</p></div>
+  <a class="btn btn-primary" href="/find-a-condo.html">Tell us what you need →</a></div>
 <script>{RENT_FILTER_JS}</script>"""
     else:
         inner = ('<p class="muted">New units are being added. Tell us your budget and move-in date and we\'ll send you what\'s available.</p>'
-                 + contact_links())
+                 '<a class="btn btn-primary" href="/find-a-condo.html">Tell us what you need →</a>')
     body = f"""
 <div class="wrap">
   <div class="detail-head">
@@ -1191,6 +1197,10 @@ def main():
          "ฝากเช่าคอนโดใกล้ BTS บางนา ลงประกาศฟรี จ่ายค่าบริการ 1 เดือนเฉพาะเมื่อได้ผู้เช่าสัญญา 1 ปีผ่านเรา หาผู้เช่าได้ทั้งคนไทยและชาวต่างชาติ"),
         ("blog/thailand-visas.html", "/blog/thailand-visas.html", "Which Thai visa fits your condo lease? (2026)",
          "Thai visa options in 2026 (30-day visa exemption, DTV, Non-B, retirement, LTR, Thailand Privilege) and which condo lease length each one fits."),
+        ("find-a-condo.html", "/find-a-condo.html", "Find me a condo in Bang Na",
+         "Tell us your budget, bedrooms and move-in date. We search condos around BTS Bang Na for you, including units not listed online, and send a shortlist on LINE. Free for renters."),
+        ("th/find-a-condo.html", "/th/find-a-condo.html", "หาคอนโดเช่าแถวบางนา บอกความต้องการ เราหาให้",
+         "บอกงบ จำนวนห้องนอน และวันที่อยากย้ายเข้า เราหาคอนโดเช่ารอบ BTS บางนาให้ ส่งรายการห้องทาง LINE ผู้เช่าไม่เสียค่าบริการ"),
         ("contact.html", "/contact.html", "Contact",
          "Contact The Thai Base about condos for rent or sale at BTS Bang Na."),
         ("404.html", "/404.html", "Page not found", "Page not found."),
@@ -1199,6 +1209,10 @@ def main():
         if name == "blog/thailand-visas.html":
             kw.update(nav_path="/renting-guide.html",
                       head_extra=article_jsonld(path, title, desc, "2026-10-26"))
+        if name.endswith("find-a-condo.html"):
+            kw["alternates"] = FIND_ALTERNATES
+            if name.startswith("th/"):
+                kw.update(lang="th", nav_path="/find-a-condo.html")
         if name.endswith("list-your-condo.html"):
             kw["alternates"] = OWNER_ALTERNATES
             if name.startswith("th/"):
