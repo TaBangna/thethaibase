@@ -10,6 +10,7 @@ Generated pages are written to the repo root so GitHub Pages serves them.
 """
 import html
 import json
+import re
 from urllib.parse import quote
 from datetime import date
 from pathlib import Path
@@ -927,7 +928,7 @@ def page_unit(u):
         bp = c["photos"][:5]
         gallery_html = (
             '<div class="notice"><strong>Updated photos of this unit are coming soon.</strong> '
-            f'Below are photos of {e(c["name"])}. Message us on LINE or WhatsApp for current photos of the unit or a live video viewing.</div>'
+            f'Below are photos of {e(c["name"])}. Message us on LINE{" or WhatsApp" if wa_number() else ""} for current photos of the unit or a live video viewing.</div>'
             '<div class="gallery gallery-building">'
             + f'<a class="g-lead" href="{e(bp[0]["src"])}"><img src="{e(bp[0]["src"])}" alt="{e(bp[0]["alt"])}" width="1200" height="800"></a>'
             + "".join(f'<a href="{e(p["src"])}"><img src="{e(p["src"])}" alt="{e(p["alt"])}" loading="lazy" width="600" height="400"></a>' for p in bp[1:])
@@ -1197,7 +1198,11 @@ def external_redirect(url, label):
 
 def page_fragment(name, path, title, desc, lang="en", nav_path=None, alternates=None, head_extra=""):
     frag = ((SRC / name).read_text(encoding="utf-8").replace("{{CONTACT}}", contact_links(lang=lang))
-            .replace("{{WA_NUM}}", wa_number()))
+            .replace("{{WA_NUM}}", wa_number()).replace("{{WA_DISPLAY}}", SITE["contact"].get("whatsapp", "")))
+    if not wa_number():
+        # No WhatsApp number set: drop WhatsApp-only text and buttons from the page.
+        frag = re.sub(r'<span data-wa-only>.*?</span>(?:</strong></span>)?', "", frag, flags=re.S)
+        frag = re.sub(r'<button[^>]*data-wa-only[^>]*>.*?</button>', "", frag, flags=re.S)
     return layout(path, title, desc, frag, lang, nav_path, alternates, head_extra=head_extra)
 
 
@@ -1273,6 +1278,9 @@ def main():
     # changes, edit data/site.json and rebuild; links already shared keep working.
     if wa_number():
         write("whatsapp/index.html", external_redirect(f"https://wa.me/{wa_number()}", "WhatsApp"))
+    elif line_url():
+        # WhatsApp switched off: links already shared to /whatsapp/ go to LINE instead.
+        write("whatsapp/index.html", external_redirect(line_url(), "LINE"))
     if line_url():
         write("line/index.html", external_redirect(line_url(), "LINE"))
     write_admin_public()
