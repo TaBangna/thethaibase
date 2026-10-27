@@ -32,12 +32,20 @@ CONDO_BY_SLUG = {c["slug"]: c for c in CONDOS}
 # "pending" units are kept in the data file but not published until their details are filled in.
 # "hidden" units are complete but held back; remove "hidden" to open one on the site.
 # "checked": false hides the "Checked in person" badge for a unit we have not visited yet.
+# "photos_pending": true keeps the unit's photos off the site (building photos are shown
+# instead, marked "unit photos coming soon"); remove it to show the unit's own photos again.
 def unpublished(u):
     return bool(u.get("pending") or u.get("hidden"))
 
 
 UNITS = [u for u in UNITS if not unpublished(u)]
 LIVE_UNITS = [u for u in UNITS if not u.get("draft")]
+# Units with their own photos come first in lists.
+LIVE_UNITS.sort(key=lambda u: bool(u.get("photos_pending")))
+
+
+def unit_photos(u):
+    return [] if u.get("photos_pending") else (u.get("photos") or [])
 
 
 def is_sale(u):
@@ -478,7 +486,7 @@ def page_home():
         units_block = f"""
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2>Available now</h2><p>Real units with real photos and full details.</p></div><a href="/rent/">All {len(RENT_UNITS)} unit{"s" if len(RENT_UNITS) != 1 else ""} for rent →</a></div>
+    <div class="section-head"><div><h2>Available now</h2><p>Real units with full details and a fair-price check.</p></div><a href="/rent/">All {len(RENT_UNITS)} unit{"s" if len(RENT_UNITS) != 1 else ""} for rent →</a></div>
     {unit_cards(RENT_UNITS[:6])}
     <p class="small muted" style="margin-top:12px">{e(FAIR_NOTE['en'])}</p>
   </div>
@@ -554,7 +562,7 @@ def page_home_th():
         units_block = f"""
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><div><h2>ห้องว่างให้เช่าตอนนี้</h2><p>ห้องที่เราไปดูมาแล้ว พร้อมรูปจริง</p></div><a href="/rent/">ดูห้องเช่าทั้งหมด {len(RENT_UNITS)} ห้อง →</a></div>
+    <div class="section-head"><div><h2>ห้องว่างให้เช่าตอนนี้</h2><p>ห้องจริง รายละเอียดครบ พร้อมเทียบราคา</p></div><a href="/rent/">ดูห้องเช่าทั้งหมด {len(RENT_UNITS)} ห้อง →</a></div>
     {unit_cards(RENT_UNITS[:6], "th")}
     <p class="small muted" style="margin-top:12px">{e(FAIR_NOTE['th'])}</p>
   </div>
@@ -876,8 +884,17 @@ def unit_cards(units, lang="en"):
         elif is_sale(u):
             badge = f'<span class="badge badge-sale">{"For sale" if lang == "en" else "ขาย"}</span>'
         checked = "" if is_sale(u) or u.get("checked") is False else f'<span class="chip">✓ {"Checked in person" if lang == "en" else "ตรวจห้องแล้ว"}</span>'
-        img = (f'<img src="{e(u["photos"][0])}" alt="" loading="lazy" width="600" height="400">' if u.get("photos")
-               else '<div class="unit-card-nophoto">Photos coming soon</div>')
+        own = unit_photos(u)
+        # Vary the building photo between cards so a list of pending units isn't one image repeated.
+        bphoto = c["photos"][sum(map(ord, u["id"])) % len(c["photos"])]["src"] if c.get("photos") else ""
+        if own:
+            img = f'<img src="{e(own[0])}" alt="" loading="lazy" width="600" height="400">'
+        elif u.get("photos_pending") and bphoto:
+            img = f'<img class="img-building" src="{e(bphoto)}" alt="{e(c["name"])} building" loading="lazy" width="600" height="400">'
+            checked = f'<span class="chip chip-soon">{"Unit photos coming soon" if lang == "en" else "รออัปเดตรูปห้อง"}</span>'
+        else:
+            img = f'<div class="unit-card-nophoto">{"Photos coming soon" if lang == "en" else "รออัปเดตรูปห้อง"}</div>'
+
         meta = " · ".join(x for x in [e(c['name']), floor_text(u, lang)] if x)
         cards.append(f"""<li class="unit-card" data-beds="{u.get('bedrooms', '')}" data-rent="{u.get('rent_thb') or ''}">
   <a href="{unit_url(u)}">
@@ -896,7 +913,7 @@ def unit_cards(units, lang="en"):
 def page_unit(u):
     c = CONDO_BY_SLUG[u["condo"]]
     title = unit_title(u)
-    photos = u.get("photos") or []
+    photos = unit_photos(u)
     if not photos:
         gallery_html = '<div class="notice">Photos of this unit are coming soon. Ask us on LINE for current photos or a video call.</div>'
     gallery = "" if not photos else (f'<a class="g-lead" href="{e(photos[0])}"><img src="{e(photos[0])}" alt="Photo 1 of {len(photos)}" width="1200" height="800"></a>'
@@ -906,6 +923,17 @@ def page_unit(u):
             if len(photos) > 5 else "")
     if photos:
         gallery_html = f'<div class="gallery">{gallery}</div>'
+    elif u.get("photos_pending") and c.get("photos"):
+        bp = c["photos"][:5]
+        gallery_html = (
+            '<div class="notice"><strong>Updated photos of this unit are coming soon.</strong> '
+            f'Below are photos of {e(c["name"])}. Message us on LINE or WhatsApp for current photos of the unit or a live video viewing.</div>'
+            '<div class="gallery gallery-building">'
+            + f'<a class="g-lead" href="{e(bp[0]["src"])}"><img src="{e(bp[0]["src"])}" alt="{e(bp[0]["alt"])}" width="1200" height="800"></a>'
+            + "".join(f'<a href="{e(p["src"])}"><img src="{e(p["src"])}" alt="{e(p["alt"])}" loading="lazy" width="600" height="400"></a>' for p in bp[1:])
+            + '</div>'
+            + (f'<p class="small muted">Building photos: {e(c.get("photo_credit") or c.get("photo_source") or "")}.</p>'
+               if (c.get("photo_credit") or c.get("photo_source")) else ""))
 
     sale = is_sale(u)
     spec = [("Price" if sale else "Rent", unit_price_text(u)),
@@ -989,7 +1017,7 @@ def page_unit(u):
             + f". Near BTS {c['station']}.")
     return layout(unit_url(u), f"{title} {word} at {c['name']}", desc, body,
                   nav_path="/sale/" if sale else "/rent/", noindex=bool(u.get("draft")),
-                  image=(photos[0] if photos else None), unit=u["id"])
+                  image=(photos[0] if photos else (c["photos"][0]["src"] if c.get("photos") else None)), unit=u["id"])
 
 
 RENT_FILTER = """<form class="filter-bar" id="rent-filter" action="/rent/" method="get">

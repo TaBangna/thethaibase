@@ -365,3 +365,6 @@ ol.steps-plain li { margin-bottom: .6em; }
 .btn-wa { background: #25D366; color: #08331B; }
 .btn-wa:hover { background: #1EBE5A; color: #08331B; }
 .price-panel .btn + .btn { margin-top: 10px; }
+.unit-card-media .img-building { filter: saturate(.75) brightness(.92); }
+.chip-soon { background: #FFF4D6; color: #6B4E00; }
+.gallery-building { margin-top: 12px; }
