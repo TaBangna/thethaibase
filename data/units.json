@@ -674,5 +674,53 @@
     "description_th": "ห้องใหม่แกะกล่อง 1 ห้องนอน 28 ตร.ม. ตึก A มีประตูกั้นแยกห้องนอนกับห้องนั่งเล่น วิวโล่ง ตกแต่งครบพร้อมเข้าอยู่ แอร์ 2 ตัว ทีวี Samsung 43 นิ้ว ตู้เย็น Samsung ไมโครเวฟ เครื่องทำน้ำอุ่น เครื่องซักผ้า เดินไป BTS บางนาประมาณ 10 นาที เจ้าของรับเฉพาะผู้เช่าที่ทำงานประจำ ชาวต่างชาติต้องมี work permit",
     "listed": "2026-10-27",
     "checked": false
+  },
+  {
+    "id": "RHR-003",
+    "slug": "regent-home-1br-rhr-003",
+    "condo": "regent-home-bangna",
+    "status": "available",
+    "rent_thb": 11000,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "size_sqm": 28,
+    "tower": "A",
+    "floor_band": "11–20",
+    "furnished": "Fully furnished",
+    "furniture": [
+      "Sliding glass partition between bedroom and living area",
+      "Bed",
+      "Wardrobe",
+      "Sofa bed",
+      "Dining table for two",
+      "Bookshelf",
+      "Kitchen set",
+      "Curtains"
+    ],
+    "appliances": [
+      "2 air conditioners",
+      "TV",
+      "Fridge",
+      "Microwave",
+      "Washing machine",
+      "Water heater"
+    ],
+    "photos": [
+      "/assets/units/rhr-003/01.jpg",
+      "/assets/units/rhr-003/02.jpg",
+      "/assets/units/rhr-003/03.jpg",
+      "/assets/units/rhr-003/04.jpg",
+      "/assets/units/rhr-003/05.jpg",
+      "/assets/units/rhr-003/06.jpg",
+      "/assets/units/rhr-003/07.jpg",
+      "/assets/units/rhr-003/08.jpg",
+      "/assets/units/rhr-003/09.jpg",
+      "/assets/units/rhr-003/10.jpg",
+      "/assets/units/rhr-003/11.jpg"
+    ],
+    "description_en": "A stylish one-bedroom unit of 28 sq m in Tower A, with a sliding glass partition between the bedroom and the living area and a city view from the bedroom window. Fully furnished in dark wood and warm accents: sofa bed, dining table, bookshelf, wardrobe, kitchen set, two air conditioners, TV, fridge, microwave, washing machine and water heater. Regent Home Bangna is about 10 minutes' walk to BTS Bang Na.",
+    "description_th": "ห้อง 1 ห้องนอน 28 ตร.ม. ตึก A มีฉากกระจกบานเลื่อนกั้นห้องนอนกับห้องนั่งเล่น ห้องนอนมองเห็นวิวเมือง ตกแต่งครบ มีโซฟาเบด โต๊ะทานข้าว ชั้นหนังสือ ตู้เสื้อผ้า ชุดครัว แอร์ 2 ตัว ทีวี ตู้เย็น ไมโครเวฟ เครื่องซักผ้า เครื่องทำน้ำอุ่น เดินไป BTS บางนาประมาณ 10 นาที",
+    "listed": "2026-10-28",
+    "checked": false
   }
 ]
