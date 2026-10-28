@@ -722,5 +722,91 @@
     "description_th": "ห้อง 1 ห้องนอน 28 ตร.ม. ตึก A มีฉากกระจกบานเลื่อนกั้นห้องนอนกับห้องนั่งเล่น ห้องนอนมองเห็นวิวเมือง ตกแต่งครบ มีโซฟาเบด โต๊ะทานข้าว ชั้นหนังสือ ตู้เสื้อผ้า ชุดครัว แอร์ 2 ตัว ทีวี ตู้เย็น ไมโครเวฟ เครื่องซักผ้า เครื่องทำน้ำอุ่น เดินไป BTS บางนาประมาณ 10 นาที",
     "listed": "2026-10-28",
     "checked": false
+  },
+  {
+    "condo": "regent-home-bangna",
+    "status": "available",
+    "rent_thb": 12500,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "size_sqm": 28,
+    "tower": "D",
+    "facing": "East",
+    "furnished": "Fully furnished",
+    "furniture": [
+      "Brand-new unit, never occupied",
+      "Separate enclosed kitchen with balcony access",
+      "Pocket-spring mattress",
+      "Large sofa",
+      "Desk and chair",
+      "Wardrobe",
+      "Blackout curtains in bedroom and living room"
+    ],
+    "appliances": [
+      "55-inch Google TV",
+      "Front-loading washing machine",
+      "Stiebel 4,500 W water heater",
+      "Microwave",
+      "Air conditioning"
+    ],
+    "photos": [
+      "/assets/units/rhr-004/01.jpg",
+      "/assets/units/rhr-004/02.jpg",
+      "/assets/units/rhr-004/03.jpg",
+      "/assets/units/rhr-004/04.jpg",
+      "/assets/units/rhr-004/05.jpg",
+      "/assets/units/rhr-004/06.jpg",
+      "/assets/units/rhr-004/07.jpg"
+    ],
+    "listed": "2026-10-28",
+    "checked": false,
+    "id": "RHR-004",
+    "slug": "regent-home-1br-rhr-004",
+    "floor_band": "21–30",
+    "description_en": "A brand-new, never-occupied one-bedroom unit in Tower D, facing east, with a separate enclosed kitchen that opens onto the balcony. Fully furnished: pocket-spring mattress, large sofa, 55-inch Google TV, front-loading washing machine, Stiebel water heater and 100% blackout curtains. Rent includes the common-area fee and one car parking space. Regent Home Bangna is about 10 minutes' walk to BTS Bang Na, with 7-Eleven, pool, gym, yoga room and co-working space on site. Same layout and furnishing as RHR-005 on a lower floor.",
+    "description_th": "ห้องใหม่มือหนึ่ง 1 ห้องนอน ตึก D หันทิศตะวันออก ห้องครัวปิดติดระเบียง ตกแต่งครบ ที่นอน Pocket Spring โซฟาใหญ่ Google TV 55 นิ้ว เครื่องซักผ้าฝาหน้า เครื่องทำน้ำอุ่น Stiebel ม่าน Blackout ค่าเช่ารวมค่าส่วนกลางและที่จอดรถ 1 คัน เดินไป BTS บางนาประมาณ 10 นาที ในโครงการมี 7-11 สระว่ายน้ำ ฟิตเนส ห้องโยคะ และ co-working space ห้องเดียวกับ RHR-005 แต่ชั้นสูงกว่า"
+  },
+  {
+    "condo": "regent-home-bangna",
+    "status": "available",
+    "rent_thb": 12500,
+    "bedrooms": 1,
+    "bathrooms": 1,
+    "size_sqm": 28,
+    "tower": "D",
+    "facing": "East",
+    "furnished": "Fully furnished",
+    "furniture": [
+      "Brand-new unit, never occupied",
+      "Separate enclosed kitchen with balcony access",
+      "Pocket-spring mattress",
+      "Large sofa",
+      "Desk and chair",
+      "Wardrobe",
+      "Blackout curtains in bedroom and living room"
+    ],
+    "appliances": [
+      "55-inch Google TV",
+      "Front-loading washing machine",
+      "Stiebel 4,500 W water heater",
+      "Microwave",
+      "Air conditioning"
+    ],
+    "photos": [
+      "/assets/units/rhr-004/01.jpg",
+      "/assets/units/rhr-004/02.jpg",
+      "/assets/units/rhr-004/03.jpg",
+      "/assets/units/rhr-004/04.jpg",
+      "/assets/units/rhr-004/05.jpg",
+      "/assets/units/rhr-004/06.jpg",
+      "/assets/units/rhr-004/07.jpg"
+    ],
+    "listed": "2026-10-28",
+    "checked": false,
+    "id": "RHR-005",
+    "slug": "regent-home-1br-rhr-005",
+    "floor_band": "11–20",
+    "description_en": "A brand-new, never-occupied one-bedroom unit in Tower D, facing east, with a separate enclosed kitchen that opens onto the balcony. Fully furnished: pocket-spring mattress, large sofa, 55-inch Google TV, front-loading washing machine, Stiebel water heater and 100% blackout curtains. Rent includes the common-area fee and one car parking space. Regent Home Bangna is about 10 minutes' walk to BTS Bang Na, with 7-Eleven, pool, gym, yoga room and co-working space on site. Same layout and furnishing as RHR-004 on a higher floor.",
+    "description_th": "ห้องใหม่มือหนึ่ง 1 ห้องนอน ตึก D หันทิศตะวันออก ห้องครัวปิดติดระเบียง ตกแต่งครบ ที่นอน Pocket Spring โซฟาใหญ่ Google TV 55 นิ้ว เครื่องซักผ้าฝาหน้า เครื่องทำน้ำอุ่น Stiebel ม่าน Blackout ค่าเช่ารวมค่าส่วนกลางและที่จอดรถ 1 คัน เดินไป BTS บางนาประมาณ 10 นาที ในโครงการมี 7-11 สระว่ายน้ำ ฟิตเนส ห้องโยคะ และ co-working space ห้องเดียวกับ RHR-004 แต่ชั้นต่ำกว่า"
   }
 ]
